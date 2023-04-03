@@ -15,7 +15,7 @@ import { AppContext } from "./context";
 import { ACTION_TYPES } from "./actions";
 
 function TaskList({ tasks }) {
-  const [state, dispatch] = useContext(AppContext);
+  const [, dispatch] = useContext(AppContext);
   const theme = useTheme();
 
   const toggleCompletion = (taskId) => {
@@ -55,7 +55,6 @@ function TaskList({ tasks }) {
                   bgcolor: theme.palette.background.paper,
                 },
               }}
-              disableRipple
             >
               <ListItemIcon>
                 <Checkbox

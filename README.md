@@ -1,4 +1,4 @@
-# Todo App in React
+# Todo Application in React
 
 In the project directory, you can run:
 

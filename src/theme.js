@@ -1,7 +1,7 @@
 import { createTheme } from "@mui/material";
 import { grey, indigo, red } from "@mui/material/colors";
 
-function getTheme(mode, color) {
+function getTheme(mode) {
   return createTheme({
     palette: {
       primary: {

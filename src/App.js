@@ -6,8 +6,8 @@ import { ACTION_TYPES } from "./actions.js";
 import { initialState, reducer } from "./state.js";
 import { Box, ThemeProvider } from "@mui/material";
 import { AppContext } from "./context";
-import ListView from "./list-view.js";
 import getTheme from "./theme.js";
+import MainPanel from "./main-panel.js";
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -36,7 +36,7 @@ function App() {
               <Sidebar></Sidebar>
             </Box>
             <Box id="main" sx={{ height: "100%", flexGrow: "1" }}>
-              <ListView></ListView>
+              <MainPanel></MainPanel>
             </Box>
           </Box>
         </Spinner>
