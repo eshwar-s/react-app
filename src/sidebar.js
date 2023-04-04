@@ -25,7 +25,7 @@ function Sidebar() {
         backgroundColor: theme.palette.secondary.main,
       }}
     >
-      <Box sx={{ flexGrow: "1" }}>
+      <Box sx={{ flex: "1 1 auto", overflowY: "scroll" }}>
         <TodoLists></TodoLists>
       </Box>
       <Button

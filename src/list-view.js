@@ -1,7 +1,7 @@
-import { Collapse, Typography } from "@mui/material";
+import { Button, Collapse, Typography } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import { Box } from "@mui/system";
-import { useContext, useMemo } from "react";
+import { useContext, useMemo, useState } from "react";
 import { AppContext } from "./context";
 import TaskList from "./task-list";
 import AddTask from "./add-task";
@@ -9,6 +9,7 @@ import AddTask from "./add-task";
 function ListView() {
   const [state] = useContext(AppContext);
   const theme = useTheme();
+  const [showCompletedTasks, setShowCompletedTasks] = useState(true);
 
   const selectedListName =
     state.selectedList < state.lists.length
@@ -43,22 +44,36 @@ function ListView() {
         padding: "12px",
       }}
     >
-      <Box sx={{ flexGrow: "1", overflowY: "scroll" }}>
+      <Box sx={{ flex: "1 1 auto", overflowY: "scroll" }}>
         <Typography
           variant="h5"
           gutterBottom
-          sx={{ fontWeight: "bold", color: theme.palette.background.paper }}
+          sx={{
+            fontWeight: "bold",
+            color: theme.palette.background.paper,
+          }}
         >
           {selectedListName}
         </Typography>
         <Box>
           <TaskList tasks={incompleteTasks}></TaskList>
-          <Collapse in={true}>
-            <TaskList tasks={completedTasks}></TaskList>
-          </Collapse>
+          {completedTasks.length > 0 ? (
+            <>
+              <Button
+                sx={{ color: theme.palette.background.paper }}
+                size="small"
+                onClick={() => setShowCompletedTasks(!showCompletedTasks)}
+              >
+                Completed
+              </Button>
+              <Collapse in={showCompletedTasks}>
+                <TaskList tasks={completedTasks}></TaskList>
+              </Collapse>
+            </>
+          ) : null}
         </Box>
       </Box>
-      <Box sx={{ flexShrink: "0" }}>
+      <Box sx={{ flex: "0 0 auto" }}>
         <AddTask></AddTask>
       </Box>
     </Box>

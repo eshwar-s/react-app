@@ -1,13 +1,15 @@
 #root {
   width: 100vw;
   height: 100vh;
-  font-family: "Roboto", "Noto", sans-serif;
-  -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
-  overflow-y: hidden;
+  position: fixed;
 }
 
 * {
   box-sizing: border-box;
   text-transform: none !important;
+}
+
+body {
+  margin: 0;
+  padding: 0;
 }
