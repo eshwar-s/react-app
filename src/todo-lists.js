@@ -1,4 +1,9 @@
-import { List as ListIcon } from "@mui/icons-material";
+import {
+  DeleteOutlined,
+  FlipOutlined,
+  List as ListIcon,
+  PrintOutlined,
+} from "@mui/icons-material";
 import {
   Divider,
   List,
@@ -14,13 +19,8 @@ import { useContext, useState } from "react";
 import { ACTION_TYPES } from "./actions";
 import { AppContext } from "./context";
 
-function TodoLists() {
+function TodoListsMenu({ anchorPosition, onClose }) {
   const [state, dispatch] = useContext(AppContext);
-  const [contextMenu, setContextMenu] = useState(null);
-
-  const handleListChange = (list) => {
-    dispatch({ type: ACTION_TYPES.SELECT_LIST, payload: { listId: list.id } });
-  };
 
   const handleListDelete = () => {
     if (state.selectedList < state.lists.length) {
@@ -29,7 +29,53 @@ function TodoLists() {
         payload: { listId: state.lists[state.selectedList].id },
       });
     }
-    setContextMenu(null);
+    onClose();
+  };
+
+  return (
+    <Menu
+      open={anchorPosition != null}
+      onClose={onClose}
+      anchorReference="anchorPosition"
+      anchorPosition={
+        anchorPosition !== null
+          ? { top: anchorPosition.mouseY, left: anchorPosition.mouseX }
+          : undefined
+      }
+    >
+      <MenuItem dense>
+        <ListItemIcon>
+          <FlipOutlined />
+        </ListItemIcon>
+        <ListItemText>Rename List</ListItemText>
+      </MenuItem>
+      <MenuItem dense>
+        <ListItemIcon>
+          <PrintOutlined />
+        </ListItemIcon>
+        <ListItemText>Print List</ListItemText>
+      </MenuItem>
+      <Divider></Divider>
+      <MenuItem
+        onClick={handleListDelete}
+        dense
+        disabled={state.lists.length <= 1}
+      >
+        <ListItemIcon>
+          <DeleteOutlined />
+        </ListItemIcon>
+        <ListItemText>Delete List</ListItemText>
+      </MenuItem>
+    </Menu>
+  );
+}
+
+function TodoLists() {
+  const [state, dispatch] = useContext(AppContext);
+  const [contextMenu, setContextMenu] = useState(null);
+
+  const handleListChange = (list) => {
+    dispatch({ type: ACTION_TYPES.SELECT_LIST, payload: { listId: list.id } });
   };
 
   const handleContextMenu = (event) => {
@@ -37,10 +83,7 @@ function TodoLists() {
     event.target.click();
     setContextMenu(
       contextMenu === null
-        ? {
-            mouseX: event.clientX,
-            mouseY: event.clientY,
-          }
+        ? { mouseX: event.clientX, mouseY: event.clientY }
         : null
     );
   };
@@ -70,31 +113,10 @@ function TodoLists() {
           );
         })}
       </List>
-      <Menu
-        open={contextMenu != null}
+      <TodoListsMenu
+        anchorPosition={contextMenu}
         onClose={() => setContextMenu(null)}
-        anchorReference="anchorPosition"
-        anchorPosition={
-          contextMenu !== null
-            ? { top: contextMenu.mouseY, left: contextMenu.mouseX }
-            : undefined
-        }
-      >
-        <MenuItem dense>
-          <ListItemText>Rename List</ListItemText>
-        </MenuItem>
-        <MenuItem dense>
-          <ListItemText>Print List</ListItemText>
-        </MenuItem>
-        <Divider></Divider>
-        <MenuItem
-          onClick={handleListDelete}
-          dense
-          disabled={state.lists.length <= 1}
-        >
-          <ListItemText>Delete List</ListItemText>
-        </MenuItem>
-      </Menu>
+      ></TodoListsMenu>
     </div>
   );
 }

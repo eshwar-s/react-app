@@ -11,6 +11,11 @@ function getTheme(mode) {
         main: grey[300],
       },
     },
+    typography: {
+      button: {
+        textTransform: "none",
+      },
+    },
     components: {
       MuiButtonBase: {
         defaultProps: {

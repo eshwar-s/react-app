@@ -5,6 +5,7 @@ import { useContext, useMemo, useState } from "react";
 import { AppContext } from "./context";
 import TaskList from "./task-list";
 import AddTask from "./add-task";
+import { ExpandLess, ExpandMore } from "@mui/icons-material";
 
 function ListView() {
   const [state] = useContext(AppContext);
@@ -45,16 +46,19 @@ function ListView() {
       }}
     >
       <Box sx={{ flex: "1 1 auto", overflowY: "scroll" }}>
-        <Typography
-          variant="h5"
-          gutterBottom
-          sx={{
-            fontWeight: "bold",
-            color: theme.palette.background.paper,
-          }}
-        >
-          {selectedListName}
-        </Typography>
+        <Box sx={{ display: "flex", flexDirection: "row" }}>
+          <Typography
+            variant="h5"
+            gutterBottom
+            sx={{
+              flex: "1 1 auto",
+              fontWeight: "bold",
+              color: theme.palette.background.paper,
+            }}
+          >
+            {selectedListName}
+          </Typography>
+        </Box>
         <Box>
           <TaskList tasks={incompleteTasks}></TaskList>
           {completedTasks.length > 0 ? (
@@ -63,6 +67,7 @@ function ListView() {
                 sx={{ color: theme.palette.background.paper }}
                 size="small"
                 onClick={() => setShowCompletedTasks(!showCompletedTasks)}
+                startIcon={showCompletedTasks ? <ExpandMore /> : <ExpandLess />}
               >
                 Completed
               </Button>

@@ -4,7 +4,7 @@ import Sidebar from "./sidebar.js";
 import Spinner from "./spinner.js";
 import { ACTION_TYPES } from "./actions.js";
 import { initialState, reducer } from "./state.js";
-import { Box, ThemeProvider } from "@mui/material";
+import { Box, ThemeProvider, useMediaQuery } from "@mui/material";
 import { AppContext } from "./context";
 import getTheme from "./theme.js";
 import MainPanel from "./main-panel.js";
@@ -12,6 +12,7 @@ import MainPanel from "./main-panel.js";
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
   const theme = useMemo(() => getTheme(), []);
+  const showSidebar = useMediaQuery(theme.breakpoints.up("sm"));
 
   useEffect(() => {
     loadTodoLists()
@@ -29,8 +30,9 @@ function App() {
             <Box
               id="navigation"
               sx={{
-                width: "300px",
+                width: "250px",
                 height: "100%",
+                display: showSidebar ? "block" : "none",
               }}
             >
               <Sidebar></Sidebar>
