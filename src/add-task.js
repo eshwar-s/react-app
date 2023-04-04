@@ -10,7 +10,7 @@ function AddTask() {
   const [, dispatch] = useContext(AppContext);
   const theme = useTheme();
 
-  const handleKeydown = (event) => {
+  const handleKeyDown = (event) => {
     if (event.key === "Enter" && event.target.value !== "") {
       event.preventDefault();
       dispatch({
@@ -46,7 +46,7 @@ function AddTask() {
       }
       value={value}
       onChange={handleChange}
-      onKeyDown={handleKeydown}
+      onKeyDown={handleKeyDown}
     ></OutlinedInput>
   );
 }

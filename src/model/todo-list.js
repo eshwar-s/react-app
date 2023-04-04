@@ -1,5 +1,7 @@
 import { uuidv4 } from "./uuid.js";
 
+export const DEFAULT_TODO_LIST_NAME = "Untitled";
+
 export class TodoList {
   constructor(name) {
     this.id = uuidv4();
@@ -8,7 +10,7 @@ export class TodoList {
   }
 
   static new() {
-    return new TodoList("Untitled");
+    return new TodoList(DEFAULT_TODO_LIST_NAME);
   }
 
   printTodoList() {

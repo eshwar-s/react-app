@@ -6,9 +6,12 @@ import { AppContext } from "./context";
 import TaskList from "./task-list";
 import AddTask from "./add-task";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
+import { ACTION_TYPES } from "./actions";
+import Editable from "./editable";
+import { DEFAULT_TODO_LIST_NAME } from "./model/todo-list";
 
 function ListView() {
-  const [state] = useContext(AppContext);
+  const [state, dispatch] = useContext(AppContext);
   const theme = useTheme();
   const [showCompletedTasks, setShowCompletedTasks] = useState(true);
 
@@ -35,6 +38,18 @@ function ListView() {
     });
   }, [state.selectedList, state.lists]);
 
+  const handleListNameChanged = (listName) => {
+    if (state.selectedList < state.lists.length) {
+      dispatch({
+        type: ACTION_TYPES.RENAME_LIST,
+        payload: {
+          listId: state.lists[state.selectedList].id,
+          listName: listName,
+        },
+      });
+    }
+  };
+
   return (
     <Box
       sx={{
@@ -47,17 +62,24 @@ function ListView() {
     >
       <Box sx={{ flex: "1 1 auto", overflowY: "scroll" }}>
         <Box sx={{ display: "flex", flexDirection: "row" }}>
-          <Typography
-            variant="h5"
-            gutterBottom
-            sx={{
-              flex: "1 1 auto",
-              fontWeight: "bold",
-              color: theme.palette.background.paper,
-            }}
-          >
-            {selectedListName}
-          </Typography>
+          <Editable
+            element={
+              <Typography
+                variant="h5"
+                gutterBottom
+                sx={{
+                  flex: "1 1 auto",
+                  fontWeight: "bold",
+                  color: theme.palette.background.paper,
+                  outline: "0px solid transparent",
+                }}
+              >
+                {selectedListName}
+              </Typography>
+            }
+            placeholder={DEFAULT_TODO_LIST_NAME}
+            onChanged={handleListNameChanged}
+          ></Editable>
         </Box>
         <Box>
           <TaskList tasks={incompleteTasks}></TaskList>
