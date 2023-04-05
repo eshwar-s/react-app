@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import ListView from "./list-view";
-import { AppContext } from "./context";
+import { AppContext } from "../common/context";
 
 function MainPanel() {
   const [state] = useContext(AppContext);

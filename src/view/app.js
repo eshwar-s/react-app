@@ -1,13 +1,13 @@
 import { useEffect, useMemo, useReducer } from "react";
-import { loadTodoLists } from "./model/todo-liststore.js";
-import Sidebar from "./sidebar.js";
-import Spinner from "./spinner.js";
-import { ACTION_TYPES } from "./actions.js";
-import { initialState, reducer } from "./state.js";
+import { loadTodoLists } from "../model/todo-liststore.js";
+import Sidebar from "./sidebar";
+import Spinner from "./spinner";
+import { ACTION_TYPES } from "../common/actions.js";
+import { initialState, reducer } from "../common/state.js";
 import { Box, ThemeProvider, useMediaQuery } from "@mui/material";
-import { AppContext } from "./context";
-import getTheme from "./theme.js";
-import MainPanel from "./main-panel.js";
+import { AppContext } from "../common/context.js";
+import getTheme from "../common/theme";
+import MainPanel from "./main-panel";
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);

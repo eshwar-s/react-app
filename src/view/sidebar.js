@@ -3,8 +3,8 @@ import { Button } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import { Box } from "@mui/system";
 import { useContext } from "react";
-import { ACTION_TYPES } from "./actions";
-import { AppContext } from "./context";
+import { ACTION_TYPES } from "../common/actions";
+import { AppContext } from "../common/context";
 import TodoLists from "./todo-lists";
 
 function Sidebar() {

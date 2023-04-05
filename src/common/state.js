@@ -1,6 +1,6 @@
 import { ACTION_TYPES } from "./actions";
-import { TodoList } from "./model/todo-list.js";
-import { TodoItem } from "./model/todo-item";
+import { TodoList } from "../model/todo-list.js";
+import { TodoItem } from "../model/todo-item";
 
 export const initialState = {
   loading: true,
@@ -145,6 +145,9 @@ export const reducer = (state, action) => {
           return list;
         }),
       };
+
+    default:
+      break;
   }
 
   return state;

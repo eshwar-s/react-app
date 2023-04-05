@@ -2,13 +2,13 @@ import { Button, Collapse, Typography } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import { Box } from "@mui/system";
 import { useContext, useMemo, useState } from "react";
-import { AppContext } from "./context";
+import { AppContext } from "../common/context";
 import TaskList from "./task-list";
 import AddTask from "./add-task";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
-import { ACTION_TYPES } from "./actions";
+import { ACTION_TYPES } from "../common/actions";
 import Editable from "./editable";
-import { DEFAULT_TODO_LIST_NAME } from "./model/todo-list";
+import { DEFAULT_TODO_LIST_NAME } from "../model/todo-list";
 
 function ListView({ list }) {
   const [, dispatch] = useContext(AppContext);

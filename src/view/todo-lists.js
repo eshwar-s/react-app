@@ -16,8 +16,8 @@ import {
   Typography,
 } from "@mui/material";
 import { useContext, useState } from "react";
-import { ACTION_TYPES } from "./actions";
-import { AppContext } from "./context";
+import { ACTION_TYPES } from "../common/actions";
+import { AppContext } from "../common/context";
 
 function TodoListsMenu({ anchorPosition, onClose }) {
   const [state, dispatch] = useContext(AppContext);

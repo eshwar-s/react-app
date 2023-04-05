@@ -11,8 +11,8 @@ import StarIcon from "@mui/icons-material/Star";
 import StarOutlineIcon from "@mui/icons-material/StarOutline";
 import { useTheme } from "@mui/material/styles";
 import { useContext } from "react";
-import { AppContext } from "./context";
-import { ACTION_TYPES } from "./actions";
+import { AppContext } from "../common/context";
+import { ACTION_TYPES } from "../common/actions";
 
 function TaskList({ listId, tasks }) {
   const [, dispatch] = useContext(AppContext);

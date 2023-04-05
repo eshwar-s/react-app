@@ -2,8 +2,8 @@ import { InputAdornment, OutlinedInput } from "@mui/material";
 import { Add as AddIcon } from "@mui/icons-material";
 import { useTheme } from "@mui/material/styles";
 import { useContext, useState } from "react";
-import { AppContext } from "./context";
-import { ACTION_TYPES } from "./actions";
+import { AppContext } from "../common/context";
+import { ACTION_TYPES } from "../common/actions";
 
 function AddTask({ listId }) {
   const [value, setValue] = useState("");
