@@ -5,7 +5,7 @@ import { Box } from "@mui/system";
 import { useContext } from "react";
 import { ACTION_TYPES } from "../common/actions";
 import { AppContext } from "../common/context";
-import TodoLists from "./todo-lists";
+import NavigationPane from "./navigation-pane";
 
 function Sidebar() {
   const [, dispatch] = useContext(AppContext);
@@ -26,7 +26,7 @@ function Sidebar() {
       }}
     >
       <Box sx={{ flex: "1 1 auto", overflowY: "scroll" }}>
-        <TodoLists></TodoLists>
+        <NavigationPane></NavigationPane>
       </Box>
       <Button
         sx={{

@@ -19,7 +19,7 @@ import { useContext, useState } from "react";
 import { ACTION_TYPES } from "../common/actions";
 import { AppContext } from "../common/context";
 
-function TodoListsMenu({ anchorPosition, onClose }) {
+function NavigationContextMenu({ anchorPosition, onClose }) {
   const [state, dispatch] = useContext(AppContext);
 
   const handleListDelete = () => {
@@ -70,7 +70,7 @@ function TodoListsMenu({ anchorPosition, onClose }) {
   );
 }
 
-function TodoLists() {
+function NavigationPane() {
   const [state, dispatch] = useContext(AppContext);
   const [contextMenu, setContextMenu] = useState(null);
 
@@ -113,12 +113,12 @@ function TodoLists() {
           );
         })}
       </List>
-      <TodoListsMenu
+      <NavigationContextMenu
         anchorPosition={contextMenu}
         onClose={() => setContextMenu(null)}
-      ></TodoListsMenu>
+      ></NavigationContextMenu>
     </div>
   );
 }
 
-export default TodoLists;
+export default NavigationPane;
