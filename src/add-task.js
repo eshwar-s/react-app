@@ -5,7 +5,7 @@ import { useContext, useState } from "react";
 import { AppContext } from "./context";
 import { ACTION_TYPES } from "./actions";
 
-function AddTask() {
+function AddTask({ listId }) {
   const [value, setValue] = useState("");
   const [, dispatch] = useContext(AppContext);
   const theme = useTheme();
@@ -16,6 +16,7 @@ function AddTask() {
       dispatch({
         type: ACTION_TYPES.ADD_TASK,
         payload: {
+          listId: listId,
           taskTitle: event.target.value,
         },
       });

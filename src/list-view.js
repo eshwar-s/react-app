@@ -10,44 +10,31 @@ import { ACTION_TYPES } from "./actions";
 import Editable from "./editable";
 import { DEFAULT_TODO_LIST_NAME } from "./model/todo-list";
 
-function ListView() {
-  const [state, dispatch] = useContext(AppContext);
+function ListView({ list }) {
+  const [, dispatch] = useContext(AppContext);
   const theme = useTheme();
   const [showCompletedTasks, setShowCompletedTasks] = useState(true);
 
-  const selectedListName =
-    state.selectedList < state.lists.length
-      ? state.lists[state.selectedList].name
-      : "";
-
   const incompleteTasks = useMemo(() => {
-    if (state.selectedList >= state.lists.length) {
-      return [];
-    }
-    return state.lists[state.selectedList].items.filter((item) => {
+    return list.items.filter((item) => {
       return !item.isCompleted;
     });
-  }, [state.selectedList, state.lists]);
+  }, [list]);
 
   const completedTasks = useMemo(() => {
-    if (state.selectedList >= state.lists.length) {
-      return [];
-    }
-    return state.lists[state.selectedList].items.filter((item) => {
+    return list.items.filter((item) => {
       return item.isCompleted;
     });
-  }, [state.selectedList, state.lists]);
+  }, [list]);
 
   const handleListNameChanged = (listName) => {
-    if (state.selectedList < state.lists.length) {
-      dispatch({
-        type: ACTION_TYPES.RENAME_LIST,
-        payload: {
-          listId: state.lists[state.selectedList].id,
-          listName: listName,
-        },
-      });
-    }
+    dispatch({
+      type: ACTION_TYPES.RENAME_LIST,
+      payload: {
+        listId: list.id,
+        listName: listName,
+      },
+    });
   };
 
   return (
@@ -74,7 +61,7 @@ function ListView() {
                   outline: "0px solid transparent",
                 }}
               >
-                {selectedListName}
+                {list.name}
               </Typography>
             }
             placeholder={DEFAULT_TODO_LIST_NAME}
@@ -82,7 +69,7 @@ function ListView() {
           ></Editable>
         </Box>
         <Box>
-          <TaskList tasks={incompleteTasks}></TaskList>
+          <TaskList listId={list.id} tasks={incompleteTasks}></TaskList>
           {completedTasks.length > 0 ? (
             <>
               <Button
@@ -94,14 +81,14 @@ function ListView() {
                 Completed
               </Button>
               <Collapse in={showCompletedTasks}>
-                <TaskList tasks={completedTasks}></TaskList>
+                <TaskList listId={list.id} tasks={completedTasks}></TaskList>
               </Collapse>
             </>
           ) : null}
         </Box>
       </Box>
       <Box sx={{ flex: "0 0 auto" }}>
-        <AddTask></AddTask>
+        <AddTask listId={list.id}></AddTask>
       </Box>
     </Box>
   );

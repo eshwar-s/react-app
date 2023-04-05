@@ -1,12 +1,13 @@
+import { useContext } from "react";
 import ListView from "./list-view";
-
-export const View = {
-  List: "List",
-  ImportantTasks: "ImportantTasks",
-};
+import { AppContext } from "./context";
 
 function MainPanel() {
-  return <ListView></ListView>;
+  const [state] = useContext(AppContext);
+
+  return state.selectedList < state.lists.length ? (
+    <ListView list={state.lists[state.selectedList]}></ListView>
+  ) : null;
 }
 
 export default MainPanel;

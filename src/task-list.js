@@ -14,21 +14,21 @@ import { useContext } from "react";
 import { AppContext } from "./context";
 import { ACTION_TYPES } from "./actions";
 
-function TaskList({ tasks }) {
+function TaskList({ listId, tasks }) {
   const [, dispatch] = useContext(AppContext);
   const theme = useTheme();
 
   const toggleCompletion = (taskId) => {
     dispatch({
       type: ACTION_TYPES.TOGGLE_TASK_COMPLETION,
-      payload: { taskId: taskId },
+      payload: { listId: listId, taskId: taskId },
     });
   };
 
   const toggleImportance = (taskId) => {
     dispatch({
       type: ACTION_TYPES.TOGGLE_TASK_IMPORTANCE,
-      payload: { taskId: taskId },
+      payload: { listId: listId, taskId: taskId },
     });
   };
 

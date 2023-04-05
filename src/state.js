@@ -53,7 +53,7 @@ export const reducer = (state, action) => {
       return {
         ...state,
         lists: state.lists.map((list) => {
-          if (list.id === state.lists[state.selectedList].id) {
+          if (list.id === action.payload.listId) {
             const newTask = new TodoItem(action.payload.taskTitle);
             return {
               ...list,
@@ -68,7 +68,7 @@ export const reducer = (state, action) => {
       return {
         ...state,
         lists: state.lists.map((list) => {
-          if (list.id === state.lists[state.selectedList].id) {
+          if (list.id === action.payload.listId) {
             return {
               ...list,
               items: list.items.map((task) => {
@@ -90,7 +90,7 @@ export const reducer = (state, action) => {
       return {
         ...state,
         lists: state.lists.map((list) => {
-          if (list.id === state.lists[state.selectedList].id) {
+          if (list.id === action.payload.listId) {
             return {
               ...list,
               items: list.items.map((task) => {
@@ -112,7 +112,7 @@ export const reducer = (state, action) => {
       return {
         ...state,
         lists: state.lists.map((list) => {
-          if (list.id === state.lists[state.selectedList].id) {
+          if (list.id === action.payload.listId) {
             return {
               ...list,
               items: list.items.map((task) => {
@@ -134,7 +134,7 @@ export const reducer = (state, action) => {
       return {
         ...state,
         lists: state.map((list) => {
-          if (list.id === state.lists[state.selectedList].id) {
+          if (list.id === action.payload.listId) {
             return {
               ...list,
               items: list.items.filter((item) => {
