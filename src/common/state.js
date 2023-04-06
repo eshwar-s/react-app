@@ -4,7 +4,6 @@ import { TodoItem } from "../model/todo-item";
 
 export const initialState = {
   loading: true,
-  selectedList: 0,
   lists: [],
 };
 
@@ -13,20 +12,10 @@ export const reducer = (state, action) => {
     case ACTION_TYPES.INIT_LIST:
       return { ...state, loading: false, lists: action.payload };
 
-    case ACTION_TYPES.SELECT_LIST:
-      const selectedIndex = state.lists.findIndex(
-        (list) => list.id === action.payload.listId
-      );
-      return selectedIndex !== -1
-        ? { ...state, selectedList: selectedIndex }
-        : state;
-
     case ACTION_TYPES.ADD_LIST:
       const newList = TodoList.new();
-      const newIndex = state.lists.length;
       return {
         ...state,
-        selectedList: newIndex,
         lists: state.lists.concat(newList),
       };
 

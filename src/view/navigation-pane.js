@@ -15,20 +15,20 @@ import {
   MenuItem,
   Typography,
 } from "@mui/material";
-import { useContext, useState } from "react";
+import { useContext, useMemo, useState } from "react";
 import { ACTION_TYPES } from "../common/actions";
 import { AppContext } from "../common/context";
+import { Link } from "react-router-dom";
+import { InitialRouteIndex, RouteEntriesIndex } from "../common/routes";
 
-function NavigationContextMenu({ anchorPosition, onClose }) {
+function NavigationContextMenu({ selectedList, anchorPosition, onClose }) {
   const [state, dispatch] = useContext(AppContext);
 
   const handleListDelete = () => {
-    if (state.selectedList < state.lists.length) {
-      dispatch({
-        type: ACTION_TYPES.DELETE_LIST,
-        payload: { listId: state.lists[state.selectedList].id },
-      });
-    }
+    dispatch({
+      type: ACTION_TYPES.DELETE_LIST,
+      payload: { listId: selectedList },
+    });
     onClose();
   };
 
@@ -43,7 +43,7 @@ function NavigationContextMenu({ anchorPosition, onClose }) {
           : undefined
       }
     >
-      <MenuItem dense>
+      <MenuItem dense disabled={selectedList === null}>
         <ListItemIcon>
           <FlipOutlined />
         </ListItemIcon>
@@ -59,7 +59,7 @@ function NavigationContextMenu({ anchorPosition, onClose }) {
       <MenuItem
         onClick={handleListDelete}
         dense
-        disabled={state.lists.length <= 1}
+        disabled={state.lists.length <= 1 || selectedList === null}
       >
         <ListItemIcon>
           <DeleteOutlined />
@@ -71,12 +71,16 @@ function NavigationContextMenu({ anchorPosition, onClose }) {
 }
 
 function NavigationPane() {
-  const [state, dispatch] = useContext(AppContext);
+  const [state] = useContext(AppContext);
   const [contextMenu, setContextMenu] = useState(null);
+  const [selectedIndex, setSelectedIndex] = useState(InitialRouteIndex);
 
-  const handleListChange = (list) => {
-    dispatch({ type: ACTION_TYPES.SELECT_LIST, payload: { listId: list.id } });
-  };
+  const selectedList = useMemo(() => {
+    const listIndex = selectedIndex - RouteEntriesIndex.LISTS;
+    return listIndex >= 0 && listIndex < state.lists.length
+      ? state.lists[listIndex].id
+      : null;
+  }, [selectedIndex, state.lists]);
 
   const handleContextMenu = (event) => {
     event.preventDefault();
@@ -89,7 +93,7 @@ function NavigationPane() {
   };
 
   return (
-    <div onContextMenu={handleContextMenu}>
+    <nav onContextMenu={handleContextMenu}>
       <List>
         {state.lists.map((list, index) => {
           const badgeCount = list.items.filter(
@@ -98,8 +102,12 @@ function NavigationPane() {
           return (
             <ListItem key={list.id} dense disablePadding>
               <ListItemButton
-                selected={state.selectedList === index}
-                onClick={() => handleListChange(list)}
+                component={Link}
+                to={`/lists/${index}`}
+                selected={selectedIndex === index + RouteEntriesIndex.LISTS}
+                onClick={() =>
+                  setSelectedIndex(index + RouteEntriesIndex.LISTS)
+                }
               >
                 <ListItemIcon>
                   <ListIcon />
@@ -114,10 +122,11 @@ function NavigationPane() {
         })}
       </List>
       <NavigationContextMenu
+        selectedList={selectedList}
         anchorPosition={contextMenu}
         onClose={() => setContextMenu(null)}
       ></NavigationContextMenu>
-    </div>
+    </nav>
   );
 }
 

@@ -9,6 +9,16 @@ import { ExpandLess, ExpandMore } from "@mui/icons-material";
 import { ACTION_TYPES } from "../common/actions";
 import Editable from "./editable";
 import { DEFAULT_TODO_LIST_NAME } from "../model/todo-list";
+import { useParams } from "react-router-dom";
+
+function SelectedListView() {
+  const [state] = useContext(AppContext);
+  const { selectedIndex } = useParams();
+
+  return selectedIndex < state.lists.length ? (
+    <ListView list={state.lists[selectedIndex]} />
+  ) : null;
+}
 
 function ListView({ list }) {
   const [, dispatch] = useContext(AppContext);
@@ -94,4 +104,4 @@ function ListView({ list }) {
   );
 }
 
-export default ListView;
+export default SelectedListView;

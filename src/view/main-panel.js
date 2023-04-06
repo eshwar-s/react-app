@@ -1,13 +1,15 @@
-import { useContext } from "react";
-import ListView from "./list-view";
-import { AppContext } from "../common/context";
+import SelectedListView from "./list-view";
+import { Route, Routes } from "react-router-dom";
 
 function MainPanel() {
-  const [state] = useContext(AppContext);
-
-  return state.selectedList < state.lists.length ? (
-    <ListView list={state.lists[state.selectedList]}></ListView>
-  ) : null;
+  return (
+    <Routes>
+      <Route
+        path="/lists/:selectedIndex"
+        element={<SelectedListView />}
+      ></Route>
+    </Routes>
+  );
 }
 
 export default MainPanel;
