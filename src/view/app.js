@@ -1,5 +1,5 @@
-import { useEffect, useMemo, useReducer } from "react";
-import { loadTodoLists } from "../model/todo-liststore.js";
+import { useCallback, useEffect, useMemo, useReducer } from "react";
+import { loadTodoLists, saveTodoLists } from "../model/todo-liststore.js";
 import Sidebar from "./sidebar";
 import Spinner from "./spinner";
 import { ACTION_TYPES } from "../common/actions.js";
@@ -8,11 +8,20 @@ import { Box, ThemeProvider, useMediaQuery } from "@mui/material";
 import { AppContext } from "../common/context.js";
 import getTheme from "../common/theme";
 import MainPanel from "./main-panel";
+import { useBeforeUnload } from "react-router-dom";
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
   const theme = useMemo(() => getTheme(), []);
   const showSidebar = useMediaQuery(theme.breakpoints.up("sm"));
+
+  useBeforeUnload(
+    useCallback(() => {
+      if (!state.loading) {
+        saveTodoLists(state.lists);
+      }
+    }, [state.loading, state.lists])
+  );
 
   useEffect(() => {
     loadTodoLists()

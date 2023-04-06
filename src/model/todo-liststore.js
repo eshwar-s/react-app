@@ -31,6 +31,9 @@ export function saveTodoLists(todoLists) {
   );
 
   for (const todoList of todoLists) {
-    window.localStorage.setItem(todoList.id, todoList.serialize());
+    window.localStorage.setItem(
+      todoList.id,
+      Object.assign(new TodoList(), todoList).serialize()
+    );
   }
 }
