@@ -30,14 +30,7 @@ function AddTask({ listId }) {
 
   return (
     <OutlinedInput
-      sx={{
-        width: "100%",
-        backgroundColor: "rgba(0, 0, 0, 0.15)",
-        input: {
-          color: theme.palette.background.paper,
-          "&::placeholder": { opacity: 1 },
-        },
-      }}
+      sx={getStyle(theme)}
       size="small"
       placeholder="Add a Task"
       startAdornment={
@@ -50,6 +43,17 @@ function AddTask({ listId }) {
       onKeyDown={handleKeyDown}
     ></OutlinedInput>
   );
+}
+
+function getStyle(theme) {
+  return {
+    width: "100%",
+    backgroundColor: "rgba(0, 0, 0, 0.15)",
+    input: {
+      color: theme.palette.background.paper,
+      "&::placeholder": { opacity: 1 },
+    },
+  };
 }
 
 export default AddTask;

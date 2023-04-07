@@ -16,15 +16,7 @@ function Sidebar() {
   };
 
   return (
-    <Box
-      sx={{
-        height: "100%",
-        display: "flex",
-        flexDirection: "column",
-        padding: "12px",
-        backgroundColor: theme.palette.secondary.main,
-      }}
-    >
+    <Box sx={getStyle(theme)}>
       <Box sx={{ flex: "1 1 auto", overflowY: "scroll" }}>
         <NavigationPane></NavigationPane>
       </Box>
@@ -42,6 +34,16 @@ function Sidebar() {
       </Button>
     </Box>
   );
+}
+
+function getStyle(theme) {
+  return {
+    height: "100%",
+    display: "flex",
+    flexDirection: "column",
+    padding: "12px",
+    backgroundColor: theme.palette.secondary.main,
+  };
 }
 
 export default Sidebar;

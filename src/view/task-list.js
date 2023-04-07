@@ -46,16 +46,7 @@ function TaskList({ listId, tasks }) {
               </IconButton>
             }
           >
-            <ListItemButton
-              sx={{
-                borderRadius: "4px",
-                marginBottom: "2px",
-                bgcolor: theme.palette.background.paper,
-                ":hover": {
-                  bgcolor: theme.palette.background.paper,
-                },
-              }}
-            >
+            <ListItemButton sx={getStyle(theme)}>
               <ListItemIcon>
                 <Checkbox
                   edge="start"
@@ -76,6 +67,19 @@ function TaskList({ listId, tasks }) {
       })}
     </List>
   );
+}
+
+function getStyle(theme) {
+  return {
+    borderRadius: "4px",
+    marginBottom: "2px",
+    "&.MuiListItemButton-root, &.MuiListItemButton-root:hover": {
+      bgcolor: theme.palette.background.paper,
+    },
+    "&.Mui-selected, &.Mui-selected:hover": {
+      bgcolor: theme.palette.primary.light,
+    },
+  };
 }
 
 export default TaskList;
