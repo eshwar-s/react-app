@@ -5,6 +5,7 @@ function getTheme(mode) {
   return createTheme({
     palette: {
       primary: {
+        light: indigo[100],
         main: indigo[400],
       },
       secondary: {

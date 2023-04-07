@@ -122,7 +122,7 @@ export const reducer = (state, action) => {
     case ACTION_TYPES.DELETE_TASK:
       return {
         ...state,
-        lists: state.map((list) => {
+        lists: state.lists.map((list) => {
           if (list.id === action.payload.listId) {
             return {
               ...list,
