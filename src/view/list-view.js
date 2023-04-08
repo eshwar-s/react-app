@@ -10,6 +10,7 @@ import { ACTION_TYPES } from "../common/actions";
 import Editable from "./editable";
 import { DEFAULT_TODO_LIST_NAME } from "../model/todo-list";
 import { useParams } from "react-router-dom";
+import TaskDetails from "./task-details";
 
 function SelectedListView() {
   const [state] = useContext(AppContext);
@@ -24,6 +25,7 @@ function ListView({ list }) {
   const [, dispatch] = useContext(AppContext);
   const theme = useTheme();
   const [showCompletedTasks, setShowCompletedTasks] = useState(true);
+  const [selectedTask, setSelectedTask] = useState(null);
 
   const incompleteTasks = useMemo(() => {
     return list.items.filter((item) => {
@@ -48,57 +50,79 @@ function ListView({ list }) {
   };
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        backgroundColor: theme.palette.primary.main,
-        height: "100%",
-        padding: "12px",
-      }}
-    >
-      <Box sx={{ flex: "1 1 auto", overflowY: "scroll" }}>
-        <Box sx={{ display: "flex", flexDirection: "row" }}>
-          <Editable
-            element={
-              <Typography
-                variant="h5"
-                gutterBottom
-                sx={{
-                  flex: "1 1 auto",
-                  fontWeight: "bold",
-                  color: theme.palette.background.paper,
-                  outline: "0px solid transparent",
-                }}
-              >
-                {list.name}
-              </Typography>
-            }
-            placeholder={DEFAULT_TODO_LIST_NAME}
-            onChanged={handleListNameChanged}
-          ></Editable>
+    <Box sx={{ display: "flex", flexDirection: "row", height: "100%" }}>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          flex: "1 1 auto",
+          bgcolor: theme.palette.primary.main,
+          height: "100%",
+          padding: "12px",
+        }}
+      >
+        <Box sx={{ flex: "1 1 auto", overflowY: "scroll" }}>
+          <Box sx={{ display: "flex", flexDirection: "row" }}>
+            <Editable
+              element={
+                <Typography
+                  variant="h5"
+                  gutterBottom
+                  sx={{
+                    flex: "1 1 auto",
+                    fontWeight: "bold",
+                    color: theme.palette.background.paper,
+                    outline: "0px solid transparent",
+                  }}
+                >
+                  {list.name}
+                </Typography>
+              }
+              placeholder={DEFAULT_TODO_LIST_NAME}
+              onChanged={handleListNameChanged}
+            ></Editable>
+          </Box>
+          <Box>
+            <TaskList
+              listId={list.id}
+              tasks={incompleteTasks}
+              selectedTask={selectedTask}
+              setSelectedTask={setSelectedTask}
+            ></TaskList>
+            {completedTasks.length > 0 ? (
+              <>
+                <Button
+                  sx={{ color: theme.palette.background.paper }}
+                  size="small"
+                  onClick={() => setShowCompletedTasks(!showCompletedTasks)}
+                  startIcon={
+                    showCompletedTasks ? <ExpandMore /> : <ExpandLess />
+                  }
+                >
+                  Completed
+                </Button>
+                <Collapse in={showCompletedTasks}>
+                  <TaskList
+                    listId={list.id}
+                    tasks={completedTasks}
+                    selectedTask={selectedTask}
+                    setSelectedTask={setSelectedTask}
+                  ></TaskList>
+                </Collapse>
+              </>
+            ) : null}
+          </Box>
         </Box>
-        <Box>
-          <TaskList listId={list.id} tasks={incompleteTasks}></TaskList>
-          {completedTasks.length > 0 ? (
-            <>
-              <Button
-                sx={{ color: theme.palette.background.paper }}
-                size="small"
-                onClick={() => setShowCompletedTasks(!showCompletedTasks)}
-                startIcon={showCompletedTasks ? <ExpandMore /> : <ExpandLess />}
-              >
-                Completed
-              </Button>
-              <Collapse in={showCompletedTasks}>
-                <TaskList listId={list.id} tasks={completedTasks}></TaskList>
-              </Collapse>
-            </>
-          ) : null}
+        <Box sx={{ flex: "0 0 auto" }}>
+          <AddTask listId={list.id}></AddTask>
         </Box>
       </Box>
-      <Box sx={{ flex: "0 0 auto" }}>
-        <AddTask listId={list.id}></AddTask>
+      <Box>
+        <TaskDetails
+          list={list}
+          taskId={selectedTask}
+          onClose={() => setSelectedTask(null)}
+        ></TaskDetails>
       </Box>
     </Box>
   );

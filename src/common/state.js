@@ -75,6 +75,28 @@ export const reducer = (state, action) => {
         }),
       };
 
+    case ACTION_TYPES.UPDATE_TASK_NOTES:
+      return {
+        ...state,
+        lists: state.lists.map((list) => {
+          if (list.id === action.payload.listId) {
+            return {
+              ...list,
+              items: list.items.map((task) => {
+                if (task.id === action.payload.taskId) {
+                  return {
+                    ...task,
+                    notes: action.payload.taskNotes,
+                  };
+                }
+                return task;
+              }),
+            };
+          }
+          return list;
+        }),
+      };
+
     case ACTION_TYPES.TOGGLE_TASK_COMPLETION:
       return {
         ...state,
