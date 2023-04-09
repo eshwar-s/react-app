@@ -1,5 +1,5 @@
 import { createTheme } from "@mui/material";
-import { grey, indigo } from "@mui/material/colors";
+import { indigo } from "@mui/material/colors";
 
 function getTheme(mode) {
   return createTheme({
