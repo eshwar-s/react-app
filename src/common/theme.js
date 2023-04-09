@@ -8,9 +8,6 @@ function getTheme(mode) {
         light: indigo[100],
         main: indigo[400],
       },
-      secondary: {
-        main: grey[300],
-      },
     },
     typography: {
       button: {
