@@ -1,0 +1,10 @@
+{
+  "title": "Todo",
+  "add-task-placeholder": "Add a Task",
+  "new-list": "New List",
+  "rename-list": "Rename List",
+  "print-list": "Print List",
+  "delete-list": "Delete List",
+  "add-note-placeholder": "Add Note",
+  "completed": "Completed"
+}

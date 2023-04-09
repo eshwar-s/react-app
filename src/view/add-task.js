@@ -4,11 +4,13 @@ import { useTheme } from "@mui/material/styles";
 import { useContext, useState } from "react";
 import { AppContext } from "../common/context";
 import { ACTION_TYPES } from "../common/actions";
+import { useTranslation } from "react-i18next";
 
 function AddTask({ listId }) {
   const [value, setValue] = useState("");
   const [, dispatch] = useContext(AppContext);
   const theme = useTheme();
+  const { t } = useTranslation();
 
   const handleKeyDown = (event) => {
     if (event.key === "Enter" && event.target.value !== "") {
@@ -32,7 +34,7 @@ function AddTask({ listId }) {
     <OutlinedInput
       sx={getStyle(theme)}
       size="small"
-      placeholder="Add a Task"
+      placeholder={t("add-task-placeholder")}
       startAdornment={
         <InputAdornment position="start">
           <AddIcon sx={{ color: theme.palette.primary.contrastText }} />

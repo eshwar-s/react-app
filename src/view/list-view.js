@@ -11,6 +11,7 @@ import Editable from "./editable";
 import { DEFAULT_TODO_LIST_NAME } from "../model/todo-list";
 import { useParams } from "react-router-dom";
 import TaskDetails from "./task-details";
+import { useTranslation } from "react-i18next";
 
 function SelectedListView() {
   const [state] = useContext(AppContext);
@@ -26,6 +27,7 @@ function ListView({ list }) {
   const theme = useTheme();
   const [showCompletedTasks, setShowCompletedTasks] = useState(true);
   const [selectedTask, setSelectedTask] = useState(null);
+  const { t } = useTranslation();
 
   const incompleteTasks = useMemo(() => {
     return list.items.filter((item) => {
@@ -99,7 +101,7 @@ function ListView({ list }) {
                     showCompletedTasks ? <ExpandMore /> : <ExpandLess />
                   }
                 >
-                  Completed
+                  {t("completed")}
                 </Button>
                 <Collapse in={showCompletedTasks}>
                   <TaskList

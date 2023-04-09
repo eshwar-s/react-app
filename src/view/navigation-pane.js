@@ -20,9 +20,11 @@ import { ACTION_TYPES } from "../common/actions";
 import { AppContext } from "../common/context";
 import { Link } from "react-router-dom";
 import { InitialRouteIndex, RouteEntriesIndex } from "../common/routes";
+import { useTranslation } from "react-i18next";
 
 function NavigationContextMenu({ selectedList, anchorPosition, onClose }) {
   const [state, dispatch] = useContext(AppContext);
+  const { t } = useTranslation();
 
   const handleListDelete = () => {
     dispatch({
@@ -47,13 +49,13 @@ function NavigationContextMenu({ selectedList, anchorPosition, onClose }) {
         <ListItemIcon>
           <FlipOutlined />
         </ListItemIcon>
-        <ListItemText>Rename List</ListItemText>
+        <ListItemText>{t("rename-list")}</ListItemText>
       </MenuItem>
       <MenuItem dense>
         <ListItemIcon>
           <PrintOutlined />
         </ListItemIcon>
-        <ListItemText>Print List</ListItemText>
+        <ListItemText>{t("print-list")}</ListItemText>
       </MenuItem>
       <Divider></Divider>
       <MenuItem
@@ -64,7 +66,7 @@ function NavigationContextMenu({ selectedList, anchorPosition, onClose }) {
         <ListItemIcon>
           <DeleteOutlined />
         </ListItemIcon>
-        <ListItemText>Delete List</ListItemText>
+        <ListItemText>{t("delete-list")}</ListItemText>
       </MenuItem>
     </Menu>
   );

@@ -18,10 +18,12 @@ import { useContext, useMemo } from "react";
 import { ACTION_TYPES } from "../common/actions";
 import { AppContext } from "../common/context";
 import Editable from "./editable";
+import { useTranslation } from "react-i18next";
 
 function TaskDetails({ list, taskId, onClose }) {
   const [, dispatch] = useContext(AppContext);
   const theme = useTheme();
+  const { t } = useTranslation();
 
   const task = useMemo(() => {
     return taskId ? list.items.find((task) => task.id === taskId) : null;
@@ -118,7 +120,7 @@ function TaskDetails({ list, taskId, onClose }) {
             size="small"
             multiline
             minRows={3}
-            placeholder="Add Note"
+            placeholder={t("add-note-placeholder")}
             value={task.notes}
             onChange={handleTaskNotes}
           ></OutlinedInput>

@@ -6,10 +6,12 @@ import { useContext } from "react";
 import { ACTION_TYPES } from "../common/actions";
 import { AppContext } from "../common/context";
 import NavigationPane from "./navigation-pane";
+import { useTranslation } from "react-i18next";
 
 function Sidebar() {
   const [, dispatch] = useContext(AppContext);
   const theme = useTheme();
+  const { t } = useTranslation();
 
   const handleListAdd = () => {
     dispatch({ type: ACTION_TYPES.ADD_LIST });
@@ -30,7 +32,7 @@ function Sidebar() {
         startIcon={<AddIcon></AddIcon>}
         onClick={handleListAdd}
       >
-        New List
+        {t("new-list")}
       </Button>
     </Box>
   );
