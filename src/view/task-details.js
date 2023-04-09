@@ -76,7 +76,7 @@ function TaskDetails({ list, taskId, onClose }) {
           width: "300px",
           height: "100vh",
           padding: "12px",
-          bgcolor: theme.palette.secondary.main,
+          bgcolor: theme.palette.grey[300],
         }}
       >
         <Box

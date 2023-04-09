@@ -42,7 +42,7 @@ function getStyle(theme) {
     display: "flex",
     flexDirection: "column",
     padding: "12px",
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: theme.palette.grey[300],
   };
 }
 
