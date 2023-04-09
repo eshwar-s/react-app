@@ -7,6 +7,7 @@ function getTheme(mode) {
       primary: {
         light: indigo[100],
         main: indigo[400],
+        dark: indigo[500],
       },
     },
     typography: {
@@ -18,6 +19,13 @@ function getTheme(mode) {
       MuiButtonBase: {
         defaultProps: {
           disableRipple: true,
+        },
+        styleOverrides: {
+          root: {
+            "&.Mui-focusVisible": {
+              border: `2px solid ${indigo[500]}`,
+            },
+          },
         },
       },
     },

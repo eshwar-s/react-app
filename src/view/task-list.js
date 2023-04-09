@@ -63,9 +63,9 @@ function TaskList({ listId, tasks, selectedTask, setSelectedTask }) {
             >
               <ListItemIcon>
                 <Checkbox
+                  tabIndex={0}
                   edge="start"
                   checked={task.isCompleted}
-                  tabIndex={-1}
                   onClick={(event) => toggleCompletion(event, task.id)}
                 />
               </ListItemIcon>
@@ -90,7 +90,10 @@ function getStyle(theme) {
     "&.MuiListItemButton-root": {
       bgcolor: theme.palette.primary.contrastText,
     },
-    "&.Mui-selected, &.Mui-selected:hover": {
+    "&.Mui-selected, &.Mui-selected:hover, &.Mui-selected.Mui-focusVisible": {
+      bgcolor: theme.palette.primary.light,
+    },
+    "&.Mui-focusVisible": {
       bgcolor: theme.palette.primary.light,
     },
   };

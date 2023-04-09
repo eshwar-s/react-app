@@ -46,7 +46,7 @@ function App() {
             >
               <Sidebar></Sidebar>
             </Box>
-            <Box id="main" sx={{ height: "100%", flexGrow: "1" }}>
+            <Box role="main" id="main" sx={{ height: "100%", flexGrow: "1" }}>
               <MainPanel></MainPanel>
             </Box>
           </Box>
