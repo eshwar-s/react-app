@@ -88,7 +88,7 @@ function getStyle(theme) {
     borderRadius: "4px",
     marginBottom: "2px",
     "&.MuiListItemButton-root": {
-      bgcolor: theme.palette.background.paper,
+      bgcolor: theme.palette.primary.contrastText,
     },
     "&.Mui-selected, &.Mui-selected:hover": {
       bgcolor: theme.palette.primary.light,

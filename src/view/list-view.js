@@ -71,7 +71,7 @@ function ListView({ list }) {
                   sx={{
                     flex: "1 1 auto",
                     fontWeight: "bold",
-                    color: theme.palette.background.paper,
+                    color: theme.palette.primary.contrastText,
                     outline: "0px solid transparent",
                   }}
                 >
@@ -92,7 +92,7 @@ function ListView({ list }) {
             {completedTasks.length > 0 ? (
               <>
                 <Button
-                  sx={{ color: theme.palette.background.paper }}
+                  sx={{ color: theme.palette.primary.contrastText }}
                   size="small"
                   onClick={() => setShowCompletedTasks(!showCompletedTasks)}
                   startIcon={

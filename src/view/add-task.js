@@ -35,7 +35,7 @@ function AddTask({ listId }) {
       placeholder="Add a Task"
       startAdornment={
         <InputAdornment position="start">
-          <AddIcon sx={{ color: theme.palette.background.paper }} />
+          <AddIcon sx={{ color: theme.palette.primary.contrastText }} />
         </InputAdornment>
       }
       value={value}
@@ -50,7 +50,7 @@ function getStyle(theme) {
     width: "100%",
     backgroundColor: "rgba(0, 0, 0, 0.15)",
     input: {
-      color: theme.palette.background.paper,
+      color: theme.palette.primary.contrastText,
       "&::placeholder": { opacity: 1 },
     },
   };
