@@ -2,7 +2,7 @@ import { createTheme } from "@mui/material";
 import { indigo } from "@mui/material/colors";
 
 function getTheme(mode) {
-  return createTheme({
+  let theme = createTheme({
     palette: {
       primary: {
         light: indigo[100],
@@ -15,6 +15,9 @@ function getTheme(mode) {
         textTransform: "none",
       },
     },
+  });
+
+  return createTheme(theme, {
     components: {
       MuiButtonBase: {
         defaultProps: {
@@ -23,7 +26,7 @@ function getTheme(mode) {
         styleOverrides: {
           root: {
             "&.Mui-focusVisible": {
-              border: `2px solid ${indigo[500]}`,
+              border: `2px solid ${theme.palette.primary.dark}`,
             },
           },
         },

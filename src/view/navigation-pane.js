@@ -112,7 +112,7 @@ function NavigationPane() {
                 }
               >
                 <ListItemIcon>
-                  <ListIcon />
+                  <ListIcon color="primary" />
                 </ListItemIcon>
                 <ListItemText>{list.name}</ListItemText>
                 {badgeCount > 0 ? (
