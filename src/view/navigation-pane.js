@@ -98,6 +98,7 @@ function NavigationPane() {
     <nav onContextMenu={handleContextMenu}>
       <List>
         {state.lists.map((list, index) => {
+          const listIndex = index + RouteEntriesIndex.LISTS;
           const badgeCount = list.items.filter(
             (item) => !item.isCompleted
           ).length;
@@ -106,15 +107,13 @@ function NavigationPane() {
               <ListItemButton
                 component={Link}
                 to={`/lists/${index}`}
-                selected={selectedIndex === index + RouteEntriesIndex.LISTS}
-                onClick={() =>
-                  setSelectedIndex(index + RouteEntriesIndex.LISTS)
-                }
+                selected={selectedIndex === listIndex}
+                onClick={() => setSelectedIndex(listIndex)}
               >
                 <ListItemIcon>
                   <ListIcon color="primary" />
                 </ListItemIcon>
-                <ListItemText>{list.name}</ListItemText>
+                <ListItemText primary={list.name} />
                 {badgeCount > 0 ? (
                   <Typography variant="caption">{badgeCount}</Typography>
                 ) : null}
