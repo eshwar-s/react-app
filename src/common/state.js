@@ -1,16 +1,23 @@
 import { ACTION_TYPES } from "./actions";
 import { TodoList } from "../model/todo-list.js";
 import { TodoItem } from "../model/todo-item";
+import { TodoSettings } from "../model/todo-settings";
 
 export const initialState = {
   loading: true,
   lists: [],
+  settings: new TodoSettings(),
 };
 
 export const reducer = (state, action) => {
   switch (action.type) {
     case ACTION_TYPES.INIT_LIST:
-      return { ...state, loading: false, lists: action.payload };
+      return {
+        ...state,
+        loading: false,
+        lists: action.payload.lists,
+        settings: action.payload.settings,
+      };
 
     case ACTION_TYPES.ADD_LIST:
       const newList = TodoList.new();
@@ -155,6 +162,33 @@ export const reducer = (state, action) => {
           }
           return list;
         }),
+      };
+
+    case ACTION_TYPES.SET_THEME_COLOR:
+      return {
+        ...state,
+        settings: {
+          ...state.settings,
+          theme: action.payload,
+        },
+      };
+
+    case ACTION_TYPES.SET_TASK_SORT_ORDER:
+      return {
+        ...state,
+        settings: {
+          ...state.settings,
+          sortOrder: action.payload,
+        },
+      };
+
+    case ACTION_TYPES.TOGGLE_SHOW_COMPLETED_TASKS:
+      return {
+        ...state,
+        settings: {
+          ...state.settings,
+          showCompleted: action.payload,
+        },
       };
 
     default:

@@ -1,6 +1,8 @@
 import { TodoList } from "./todo-list.js";
+import { TodoSettings } from "./todo-settings.js";
 
 const TODO_LIST_STORAGE_ID = "todo-lists";
+const TODO_SETTINGS_STORAGE_ID = "todo-settings";
 const TODO_LIST_LOAD_TIMEOUT = 300;
 
 export async function loadTodoLists() {
@@ -19,7 +21,17 @@ export async function loadTodoLists() {
         todoLists.push(TodoList.new());
       }
 
-      resolve(todoLists);
+      const settingsData = window.localStorage.getItem(
+        TODO_SETTINGS_STORAGE_ID
+      );
+
+      let settings = new TodoSettings();
+
+      if (settingsData) {
+        settings = new TodoSettings().deserialize(settingsData);
+      }
+
+      resolve({ lists: todoLists, settings: settings });
     }, TODO_LIST_LOAD_TIMEOUT);
   });
 }
@@ -36,4 +48,11 @@ export function saveTodoLists(todoLists) {
       Object.assign(new TodoList(), todoList).serialize()
     );
   }
+}
+
+export function saveTodoSettings(todoSettings) {
+  window.localStorage.setItem(
+    TODO_SETTINGS_STORAGE_ID,
+    todoSettings.serialize()
+  );
 }

@@ -5,8 +5,12 @@
   "rename-list": "Rename List",
   "print-list": "Print List",
   "delete-list": "Delete List",
+  "sort-list": "Sort",
   "add-note-placeholder": "Add Note",
   "completed": "Completed",
   "important-task": "Important",
-  "complete-task": "Complete Task"
+  "complete-task": "Complete Task",
+  "change-theme": "Change Theme...",
+  "hide-completed-tasks": "Handle Completed Tasks",
+  "show-completed-tasks": "Show Completed Tasks"
 }

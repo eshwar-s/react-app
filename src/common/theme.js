@@ -8,6 +8,7 @@ import {
   grey,
   indigo,
 } from "@mui/material/colors";
+import { useMemo } from "react";
 
 export const ThemeColor = {
   BLUE: "blue",
@@ -66,6 +67,7 @@ function getPrimaryColor(color) {
       };
 
     case ThemeColor.INDIGO:
+    default:
       return {
         light: indigo[200],
         main: indigo[400],
@@ -73,41 +75,42 @@ function getPrimaryColor(color) {
         contrastText: "#fff",
       };
   }
-  console.error(`Invalid color provided ${color}`);
 }
 
-function getTheme(darkMode, themeColor = ThemeColor.INDIGO) {
-  let theme = createTheme({
-    palette: {
-      mode: darkMode ? ThemeMode.DARK : ThemeMode.LIGHT,
-      primary: getPrimaryColor(themeColor),
-    },
-    typography: {
-      button: {
-        textTransform: "none",
+function useTheme(darkMode, themeColor) {
+  return useMemo(() => {
+    let theme = createTheme({
+      palette: {
+        mode: darkMode ? ThemeMode.DARK : ThemeMode.LIGHT,
+        primary: getPrimaryColor(themeColor),
       },
-    },
-    sidebar: {
-      background: darkMode ? grey[900] : grey[300],
-    },
-  });
-
-  return createTheme(theme, {
-    components: {
-      MuiButtonBase: {
-        defaultProps: {
-          disableRipple: true,
+      typography: {
+        button: {
+          textTransform: "none",
         },
-        styleOverrides: {
-          root: {
-            "&.Mui-focusVisible": {
-              border: `2px solid ${theme.palette.primary.dark}`,
+      },
+      sidebar: {
+        background: darkMode ? grey[900] : grey[300],
+      },
+    });
+
+    return createTheme(theme, {
+      components: {
+        MuiButtonBase: {
+          defaultProps: {
+            disableRipple: true,
+          },
+          styleOverrides: {
+            root: {
+              "&.Mui-focusVisible": {
+                border: `2px solid ${theme.palette.primary.dark}`,
+              },
             },
           },
         },
       },
-    },
-  });
+    });
+  }, [darkMode, themeColor]);
 }
 
-export default getTheme;
+export default useTheme;
