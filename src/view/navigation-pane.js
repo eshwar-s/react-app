@@ -14,6 +14,7 @@ import {
   Menu,
   MenuItem,
   Typography,
+  useTheme,
 } from "@mui/material";
 import { useContext, useMemo, useState } from "react";
 import { ACTION_TYPES } from "../common/actions";
@@ -76,6 +77,7 @@ function NavigationPane() {
   const [state] = useContext(AppContext);
   const [contextMenu, setContextMenu] = useState(null);
   const [selectedIndex, setSelectedIndex] = useState(InitialRouteIndex);
+  const theme = useTheme();
 
   const selectedList = useMemo(() => {
     const listIndex = selectedIndex - RouteEntriesIndex.LISTS;
@@ -105,6 +107,7 @@ function NavigationPane() {
           return (
             <ListItem key={list.id} dense disablePadding>
               <ListItemButton
+                sx={{ color: theme.palette.text.primary }}
                 component={Link}
                 to={`/lists/${index}`}
                 selected={selectedIndex === listIndex}

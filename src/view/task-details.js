@@ -69,7 +69,7 @@ function TaskDetails({ list, taskId, onClose }) {
     onClose();
   };
 
-  return task !== null ? (
+  return Boolean(task) ? (
     <ClickAwayListener onClickAway={onClose}>
       <Box
         sx={{
@@ -78,7 +78,7 @@ function TaskDetails({ list, taskId, onClose }) {
           width: "300px",
           height: "100vh",
           padding: "12px",
-          bgcolor: theme.palette.grey[300],
+          bgcolor: theme.sidebar.background,
         }}
       >
         <Box
@@ -99,7 +99,11 @@ function TaskDetails({ list, taskId, onClose }) {
             <Editable
               element={
                 <Typography
-                  sx={{ flex: "1 0 auto", outline: "0px solid transparent" }}
+                  sx={{
+                    flex: "1 0 auto",
+                    outline: "0px solid transparent",
+                    color: theme.palette.text.primary,
+                  }}
                   variant="body2"
                 >
                   {task.title}
@@ -137,7 +141,12 @@ function TaskDetails({ list, taskId, onClose }) {
           <IconButton edge="start" size="small" onClick={onClose}>
             <ChevronRight></ChevronRight>
           </IconButton>
-          <Typography variant="caption">{task.creationTime}</Typography>
+          <Typography
+            sx={{ color: theme.palette.text.primary }}
+            variant="caption"
+          >
+            {task.creationTime}
+          </Typography>
           <IconButton edge="end" size="small" onClick={handleTaskDelete}>
             <DeleteOutline></DeleteOutline>
           </IconButton>

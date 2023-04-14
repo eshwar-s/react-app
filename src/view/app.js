@@ -8,14 +8,14 @@ import { Box, ThemeProvider, useMediaQuery } from "@mui/material";
 import { AppContext } from "../common/context.js";
 import getTheme from "../common/theme";
 import MainPanel from "./main-panel";
-import { useBeforeUnload } from "react-router-dom";
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const theme = useMemo(() => getTheme(), []);
+  const darkMode = useMediaQuery("(prefers-color-scheme: dark)");
+  const theme = useMemo(() => getTheme(darkMode), [darkMode]);
   const showSidebar = useMediaQuery(theme.breakpoints.up("sm"));
 
-  useBeforeUnload(
+  useEffect(
     useCallback(() => {
       if (!state.loading) {
         saveTodoLists(state.lists);

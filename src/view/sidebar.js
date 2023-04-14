@@ -44,7 +44,7 @@ function getStyle(theme) {
     display: "flex",
     flexDirection: "column",
     padding: "12px",
-    backgroundColor: theme.palette.grey[300],
+    backgroundColor: theme.sidebar.background,
   };
 }
 

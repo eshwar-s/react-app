@@ -9,10 +9,11 @@ import {
 } from "@mui/material";
 import StarIcon from "@mui/icons-material/Star";
 import StarOutlineIcon from "@mui/icons-material/StarOutline";
-import { useTheme } from "@mui/material/styles";
+import { alpha, useTheme } from "@mui/material/styles";
 import { useContext } from "react";
 import { AppContext } from "../common/context";
 import { ACTION_TYPES } from "../common/actions";
+import { ThemeMode } from "../common/theme";
 
 function TaskList({ listId, tasks, selectedTask, setSelectedTask }) {
   const [, dispatch] = useContext(AppContext);
@@ -85,16 +86,26 @@ function TaskList({ listId, tasks, selectedTask, setSelectedTask }) {
 
 function getStyle(theme) {
   return {
+    color: theme.palette.text.primary,
     borderRadius: "4px",
     marginBottom: "2px",
     "&.MuiListItemButton-root": {
-      bgcolor: theme.palette.primary.contrastText,
+      bgcolor:
+        theme.palette.mode === ThemeMode.LIGHT
+          ? theme.palette.primary.contrastText
+          : theme.palette.divider,
     },
     "&.Mui-selected, &.Mui-selected:hover, &.Mui-selected.Mui-focusVisible": {
-      bgcolor: theme.palette.primary.light,
+      bgcolor:
+        theme.palette.mode === ThemeMode.LIGHT
+          ? theme.palette.primary.light
+          : alpha(theme.palette.primary.light, 0.3),
     },
     "&.Mui-focusVisible": {
-      bgcolor: theme.palette.primary.light,
+      bgcolor:
+        theme.palette.mode === ThemeMode.LIGHT
+          ? theme.palette.primary.light
+          : alpha(theme.palette.primary.light, 0.3),
     },
   };
 }

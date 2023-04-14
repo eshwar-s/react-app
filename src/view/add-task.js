@@ -5,6 +5,7 @@ import { useContext, useState } from "react";
 import { AppContext } from "../common/context";
 import { ACTION_TYPES } from "../common/actions";
 import { useTranslation } from "react-i18next";
+import { ThemeMode } from "../common/theme";
 
 function AddTask({ listId }) {
   const [value, setValue] = useState("");
@@ -37,7 +38,7 @@ function AddTask({ listId }) {
       placeholder={t("add-task-placeholder")}
       startAdornment={
         <InputAdornment position="start">
-          <AddIcon sx={{ color: theme.palette.primary.contrastText }} />
+          <AddIcon sx={{ color: getTextColor(theme) }} />
         </InputAdornment>
       }
       value={value}
@@ -52,10 +53,16 @@ function getStyle(theme) {
     width: "100%",
     backgroundColor: "rgba(0, 0, 0, 0.15)",
     input: {
-      color: theme.palette.primary.contrastText,
+      color: getTextColor(theme),
       "&::placeholder": { opacity: 1 },
     },
   };
+}
+
+function getTextColor(theme) {
+  return theme.palette.mode === ThemeMode.LIGHT
+    ? theme.palette.primary.contrastText
+    : theme.palette.primary.main;
 }
 
 export default AddTask;

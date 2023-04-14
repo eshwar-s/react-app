@@ -12,6 +12,7 @@ import { DEFAULT_TODO_LIST_NAME } from "../model/todo-list";
 import { useParams } from "react-router-dom";
 import TaskDetails from "./task-details";
 import { useTranslation } from "react-i18next";
+import { ThemeMode } from "../common/theme";
 
 function SelectedListView() {
   const [state] = useContext(AppContext);
@@ -53,16 +54,7 @@ function ListView({ list }) {
 
   return (
     <Box sx={{ display: "flex", flexDirection: "row", height: "100%" }}>
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          flex: "1 1 auto",
-          bgcolor: theme.palette.primary.main,
-          height: "100%",
-          padding: "12px",
-        }}
-      >
+      <Box sx={getStyle(theme)}>
         <Box sx={{ flex: "1 1 auto", overflowY: "scroll" }}>
           <Box sx={{ display: "flex", flexDirection: "row" }}>
             <Editable
@@ -73,7 +65,7 @@ function ListView({ list }) {
                   sx={{
                     flex: "1 1 auto",
                     fontWeight: "bold",
-                    color: theme.palette.primary.contrastText,
+                    color: getTextColor(theme),
                     outline: "0px solid transparent",
                   }}
                 >
@@ -94,7 +86,7 @@ function ListView({ list }) {
             {completedTasks.length > 0 ? (
               <>
                 <Button
-                  sx={{ color: theme.palette.primary.contrastText }}
+                  sx={{ color: getTextColor(theme) }}
                   size="small"
                   onClick={() => setShowCompletedTasks(!showCompletedTasks)}
                   startIcon={
@@ -128,6 +120,26 @@ function ListView({ list }) {
       </Box>
     </Box>
   );
+}
+
+function getStyle(theme) {
+  return {
+    display: "flex",
+    flexDirection: "column",
+    flex: "1 1 auto",
+    bgcolor:
+      theme.palette.mode === ThemeMode.LIGHT
+        ? theme.palette.primary.main
+        : theme.palette.background.default,
+    height: "100%",
+    padding: "12px",
+  };
+}
+
+function getTextColor(theme) {
+  return theme.palette.mode === ThemeMode.LIGHT
+    ? theme.palette.primary.contrastText
+    : theme.palette.primary.main;
 }
 
 export default SelectedListView;
