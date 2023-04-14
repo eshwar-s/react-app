@@ -6,5 +6,7 @@
   "print-list": "Print List",
   "delete-list": "Delete List",
   "add-note-placeholder": "Add Note",
-  "completed": "Completed"
+  "completed": "Completed",
+  "important-task": "Important",
+  "complete-task": "Complete Task"
 }

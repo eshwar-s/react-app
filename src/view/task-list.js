@@ -14,10 +14,12 @@ import { useContext } from "react";
 import { AppContext } from "../common/context";
 import { ACTION_TYPES } from "../common/actions";
 import { ThemeMode } from "../common/theme";
+import { useTranslation } from "react-i18next";
 
 function TaskList({ listId, tasks, selectedTask, setSelectedTask }) {
   const [, dispatch] = useContext(AppContext);
   const theme = useTheme();
+  const { t } = useTranslation();
 
   const handleSelection = (event, taskId) => {
     event.stopPropagation();
@@ -50,6 +52,8 @@ function TaskList({ listId, tasks, selectedTask, setSelectedTask }) {
             disablePadding
             secondaryAction={
               <IconButton
+                aria-pressed={task.isImportant}
+                aria-label={t("important-task")}
                 edge="end"
                 onClick={(event) => toggleImportance(event, task.id)}
               >
@@ -64,6 +68,7 @@ function TaskList({ listId, tasks, selectedTask, setSelectedTask }) {
             >
               <ListItemIcon>
                 <Checkbox
+                  aria-label={t("complete-task")}
                   tabIndex={0}
                   edge="start"
                   checked={task.isCompleted}

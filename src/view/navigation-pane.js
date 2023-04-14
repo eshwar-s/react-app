@@ -118,7 +118,9 @@ function NavigationPane() {
                 </ListItemIcon>
                 <ListItemText primary={list.name} />
                 {badgeCount > 0 ? (
-                  <Typography variant="caption">{badgeCount}</Typography>
+                  <Typography aria-hidden variant="caption">
+                    {badgeCount}
+                  </Typography>
                 ) : null}
               </ListItemButton>
             </ListItem>
