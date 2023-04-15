@@ -1,4 +1,4 @@
-import { ThemeColor } from "../common/theme";
+import { ThemeColor } from "../common/colors";
 
 export const TodoSortOrder = {
   ALPHABETICALLY: 0,

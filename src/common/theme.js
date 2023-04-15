@@ -1,81 +1,11 @@
 import { createTheme } from "@mui/material";
-import {
-  teal,
-  green,
-  red,
-  purple,
-  blue,
-  grey,
-  indigo,
-} from "@mui/material/colors";
 import { useMemo } from "react";
-
-export const ThemeColor = {
-  BLUE: "blue",
-  PURPLE: "purple",
-  RED: "red",
-  GREEN: "green",
-  TEAL: "teal",
-  INDIGO: "indigo",
-};
+import { getPrimaryColor, getSecondaryColor } from "./colors";
 
 export const ThemeMode = {
   DARK: "dark",
   LIGHT: "light",
 };
-
-function getPrimaryColor(color) {
-  switch (color) {
-    case ThemeColor.BLUE:
-      return {
-        light: blue[200],
-        main: blue[400],
-        dark: blue[500],
-        contrastText: "#fff",
-      };
-
-    case ThemeColor.PURPLE:
-      return {
-        light: purple[200],
-        main: purple[400],
-        dark: purple[500],
-        contrastText: "#fff",
-      };
-
-    case ThemeColor.RED:
-      return {
-        light: red[200],
-        main: red[400],
-        dark: red[500],
-        contrastText: "#fff",
-      };
-
-    case ThemeColor.GREEN:
-      return {
-        light: green[200],
-        main: green[400],
-        dark: green[500],
-        contrastText: "#fff",
-      };
-
-    case ThemeColor.TEAL:
-      return {
-        light: teal[200],
-        main: teal[400],
-        dark: teal[500],
-        contrastText: "#fff",
-      };
-
-    case ThemeColor.INDIGO:
-    default:
-      return {
-        light: indigo[200],
-        main: indigo[400],
-        dark: indigo[500],
-        contrastText: "#fff",
-      };
-  }
-}
 
 function useTheme(isDarkMode, themeColor) {
   return useMemo(() => {
@@ -83,7 +13,7 @@ function useTheme(isDarkMode, themeColor) {
       palette: {
         mode: isDarkMode ? ThemeMode.DARK : ThemeMode.LIGHT,
         primary: getPrimaryColor(themeColor),
-        secondary: { main: isDarkMode ? grey[900] : grey[300] },
+        secondary: getSecondaryColor(isDarkMode),
       },
       typography: {
         button: {
@@ -97,6 +27,7 @@ function useTheme(isDarkMode, themeColor) {
         MuiButtonBase: {
           defaultProps: {
             disableRipple: true,
+            disableTouchRipple: true,
           },
           styleOverrides: {
             root: {

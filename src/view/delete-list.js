@@ -29,6 +29,7 @@ function DeleteList({ list, open, onClose }) {
       sx={{
         ".MuiDialog-paper": {
           padding: "16px",
+          minWidth: "300px",
         },
       }}
       aria-labelledby="dialog-title"
