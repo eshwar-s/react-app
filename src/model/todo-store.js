@@ -53,6 +53,6 @@ export function saveTodoLists(todoLists) {
 export function saveTodoSettings(todoSettings) {
   window.localStorage.setItem(
     TODO_SETTINGS_STORAGE_ID,
-    todoSettings.serialize()
+    Object.assign(new TodoSettings(), todoSettings).serialize()
   );
 }

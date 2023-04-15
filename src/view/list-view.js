@@ -88,7 +88,7 @@ function ListView({ list }) {
               placeholder={DEFAULT_TODO_LIST_NAME}
               onChanged={handleListNameChanged}
             ></Editable>
-            <ListMenu></ListMenu>
+            <ListMenu list={list} />
           </Box>
           <Box>
             <TaskList
@@ -96,7 +96,7 @@ function ListView({ list }) {
               tasks={incompleteTasks}
               selectedTask={selectedTask}
               setSelectedTask={setSelectedTask}
-            ></TaskList>
+            />
             {completedTasks.length > 0 && state.settings.showCompleted ? (
               <>
                 <Button

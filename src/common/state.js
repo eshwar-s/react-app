@@ -187,7 +187,7 @@ export const reducer = (state, action) => {
         ...state,
         settings: {
           ...state.settings,
-          showCompleted: action.payload,
+          showCompleted: !state.settings.showCompleted,
         },
       };
 
