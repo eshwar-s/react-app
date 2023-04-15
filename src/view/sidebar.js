@@ -32,7 +32,7 @@ function Sidebar() {
         startIcon={<AddIcon></AddIcon>}
         onClick={handleListAdd}
       >
-        {t("new-list")}
+        {t("newList")}
       </Button>
     </Box>
   );
@@ -44,7 +44,7 @@ function getStyle(theme) {
     display: "flex",
     flexDirection: "column",
     padding: "12px",
-    backgroundColor: theme.sidebar.background,
+    backgroundColor: theme.palette.secondary.main,
   };
 }
 

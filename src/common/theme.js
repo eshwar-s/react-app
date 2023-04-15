@@ -77,20 +77,18 @@ function getPrimaryColor(color) {
   }
 }
 
-function useTheme(darkMode, themeColor) {
+function useTheme(isDarkMode, themeColor) {
   return useMemo(() => {
     let theme = createTheme({
       palette: {
-        mode: darkMode ? ThemeMode.DARK : ThemeMode.LIGHT,
+        mode: isDarkMode ? ThemeMode.DARK : ThemeMode.LIGHT,
         primary: getPrimaryColor(themeColor),
+        secondary: { main: isDarkMode ? grey[900] : grey[300] },
       },
       typography: {
         button: {
           textTransform: "none",
         },
-      },
-      sidebar: {
-        background: darkMode ? grey[900] : grey[300],
       },
     });
 
@@ -108,9 +106,14 @@ function useTheme(darkMode, themeColor) {
             },
           },
         },
+        MuiDialog: {
+          styleOverrides: {
+            paper: { borderRadius: "8px" },
+          },
+        },
       },
     });
-  }, [darkMode, themeColor]);
+  }, [isDarkMode, themeColor]);
 }
 
 export default useTheme;

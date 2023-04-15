@@ -13,6 +13,7 @@ import { useParams } from "react-router-dom";
 import TaskDetails from "./task-details";
 import { useTranslation } from "react-i18next";
 import { ThemeMode } from "../common/theme";
+import ListMenu from "./list-menu";
 
 function SelectedListView() {
   const [state] = useContext(AppContext);
@@ -56,7 +57,14 @@ function ListView({ list }) {
     <Box sx={{ display: "flex", flexDirection: "row", height: "100%" }}>
       <Box sx={getStyle(theme)}>
         <Box sx={{ flex: "1 1 auto", overflowY: "scroll" }}>
-          <Box sx={{ display: "flex", flexDirection: "row" }}>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
             <Editable
               element={
                 <Typography
@@ -75,6 +83,7 @@ function ListView({ list }) {
               placeholder={DEFAULT_TODO_LIST_NAME}
               onChanged={handleListNameChanged}
             ></Editable>
+            <ListMenu></ListMenu>
           </Box>
           <Box>
             <TaskList
@@ -136,7 +145,7 @@ function getStyle(theme) {
   };
 }
 
-function getTextColor(theme) {
+export function getTextColor(theme) {
   return theme.palette.mode === ThemeMode.LIGHT
     ? theme.palette.primary.contrastText
     : theme.palette.primary.main;

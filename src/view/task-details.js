@@ -78,7 +78,7 @@ function TaskDetails({ list, taskId, onClose }) {
           width: "300px",
           height: "100vh",
           padding: "12px",
-          bgcolor: theme.sidebar.background,
+          bgcolor: theme.palette.secondary.main,
         }}
       >
         <Box
@@ -124,7 +124,7 @@ function TaskDetails({ list, taskId, onClose }) {
             size="small"
             multiline
             minRows={3}
-            placeholder={t("add-note-placeholder")}
+            placeholder={t("addNotePlaceholder")}
             value={task.notes}
             onChange={handleTaskNotes}
           ></OutlinedInput>
@@ -139,7 +139,7 @@ function TaskDetails({ list, taskId, onClose }) {
           }}
         >
           <IconButton edge="start" size="small" onClick={onClose}>
-            <ChevronRight></ChevronRight>
+            <ChevronRight fontSize="inherit" />
           </IconButton>
           <Typography
             sx={{ color: theme.palette.text.primary }}
@@ -148,7 +148,7 @@ function TaskDetails({ list, taskId, onClose }) {
             {task.creationTime}
           </Typography>
           <IconButton edge="end" size="small" onClick={handleTaskDelete}>
-            <DeleteOutline></DeleteOutline>
+            <DeleteOutline fontSize="inherit" />
           </IconButton>
         </Box>
       </Box>

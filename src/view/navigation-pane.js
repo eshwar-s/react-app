@@ -17,59 +17,66 @@ import {
   useTheme,
 } from "@mui/material";
 import { useContext, useMemo, useState } from "react";
-import { ACTION_TYPES } from "../common/actions";
 import { AppContext } from "../common/context";
 import { Link } from "react-router-dom";
 import { InitialRouteIndex, RouteEntriesIndex } from "../common/routes";
 import { useTranslation } from "react-i18next";
+import DeleteList from "./delete-list";
 
 function NavigationContextMenu({ selectedList, anchorPosition, onClose }) {
-  const [state, dispatch] = useContext(AppContext);
+  const [state] = useContext(AppContext);
+  const [isDeleting, setIsDeleting] = useState(false);
   const { t } = useTranslation();
 
-  const handleListDelete = () => {
-    dispatch({
-      type: ACTION_TYPES.DELETE_LIST,
-      payload: { listId: selectedList },
-    });
-    onClose();
-  };
-
   return (
-    <Menu
-      open={anchorPosition != null}
-      onClose={onClose}
-      anchorReference="anchorPosition"
-      anchorPosition={
-        anchorPosition !== null
-          ? { top: anchorPosition.mouseY, left: anchorPosition.mouseX }
-          : undefined
-      }
-    >
-      <MenuItem dense disabled={selectedList === null}>
-        <ListItemIcon>
-          <FlipOutlined />
-        </ListItemIcon>
-        <ListItemText>{t("rename-list")}</ListItemText>
-      </MenuItem>
-      <MenuItem dense>
-        <ListItemIcon>
-          <PrintOutlined />
-        </ListItemIcon>
-        <ListItemText>{t("print-list")}</ListItemText>
-      </MenuItem>
-      <Divider></Divider>
-      <MenuItem
-        onClick={handleListDelete}
-        dense
-        disabled={state.lists.length <= 1 || selectedList === null}
+    <>
+      <Menu
+        open={anchorPosition != null}
+        onClose={onClose}
+        anchorReference="anchorPosition"
+        anchorPosition={
+          anchorPosition !== null
+            ? { top: anchorPosition.mouseY, left: anchorPosition.mouseX }
+            : undefined
+        }
       >
-        <ListItemIcon>
-          <DeleteOutlined />
-        </ListItemIcon>
-        <ListItemText>{t("delete-list")}</ListItemText>
-      </MenuItem>
-    </Menu>
+        <MenuItem
+          dense
+          onClick={() => onClose()}
+          disabled={selectedList === null}
+        >
+          <ListItemIcon>
+            <FlipOutlined />
+          </ListItemIcon>
+          <ListItemText>{t("renameList")}</ListItemText>
+        </MenuItem>
+        <MenuItem dense onClick={() => onClose()}>
+          <ListItemIcon>
+            <PrintOutlined />
+          </ListItemIcon>
+          <ListItemText>{t("printList")}</ListItemText>
+        </MenuItem>
+        <Divider sx={{ my: 0.5 }} />
+        <MenuItem
+          dense
+          onClick={() => {
+            setIsDeleting(true);
+            onClose();
+          }}
+          disabled={state.lists.length <= 1 || selectedList === null}
+        >
+          <ListItemIcon>
+            <DeleteOutlined />
+          </ListItemIcon>
+          <ListItemText>{t("deleteList")}</ListItemText>
+        </MenuItem>
+      </Menu>
+      <DeleteList
+        list={selectedList}
+        open={isDeleting}
+        onClose={() => setIsDeleting(false)}
+      ></DeleteList>
+    </>
   );
 }
 
@@ -82,7 +89,7 @@ function NavigationPane() {
   const selectedList = useMemo(() => {
     const listIndex = selectedIndex - RouteEntriesIndex.LISTS;
     return listIndex >= 0 && listIndex < state.lists.length
-      ? state.lists[listIndex].id
+      ? state.lists[listIndex]
       : null;
   }, [selectedIndex, state.lists]);
 

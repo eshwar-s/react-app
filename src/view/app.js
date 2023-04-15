@@ -15,8 +15,8 @@ import MainPanel from "./main-panel";
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const darkMode = useMediaQuery("(prefers-color-scheme: dark)");
-  const theme = useTheme(darkMode, state.settings.theme);
+  const isDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
+  const theme = useTheme(isDarkMode, state.settings.theme);
   const showSidebar = useMediaQuery(theme.breakpoints.up("sm"));
 
   useEffect(() => {

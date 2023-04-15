@@ -53,7 +53,7 @@ function TaskList({ listId, tasks, selectedTask, setSelectedTask }) {
             secondaryAction={
               <IconButton
                 aria-pressed={task.isImportant}
-                aria-label={t("important-task")}
+                aria-label={t("importantTask")}
                 edge="end"
                 onClick={(event) => toggleImportance(event, task.id)}
               >
@@ -68,7 +68,7 @@ function TaskList({ listId, tasks, selectedTask, setSelectedTask }) {
             >
               <ListItemIcon>
                 <Checkbox
-                  aria-label={t("complete-task")}
+                  aria-label={t("completeTask")}
                   tabIndex={0}
                   edge="start"
                   checked={task.isCompleted}
