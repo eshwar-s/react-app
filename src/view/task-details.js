@@ -119,7 +119,7 @@ function TaskDetails({ list, taskId, onClose }) {
           <Divider />
           <OutlinedInput
             sx={{
-              "& .MuiOutlinedInput-notchedOutline": { border: "none" },
+              ".MuiOutlinedInput-notchedOutline": { border: "none" },
             }}
             size="small"
             multiline
@@ -145,7 +145,7 @@ function TaskDetails({ list, taskId, onClose }) {
             sx={{ color: theme.palette.text.primary }}
             variant="caption"
           >
-            {task.creationTime}
+            {t("createdDate", { date: task.creationTime })}
           </Typography>
           <IconButton edge="end" size="small" onClick={handleTaskDelete}>
             <DeleteOutline fontSize="inherit" />

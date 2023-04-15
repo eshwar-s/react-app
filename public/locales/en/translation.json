@@ -16,5 +16,6 @@
   "deleteDialogTitle": "\"{{listName}}\" will be permanently deleted.",
   "deleteDialogDescription": "You won't be able to undo this action.",
   "deleteDialogConfirm": "Delete list",
-  "deleteDialogCancel": "Cancel"
+  "deleteDialogCancel": "Cancel",
+  "createdDate": "Created {{date}}"
 }
