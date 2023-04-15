@@ -32,6 +32,7 @@ function DeleteList({ list, open, onClose }) {
           minWidth: "300px",
         },
       }}
+      TransitionProps={{ mountOnEnter: true, unmountOnExit: true }}
       aria-labelledby="dialog-title"
       aria-describedby="dialog-description"
     >

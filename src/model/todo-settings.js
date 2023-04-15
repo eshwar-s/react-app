@@ -10,7 +10,7 @@ export class TodoSettings {
   constructor() {
     this.theme = ThemeColor.INDIGO;
     this.showCompleted = true;
-    this.sortOrder = TodoSortOrder.ALPHABETICALLY;
+    this.sortOrder = TodoSortOrder.CREATION_DATE;
   }
 
   serialize() {

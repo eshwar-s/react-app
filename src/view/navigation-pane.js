@@ -31,7 +31,7 @@ function NavigationContextMenu({ selectedList, anchorPosition, onClose }) {
   return (
     <>
       <Menu
-        open={anchorPosition != null}
+        open={anchorPosition !== null}
         onClose={onClose}
         anchorReference="anchorPosition"
         anchorPosition={

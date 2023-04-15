@@ -14,6 +14,7 @@ import TaskDetails from "./task-details";
 import { useTranslation } from "react-i18next";
 import { ThemeMode } from "../common/theme";
 import ListMenu from "./list-menu";
+import { TodoItem } from "../model/todo-item";
 
 function SelectedListView() {
   const [state] = useContext(AppContext);
@@ -25,23 +26,27 @@ function SelectedListView() {
 }
 
 function ListView({ list }) {
-  const [, dispatch] = useContext(AppContext);
+  const [state, dispatch] = useContext(AppContext);
   const theme = useTheme();
-  const [showCompletedTasks, setShowCompletedTasks] = useState(true);
+  const [collapseCompleted, setCollapseCompleted] = useState(false);
   const [selectedTask, setSelectedTask] = useState(null);
   const { t } = useTranslation();
 
   const incompleteTasks = useMemo(() => {
-    return list.items.filter((item) => {
-      return !item.isCompleted;
-    });
-  }, [list]);
+    return list.items
+      .sort((a, b) => TodoItem.sort(a, b, state.settings.sortOrder))
+      .filter((item) => {
+        return !item.isCompleted;
+      });
+  }, [list, state.settings.sortOrder]);
 
   const completedTasks = useMemo(() => {
-    return list.items.filter((item) => {
-      return item.isCompleted;
-    });
-  }, [list]);
+    return list.items
+      .sort((a, b) => TodoItem.sort(a, b, state.settings.sortOrder))
+      .filter((item) => {
+        return item.isCompleted;
+      });
+  }, [list, state.settings.sortOrder]);
 
   const handleListNameChanged = (listName) => {
     dispatch({
@@ -92,19 +97,19 @@ function ListView({ list }) {
               selectedTask={selectedTask}
               setSelectedTask={setSelectedTask}
             ></TaskList>
-            {completedTasks.length > 0 ? (
+            {completedTasks.length > 0 && state.settings.showCompleted ? (
               <>
                 <Button
                   sx={{ color: getTextColor(theme) }}
                   size="small"
-                  onClick={() => setShowCompletedTasks(!showCompletedTasks)}
+                  onClick={() => setCollapseCompleted(!collapseCompleted)}
                   startIcon={
-                    showCompletedTasks ? <ExpandMore /> : <ExpandLess />
+                    collapseCompleted ? <ExpandLess /> : <ExpandMore />
                   }
                 >
                   {t("completed")}
                 </Button>
-                <Collapse in={showCompletedTasks}>
+                <Collapse in={!collapseCompleted}>
                   <TaskList
                     listId={list.id}
                     tasks={completedTasks}
