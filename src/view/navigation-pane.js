@@ -66,7 +66,7 @@ function NavigationContextMenu({ selectedList, anchorPosition, onClose }) {
         list={selectedList}
         open={isDeleting}
         onClose={() => setIsDeleting(false)}
-      ></DeleteList>
+      />
     </>
   );
 }
