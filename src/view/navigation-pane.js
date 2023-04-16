@@ -12,7 +12,6 @@ import {
   ListItemIcon,
   ListItemText,
   Menu,
-  MenuItem,
   Typography,
   useTheme,
 } from "@mui/material";
@@ -22,6 +21,7 @@ import { Link } from "react-router-dom";
 import { InitialRouteIndex, RouteEntriesIndex } from "../common/routes";
 import { useTranslation } from "react-i18next";
 import DeleteList from "./delete-list";
+import { StyledMenuItem } from "./menu-item";
 
 function NavigationContextMenu({ selectedList, anchorPosition, onClose }) {
   const [state] = useContext(AppContext);
@@ -40,36 +40,27 @@ function NavigationContextMenu({ selectedList, anchorPosition, onClose }) {
             : undefined
         }
       >
-        <MenuItem
-          dense
+        <StyledMenuItem
+          text={t("renameList")}
+          startIcon={<FlipOutlined />}
           onClick={() => onClose()}
           disabled={selectedList === null}
-        >
-          <ListItemIcon>
-            <FlipOutlined />
-          </ListItemIcon>
-          <ListItemText>{t("renameList")}</ListItemText>
-        </MenuItem>
-        <MenuItem dense onClick={() => onClose()}>
-          <ListItemIcon>
-            <PrintOutlined />
-          </ListItemIcon>
-          <ListItemText>{t("printList")}</ListItemText>
-        </MenuItem>
+        />
+        <StyledMenuItem
+          text={t("printList")}
+          startIcon={<PrintOutlined />}
+          onClick={() => onClose()}
+        />
         <Divider sx={{ my: 0.5 }} />
-        <MenuItem
-          dense
+        <StyledMenuItem
+          text={t("deleteList")}
+          startIcon={<DeleteOutlined />}
           onClick={() => {
             setIsDeleting(true);
             onClose();
           }}
           disabled={state.lists.length <= 1 || selectedList === null}
-        >
-          <ListItemIcon>
-            <DeleteOutlined />
-          </ListItemIcon>
-          <ListItemText>{t("deleteList")}</ListItemText>
-        </MenuItem>
+        />
       </Menu>
       <DeleteList
         list={selectedList}

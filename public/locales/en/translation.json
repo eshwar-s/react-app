@@ -17,5 +17,8 @@
   "deleteDialogDescription": "You won't be able to undo this action.",
   "deleteDialogConfirm": "Delete list",
   "deleteDialogCancel": "Cancel",
-  "createdDate": "Created {{date}}"
+  "createdDate": "Created {{date}}",
+  "alphabetically": "Alphabetically",
+  "importance": "Importance",
+  "creationDate": "Creation Date"
 }

@@ -42,6 +42,13 @@ function useTheme(isDarkMode, themeColor) {
             paper: { borderRadius: "8px" },
           },
         },
+        MuiListItemIcon: {
+          styleOverrides: {
+            root: {
+              minWidth: "40px",
+            },
+          },
+        },
       },
     });
   }, [isDarkMode, themeColor]);
