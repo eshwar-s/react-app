@@ -36,7 +36,6 @@ export function SubMenuItem({ text, startIcon, children }) {
         }}
         open={menuOpen}
         anchorEl={ref.current}
-        elevation={1}
         onClose={() => setMenuOpen(false)}
       >
         {children}

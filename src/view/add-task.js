@@ -44,7 +44,7 @@ function AddTask({ listId }) {
       value={value}
       onChange={handleChange}
       onKeyDown={handleKeyDown}
-    ></OutlinedInput>
+    />
   );
 }
 

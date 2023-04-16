@@ -61,7 +61,6 @@ function ListMenu({ list }) {
         anchorEl={anchorElement}
         open={Boolean(anchorElement)}
         onClose={() => setAnchorElement(null)}
-        elevation={0}
       >
         <StyledMenuItem
           text={t("renameList")}
