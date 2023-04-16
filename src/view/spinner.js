@@ -9,7 +9,7 @@ function Spinner({ children, loading }) {
         top: "50%",
         left: "50%",
       }}
-    ></CircularProgress>
+    />
   ) : (
     children
   );

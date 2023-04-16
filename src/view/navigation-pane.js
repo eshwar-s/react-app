@@ -129,7 +129,7 @@ function NavigationPane() {
         selectedList={selectedList}
         anchorPosition={contextMenu}
         onClose={() => setContextMenu(null)}
-      ></NavigationContextMenu>
+      />
     </nav>
   );
 }

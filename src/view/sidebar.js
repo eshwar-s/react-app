@@ -20,7 +20,7 @@ function Sidebar() {
   return (
     <Box sx={getStyle(theme)}>
       <Box sx={{ flex: "1 1 auto", overflowY: "scroll" }}>
-        <NavigationPane></NavigationPane>
+        <NavigationPane />
       </Box>
       <Button
         sx={{
@@ -29,7 +29,7 @@ function Sidebar() {
           justifyContent: "flex-start",
         }}
         size="large"
-        startIcon={<AddIcon></AddIcon>}
+        startIcon={<AddIcon />}
         onClick={handleListAdd}
       >
         {t("newList")}

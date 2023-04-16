@@ -115,14 +115,14 @@ function ListView({ list }) {
                     tasks={completedTasks}
                     selectedTask={selectedTask}
                     setSelectedTask={setSelectedTask}
-                  ></TaskList>
+                  />
                 </Collapse>
               </>
             ) : null}
           </Box>
         </Box>
         <Box sx={{ flex: "0 0 auto" }}>
-          <AddTask listId={list.id}></AddTask>
+          <AddTask listId={list.id} />
         </Box>
       </Box>
       <Box>
@@ -130,7 +130,7 @@ function ListView({ list }) {
           list={list}
           taskId={selectedTask}
           onClose={() => setSelectedTask(null)}
-        ></TaskDetails>
+        />
       </Box>
     </Box>
   );

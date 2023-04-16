@@ -55,10 +55,10 @@ function App() {
                 display: showSidebar ? "block" : "none",
               }}
             >
-              <Sidebar></Sidebar>
+              <Sidebar />
             </Box>
             <Box role="main" id="main" sx={{ height: "100%", flexGrow: "1" }}>
-              <MainPanel></MainPanel>
+              <MainPanel />
             </Box>
           </Box>
         </Spinner>
