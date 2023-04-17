@@ -34,6 +34,7 @@ function ListMenu({ list }) {
       type: ACTION_TYPES.TOGGLE_SHOW_COMPLETED_TASKS,
       payload: null,
     });
+    setAnchorElement(null);
   };
 
   const setTaskSortOrder = (sortOrder) => {
@@ -41,6 +42,7 @@ function ListMenu({ list }) {
       type: ACTION_TYPES.SET_TASK_SORT_ORDER,
       payload: sortOrder,
     });
+    setAnchorElement(null);
   };
 
   return (
@@ -74,26 +76,17 @@ function ListMenu({ list }) {
           <StyledMenuItem
             text={t("alphabetically")}
             startIcon={<SortByAlphaOutlined />}
-            onClick={() => {
-              setTaskSortOrder(TodoSortOrder.ALPHABETICALLY);
-              setAnchorElement(null);
-            }}
+            onClick={() => setTaskSortOrder(TodoSortOrder.ALPHABETICAL)}
           />
           <StyledMenuItem
             text={t("importance")}
             startIcon={<StarOutline />}
-            onClick={() => {
-              setTaskSortOrder(TodoSortOrder.IMPORTANCE);
-              setAnchorElement(null);
-            }}
+            onClick={() => setTaskSortOrder(TodoSortOrder.IMPORTANCE)}
           />
           <StyledMenuItem
             text={t("creationDate")}
             startIcon={<CalendarMonthOutlined />}
-            onClick={() => {
-              setTaskSortOrder(TodoSortOrder.CREATION_DATE);
-              setAnchorElement(null);
-            }}
+            onClick={() => setTaskSortOrder(TodoSortOrder.CREATION_DATE)}
           />
         </SubMenuItem>
         <StyledMenuItem
@@ -116,10 +109,7 @@ function ListMenu({ list }) {
               : t("showCompletedTasks")
           }
           startIcon={<CheckCircleOutline />}
-          onClick={() => {
-            toggleShowCompletedTasks();
-            setAnchorElement(null);
-          }}
+          onClick={toggleShowCompletedTasks}
         />
         <Divider sx={{ my: 0.5 }} />
         <StyledMenuItem

@@ -14,7 +14,7 @@ export class TodoItem {
 
   static sort(item1, item2, sortOrder) {
     switch (sortOrder) {
-      case TodoSortOrder.ALPHABETICALLY:
+      case TodoSortOrder.ALPHABETICAL:
         return item1.title.localeCompare(item2.title);
 
       case TodoSortOrder.IMPORTANCE:
