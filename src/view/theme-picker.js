@@ -13,7 +13,7 @@ import { useTranslation } from "react-i18next";
 import { CheckCircle, Circle } from "@mui/icons-material";
 import { ThemeColor, getPrimaryColor } from "../common/colors";
 
-function ThemeCheckbox({ themeColor, checked, onChecked }) {
+function ThemeCheckbox({ key, themeColor, checked, onChecked }) {
   const handleThemeChange = (event) => {
     if (event.target.checked) {
       onChecked(themeColor);
@@ -30,11 +30,13 @@ function ThemeCheckbox({ themeColor, checked, onChecked }) {
 
   return (
     <Checkbox
-      {...label}
+      key={key}
       checked={checked}
+      {...label}
       onChange={handleThemeChange}
       icon={<Circle sx={style} />}
       checkedIcon={<CheckCircle sx={style} />}
+      value={themeColor}
     />
   );
 }
@@ -75,9 +77,10 @@ function ThemePicker({ open, onClose }) {
         {t("themeDialogTitle")}
       </DialogTitle>
       <DialogContent>
-        {Object.values(ThemeColor).map((themeColor) => {
+        {Object.values(ThemeColor).map((themeColor, index) => {
           return (
             <ThemeCheckbox
+              key={index}
               themeColor={themeColor}
               checked={themeSelection === themeColor}
               onChecked={setThemeSelection}
