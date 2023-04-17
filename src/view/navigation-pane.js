@@ -103,7 +103,7 @@ function NavigationPane() {
             (item) => !item.isCompleted
           ).length;
           return (
-            <ListItem key={list.id} dense disablePadding>
+            <ListItem key={index} dense disablePadding>
               <ListItemButton
                 sx={{ color: theme.palette.text.primary }}
                 component={Link}

@@ -44,10 +44,10 @@ function TaskList({ listId, tasks, selectedTask, setSelectedTask }) {
 
   return (
     <List sx={{ width: "100%" }}>
-      {tasks.map((task) => {
+      {tasks.map((task, index) => {
         return (
           <ListItem
-            key={task.id}
+            key={index}
             dense
             disablePadding
             secondaryAction={
