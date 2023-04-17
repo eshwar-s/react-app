@@ -10,6 +10,7 @@
   "completed": "Completed",
   "importantTask": "Important",
   "completeTask": "Complete Task",
+  "menu": "Menu",
   "changeTheme": "Change Theme...",
   "hideCompletedTasks": "Hide Completed Tasks",
   "showCompletedTasks": "Show Completed Tasks",
@@ -20,5 +21,8 @@
   "createdDate": "Created {{date}}",
   "alphabetically": "Alphabetically",
   "importance": "Importance",
-  "creationDate": "Creation Date"
+  "creationDate": "Creation Date",
+  "themeDialogTitle": "Pick a Theme Color",
+  "themeDialogConfirm": "Select theme",
+  "themeDialogCancel": "Cancel"
 }

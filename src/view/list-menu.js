@@ -19,11 +19,13 @@ import { AppContext } from "../common/context";
 import { ACTION_TYPES } from "../common/actions";
 import { TodoSortOrder } from "../model/todo-settings";
 import { StyledMenuItem, SubMenuItem } from "./menu-item";
+import ThemePicker from "./theme-picker";
 
 function ListMenu({ list }) {
   const [state, dispatch] = useContext(AppContext);
   const [anchorElement, setAnchorElement] = useState(null);
   const [isDeleting, setIsDeleting] = useState(false);
+  const [isSelectingTheme, setIsSelectingTheme] = useState(false);
   const theme = useTheme();
   const { t } = useTranslation();
 
@@ -48,6 +50,7 @@ function ListMenu({ list }) {
         sx={{ color: getTextColor(theme) }}
         disableElevation
         size="small"
+        aria-label={t("menu")}
         aria-haspopup="true"
         onClick={(event) => setAnchorElement(event.currentTarget)}
       >
@@ -101,7 +104,10 @@ function ListMenu({ list }) {
         <StyledMenuItem
           text={t("changeTheme")}
           startIcon={<PaletteOutlined />}
-          onClick={() => setAnchorElement(null)}
+          onClick={() => {
+            setIsSelectingTheme(true);
+            setAnchorElement(null);
+          }}
         />
         <StyledMenuItem
           text={
@@ -129,6 +135,10 @@ function ListMenu({ list }) {
         list={list}
         open={isDeleting}
         onClose={() => setIsDeleting(false)}
+      />
+      <ThemePicker
+        open={isSelectingTheme}
+        onClose={() => setIsSelectingTheme(false)}
       />
     </>
   );

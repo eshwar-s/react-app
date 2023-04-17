@@ -29,13 +29,6 @@ function useTheme(isDarkMode, themeColor) {
             disableRipple: true,
             disableTouchRipple: true,
           },
-          styleOverrides: {
-            root: {
-              "&.Mui-focusVisible": {
-                border: `2px solid ${theme.palette.primary.dark}`,
-              },
-            },
-          },
         },
         MuiDialog: {
           styleOverrides: {

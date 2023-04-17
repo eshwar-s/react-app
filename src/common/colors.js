@@ -9,12 +9,12 @@ import {
 } from "@mui/material/colors";
 
 export const ThemeColor = {
+  INDIGO: "indigo",
   BLUE: "blue",
   PURPLE: "purple",
   RED: "red",
   GREEN: "green",
   TEAL: "teal",
-  INDIGO: "indigo",
 };
 
 export function getPrimaryColor(color) {

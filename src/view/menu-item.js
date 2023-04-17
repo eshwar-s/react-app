@@ -5,7 +5,7 @@ import { useRef, useState } from "react";
 export function StyledMenuItem(props) {
   const { startIcon, text, ...other } = props;
   return (
-    <MenuItem dense {...other}>
+    <MenuItem dense tabIndex={0} {...other}>
       <ListItemIcon>{startIcon}</ListItemIcon>
       <ListItemText>{text}</ListItemText>
     </MenuItem>
@@ -18,7 +18,17 @@ export function SubMenuItem({ text, startIcon, children }) {
 
   return (
     <>
-      <MenuItem ref={ref} dense onClick={() => setMenuOpen(true)}>
+      <MenuItem
+        ref={ref}
+        dense
+        tabIndex={0}
+        onClick={() => setMenuOpen(true)}
+        onKeyDown={(event) => {
+          if (event.key === "ArrowRight") {
+            setMenuOpen(true);
+          }
+        }}
+      >
         <ListItemIcon>{startIcon}</ListItemIcon>
         <ListItemText>{text}</ListItemText>
         <ListItemIcon sx={{ justifyContent: "right" }}>
@@ -37,6 +47,11 @@ export function SubMenuItem({ text, startIcon, children }) {
         open={menuOpen}
         anchorEl={ref.current}
         onClose={() => setMenuOpen(false)}
+        onKeyDown={(event) => {
+          if (event.key === "ArrowLeft") {
+            setMenuOpen(false);
+          }
+        }}
       >
         {children}
       </Menu>
