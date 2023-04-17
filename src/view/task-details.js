@@ -93,6 +93,7 @@ function TaskDetails({ list, taskId, onClose }) {
             }}
           >
             <Checkbox
+              aria-label={t("completeTask")}
               checked={task.isCompleted}
               onClick={() => toggleCompletion(task.id)}
             />
@@ -112,7 +113,12 @@ function TaskDetails({ list, taskId, onClose }) {
               placeholder={task.title}
               onChanged={handleTitleUpdated}
             ></Editable>
-            <IconButton edge="end" onClick={() => toggleImportance(task.id)}>
+            <IconButton
+              edge="end"
+              aria-pressed={task.isImportant}
+              aria-label={t("importantTask")}
+              onClick={() => toggleImportance(task.id)}
+            >
               {task.isImportant ? <StarIcon /> : <StarOutlineIcon />}
             </IconButton>
           </Box>
@@ -138,7 +144,12 @@ function TaskDetails({ list, taskId, onClose }) {
             justifyContent: "space-between",
           }}
         >
-          <IconButton edge="start" size="small" onClick={onClose}>
+          <IconButton
+            edge="start"
+            aria-label={t("dismissDetailsView")}
+            size="small"
+            onClick={onClose}
+          >
             <ChevronRight fontSize="inherit" />
           </IconButton>
           <Typography
@@ -147,7 +158,12 @@ function TaskDetails({ list, taskId, onClose }) {
           >
             {t("createdDate", { date: task.creationTime })}
           </Typography>
-          <IconButton edge="end" size="small" onClick={handleTaskDelete}>
+          <IconButton
+            edge="end"
+            aria-label={t("deleteList")}
+            size="small"
+            onClick={handleTaskDelete}
+          >
             <DeleteOutline fontSize="inherit" />
           </IconButton>
         </Box>
