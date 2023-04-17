@@ -6,14 +6,14 @@ import {
   DialogContent,
   DialogTitle,
 } from "@mui/material";
-import { useCallback, useContext, useState } from "react";
+import { Fragment, useCallback, useContext, useState } from "react";
 import { AppContext } from "../common/context";
 import { ACTION_TYPES } from "../common/actions";
 import { useTranslation } from "react-i18next";
 import { CheckCircle, Circle } from "@mui/icons-material";
 import { ThemeColor, getPrimaryColor } from "../common/colors";
 
-function ThemeCheckbox({ key, themeColor, checked, onChecked }) {
+function ThemeCheckbox({ themeColor, checked, onChecked }) {
   const handleThemeChange = (event) => {
     if (event.target.checked) {
       onChecked(themeColor);
@@ -30,7 +30,6 @@ function ThemeCheckbox({ key, themeColor, checked, onChecked }) {
 
   return (
     <Checkbox
-      key={key}
       checked={checked}
       {...label}
       onChange={handleThemeChange}
@@ -58,14 +57,7 @@ function ThemePicker({ open, onClose }) {
     <Dialog
       open={open}
       onClose={onClose}
-      sx={{
-        ".MuiDialog-paper": {
-          padding: "16px",
-          minWidth: "300px",
-        },
-      }}
       maxWidth="sm"
-      TransitionProps={{ mountOnEnter: true, unmountOnExit: true }}
       aria-labelledby="dialog-title"
       aria-describedby="dialog-description"
     >
@@ -79,12 +71,14 @@ function ThemePicker({ open, onClose }) {
       <DialogContent>
         {Object.values(ThemeColor).map((themeColor, index) => {
           return (
-            <ThemeCheckbox
-              key={index}
-              themeColor={themeColor}
-              checked={themeSelection === themeColor}
-              onChecked={setThemeSelection}
-            />
+            <Fragment key={index}>
+              <ThemeCheckbox
+                key={index}
+                themeColor={themeColor}
+                checked={themeSelection === themeColor}
+                onChecked={setThemeSelection}
+              />
+            </Fragment>
           );
         })}
       </DialogContent>

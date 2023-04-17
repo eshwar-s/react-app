@@ -82,7 +82,11 @@ function TaskDetails({ list, taskId, onClose }) {
         }}
       >
         <Box
-          sx={{ display: "flex", flexDirection: "column", flex: "1 0 auto" }}
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            flex: "1 0 auto",
+          }}
         >
           <Box
             sx={{
@@ -100,10 +104,12 @@ function TaskDetails({ list, taskId, onClose }) {
             <Editable
               element={
                 <Typography
+                  id="list-name"
                   sx={{
                     flex: "1 0 auto",
                     outline: "0px solid transparent",
                     color: theme.palette.text.primary,
+                    userSelect: "none",
                   }}
                   variant="body2"
                 >
@@ -153,7 +159,10 @@ function TaskDetails({ list, taskId, onClose }) {
             <ChevronRight fontSize="inherit" />
           </IconButton>
           <Typography
-            sx={{ color: theme.palette.text.primary }}
+            sx={{
+              color: theme.palette.text.primary,
+              userSelect: "none",
+            }}
             variant="caption"
           >
             {t("createdDate", { date: task.creationTime })}

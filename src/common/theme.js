@@ -31,8 +31,18 @@ function useTheme(isDarkMode, themeColor) {
           },
         },
         MuiDialog: {
+          defaultProps: {
+            TransitionProps: {
+              mountOnEnter: true,
+              unmountOnExit: true,
+            },
+          },
           styleOverrides: {
-            paper: { borderRadius: "8px" },
+            paper: {
+              borderRadius: "8px",
+              padding: "16px",
+              minWidth: "300px",
+            },
           },
         },
         MuiListItemIcon: {

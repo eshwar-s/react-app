@@ -26,13 +26,6 @@ function DeleteList({ list, open, onClose }) {
   return list !== null ? (
     <Dialog
       open={open}
-      sx={{
-        ".MuiDialog-paper": {
-          padding: "16px",
-          minWidth: "300px",
-        },
-      }}
-      TransitionProps={{ mountOnEnter: true, unmountOnExit: true }}
       aria-labelledby="dialog-title"
       aria-describedby="dialog-description"
     >

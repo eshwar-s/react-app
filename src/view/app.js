@@ -12,12 +12,15 @@ import { Box, ThemeProvider, useMediaQuery } from "@mui/material";
 import { AppContext } from "../common/context.js";
 import useTheme from "../common/theme";
 import MainPanel from "./main-panel";
+import { useDisableContextMenu } from "../common/hooks.js";
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
   const isDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
   const theme = useTheme(isDarkMode, state.settings.theme);
   const showSidebar = useMediaQuery(theme.breakpoints.up("sm"));
+
+  useDisableContextMenu();
 
   useEffect(() => {
     loadTodoLists()

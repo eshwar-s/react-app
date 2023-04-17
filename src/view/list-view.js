@@ -73,6 +73,7 @@ function ListView({ list }) {
             <Editable
               element={
                 <Typography
+                  id="list-name"
                   variant="h5"
                   gutterBottom
                   sx={{
@@ -80,6 +81,7 @@ function ListView({ list }) {
                     fontWeight: "bold",
                     color: getTextColor(theme),
                     outline: "0px solid transparent",
+                    userSelect: "none",
                   }}
                 >
                   {list.name}
