@@ -17,8 +17,7 @@ import {
 } from "@mui/material";
 import { useContext, useMemo, useState } from "react";
 import { AppContext } from "../common/context";
-import { Link } from "react-router-dom";
-import { InitialRouteIndex, RouteEntriesIndex } from "../common/routes";
+import { Link, matchPath, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import DeleteList from "./delete-list";
 import { StyledMenuItem } from "./menu-item";
@@ -74,15 +73,15 @@ function NavigationContextMenu({ selectedList, anchorPosition, onClose }) {
 function NavigationPane() {
   const [state] = useContext(AppContext);
   const [contextMenu, setContextMenu] = useState(null);
-  const [selectedIndex, setSelectedIndex] = useState(InitialRouteIndex);
+  const { pathname } = useLocation();
   const theme = useTheme();
 
   const selectedList = useMemo(() => {
-    const listIndex = selectedIndex - RouteEntriesIndex.LISTS;
-    return listIndex >= 0 && listIndex < state.lists.length
-      ? state.lists[listIndex]
+    const match = matchPath("/lists/:index", pathname);
+    return match && match.params.index < state.lists.length
+      ? state.lists[match.params.index]
       : null;
-  }, [selectedIndex, state.lists]);
+  }, [state.lists, pathname]);
 
   const handleContextMenu = (event) => {
     event.preventDefault();
@@ -98,7 +97,7 @@ function NavigationPane() {
     <nav onContextMenu={handleContextMenu}>
       <List>
         {state.lists.map((list, index) => {
-          const listIndex = index + RouteEntriesIndex.LISTS;
+          const link = `/lists/${index}`;
           const badgeCount = list.items.filter(
             (item) => !item.isCompleted
           ).length;
@@ -107,9 +106,8 @@ function NavigationPane() {
               <ListItemButton
                 sx={{ color: theme.palette.text.primary }}
                 component={Link}
-                to={`/lists/${index}`}
-                selected={selectedIndex === listIndex}
-                onClick={() => setSelectedIndex(listIndex)}
+                to={link}
+                selected={pathname === link}
               >
                 <ListItemIcon>
                   <ListIcon color="primary" />

@@ -7,14 +7,17 @@ import { ACTION_TYPES } from "../common/actions";
 import { AppContext } from "../common/context";
 import NavigationPane from "./navigation-pane";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
 function Sidebar() {
-  const [, dispatch] = useContext(AppContext);
+  const [state, dispatch] = useContext(AppContext);
   const theme = useTheme();
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
   const handleListAdd = () => {
     dispatch({ type: ACTION_TYPES.ADD_LIST });
+    navigate(`/lists/${state.lists.length}`);
   };
 
   return (

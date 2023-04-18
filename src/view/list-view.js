@@ -9,7 +9,7 @@ import { ExpandLess, ExpandMore } from "@mui/icons-material";
 import { ACTION_TYPES } from "../common/actions";
 import Editable from "./editable";
 import { DEFAULT_TODO_LIST_NAME } from "../model/todo-list";
-import { useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import TaskDetails from "./task-details";
 import { useTranslation } from "react-i18next";
 import { ThemeMode } from "../common/theme";
@@ -22,7 +22,9 @@ function SelectedListView() {
 
   return selectedIndex < state.lists.length ? (
     <ListView list={state.lists[selectedIndex]} />
-  ) : null;
+  ) : (
+    <Navigate to={`/lists/${state.lists.length - 1}`} />
+  );
 }
 
 function ListView({ list }) {
