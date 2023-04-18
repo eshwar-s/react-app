@@ -73,7 +73,6 @@ function ThemePicker({ open, onClose }) {
           return (
             <Fragment key={index}>
               <ThemeCheckbox
-                key={index}
                 themeColor={themeColor}
                 checked={themeSelection === themeColor}
                 onChecked={setThemeSelection}
