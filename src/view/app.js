@@ -18,7 +18,6 @@ function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
   const isDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
   const theme = useTheme(isDarkMode, state.settings.theme);
-  const showSidebar = useMediaQuery(theme.breakpoints.up("sm"));
 
   useDisableContextMenu();
 
@@ -55,7 +54,7 @@ function App() {
               sx={{
                 width: "250px",
                 height: "100%",
-                display: showSidebar ? "block" : "none",
+                display: { xs: "none", sm: "block" },
               }}
             >
               <Sidebar />
