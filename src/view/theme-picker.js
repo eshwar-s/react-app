@@ -14,7 +14,7 @@ import { CheckCircle, Circle } from "@mui/icons-material";
 import { ThemeColor, getPrimaryColor } from "../common/colors";
 
 function ThemeCheckbox({ themeColor, checked, onChecked }) {
-  const handleThemeChange = (event) => {
+  const handleSelectionChange = (event) => {
     if (event.target.checked) {
       onChecked(themeColor);
     }
@@ -32,7 +32,7 @@ function ThemeCheckbox({ themeColor, checked, onChecked }) {
     <Checkbox
       checked={checked}
       {...label}
-      onChange={handleThemeChange}
+      onChange={handleSelectionChange}
       icon={<Circle sx={style} />}
       checkedIcon={<CheckCircle sx={style} />}
       value={themeColor}
@@ -51,7 +51,7 @@ function ThemePicker({ open, onClose }) {
       payload: themeSelection,
     });
     onClose();
-  }, [themeSelection]);
+  }, [themeSelection, dispatch, onClose]);
 
   return (
     <Dialog
