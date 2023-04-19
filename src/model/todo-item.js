@@ -12,7 +12,7 @@ export class TodoItem {
     this.notes = "";
   }
 
-  static sort(item1, item2, sortOrder) {
+  static compare(item1, item2, sortOrder) {
     switch (sortOrder) {
       case TodoSortOrder.ALPHABETICAL:
         return item1.title.localeCompare(item2.title);

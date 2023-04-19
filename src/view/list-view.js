@@ -36,7 +36,7 @@ function ListView({ list }) {
 
   const incompleteTasks = useMemo(() => {
     return list.items
-      .sort((a, b) => TodoItem.sort(a, b, state.settings.sortOrder))
+      .sort((a, b) => TodoItem.compare(a, b, state.settings.sortOrder))
       .filter((item) => {
         return !item.isCompleted;
       });
@@ -44,7 +44,7 @@ function ListView({ list }) {
 
   const completedTasks = useMemo(() => {
     return list.items
-      .sort((a, b) => TodoItem.sort(a, b, state.settings.sortOrder))
+      .sort((a, b) => TodoItem.compare(a, b, state.settings.sortOrder))
       .filter((item) => {
         return item.isCompleted;
       });
