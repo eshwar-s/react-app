@@ -109,7 +109,7 @@ function NavigationPane() {
                 to={link}
                 selected={pathname === link}
               >
-                <ListItemIcon>
+                <ListItemIcon sx={{ pointerEvents: "none" }}>
                   <ListIcon color="primary" />
                 </ListItemIcon>
                 <ListItemText primary={list.name} />
