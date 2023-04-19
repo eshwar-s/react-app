@@ -55,6 +55,7 @@ function getStyle(theme) {
     input: {
       color: getTextColor(theme),
       "&::placeholder": { opacity: 1 },
+      spellCheck: false,
     },
   };
 }
