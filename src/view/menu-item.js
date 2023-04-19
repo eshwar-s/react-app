@@ -2,30 +2,29 @@ import { ChevronRightOutlined } from "@mui/icons-material";
 import { ListItemIcon, ListItemText, Menu, MenuItem } from "@mui/material";
 import { useRef, useState } from "react";
 
-export function StyledMenuItem(props) {
+export function IconMenuItem(props) {
   const { startIcon, text, ...other } = props;
   return (
-    <MenuItem dense tabIndex={0} {...other}>
+    <MenuItem dense {...other}>
       <ListItemIcon>{startIcon}</ListItemIcon>
       <ListItemText>{text}</ListItemText>
     </MenuItem>
   );
 }
 
-export function SubMenuItem({ text, startIcon, children }) {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const ref = useRef(null);
+export function SubMenu({ text, startIcon, parentMenuOpen, children }) {
+  const [subMenuOpen, setSubMenuOpen] = useState(false);
+  const menuItemRef = useRef(null);
 
   return (
     <>
       <MenuItem
-        ref={ref}
+        ref={menuItemRef}
         dense
-        tabIndex={0}
-        onClick={() => setMenuOpen(true)}
+        onClick={() => setSubMenuOpen(true)}
         onKeyDown={(event) => {
           if (event.key === "ArrowRight") {
-            setMenuOpen(true);
+            setSubMenuOpen(true);
           }
         }}
       >
@@ -44,12 +43,12 @@ export function SubMenuItem({ text, startIcon, children }) {
           vertical: "top",
           horizontal: "right",
         }}
-        open={menuOpen}
-        anchorEl={ref.current}
-        onClose={() => setMenuOpen(false)}
+        open={parentMenuOpen && subMenuOpen}
+        anchorEl={menuItemRef.current}
+        onClose={() => setSubMenuOpen(false)}
         onKeyDown={(event) => {
           if (event.key === "ArrowLeft") {
-            setMenuOpen(false);
+            setSubMenuOpen(false);
           }
         }}
       >

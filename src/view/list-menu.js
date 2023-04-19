@@ -11,21 +11,22 @@ import {
   StarOutline,
 } from "@mui/icons-material";
 import { Button, Divider, Menu, useTheme } from "@mui/material";
-import { useContext, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { getTextColor } from "./list-view";
 import DeleteList from "./delete-list";
 import { AppContext } from "../common/context";
 import { ACTION_TYPES } from "../common/actions";
 import { TodoSortOrder } from "../model/todo-settings";
-import { StyledMenuItem, SubMenuItem } from "./menu-item";
+import { IconMenuItem, SubMenu } from "./menu-item";
 import ThemePicker from "./theme-picker";
 
 function ListMenu({ list }) {
   const [state, dispatch] = useContext(AppContext);
-  const [anchorElement, setAnchorElement] = useState(null);
+  const [menuOpen, setMenuOpen] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
   const [isSelectingTheme, setIsSelectingTheme] = useState(false);
+  const buttonRef = useRef();
   const theme = useTheme();
   const { t } = useTranslation();
 
@@ -34,7 +35,7 @@ function ListMenu({ list }) {
       type: ACTION_TYPES.TOGGLE_SHOW_COMPLETED_TASKS,
       payload: null,
     });
-    setAnchorElement(null);
+    setMenuOpen(false);
   };
 
   const setTaskSortOrder = (sortOrder) => {
@@ -42,19 +43,20 @@ function ListMenu({ list }) {
       type: ACTION_TYPES.SET_TASK_SORT_ORDER,
       payload: sortOrder,
     });
-    setAnchorElement(null);
+    setMenuOpen(false);
   };
 
   return (
     <>
       <Button
         id="list-menu-button"
+        ref={buttonRef}
         sx={{ color: getTextColor(theme) }}
         disableElevation
         size="small"
         aria-label={t("menu")}
         aria-haspopup="true"
-        onClick={(event) => setAnchorElement(event.currentTarget)}
+        onClick={() => setMenuOpen(true)}
       >
         <MoreHoriz />
       </Button>
@@ -63,46 +65,50 @@ function ListMenu({ list }) {
         MenuListProps={{
           "aria-labelledby": "list-menu-button",
         }}
-        anchorEl={anchorElement}
-        open={Boolean(anchorElement)}
-        onClose={() => setAnchorElement(null)}
+        anchorEl={buttonRef.current}
+        open={menuOpen}
+        onClose={() => setMenuOpen(false)}
       >
-        <StyledMenuItem
+        <IconMenuItem
           text={t("renameList")}
           startIcon={<FlipOutlined />}
-          onClick={() => setAnchorElement(null)}
+          onClick={() => setMenuOpen(false)}
         />
-        <SubMenuItem text={t("sortList")} startIcon={<SortOutlined />}>
-          <StyledMenuItem
+        <SubMenu
+          text={t("sortList")}
+          startIcon={<SortOutlined />}
+          parentMenuOpen={menuOpen}
+        >
+          <IconMenuItem
             text={t("alphabetically")}
             startIcon={<SortByAlphaOutlined />}
             onClick={() => setTaskSortOrder(TodoSortOrder.ALPHABETICAL)}
           />
-          <StyledMenuItem
+          <IconMenuItem
             text={t("importance")}
             startIcon={<StarOutline />}
             onClick={() => setTaskSortOrder(TodoSortOrder.IMPORTANCE)}
           />
-          <StyledMenuItem
+          <IconMenuItem
             text={t("creationDate")}
             startIcon={<CalendarMonthOutlined />}
             onClick={() => setTaskSortOrder(TodoSortOrder.CREATION_DATE)}
           />
-        </SubMenuItem>
-        <StyledMenuItem
+        </SubMenu>
+        <IconMenuItem
           text={t("printList")}
           startIcon={<PrintOutlined />}
-          onClick={() => setAnchorElement(null)}
+          onClick={() => setMenuOpen(false)}
         />
-        <StyledMenuItem
+        <IconMenuItem
           text={t("changeTheme")}
           startIcon={<PaletteOutlined />}
           onClick={() => {
             setIsSelectingTheme(true);
-            setAnchorElement(null);
+            setMenuOpen(false);
           }}
         />
-        <StyledMenuItem
+        <IconMenuItem
           text={
             state.settings.showCompleted
               ? t("hideCompletedTasks")
@@ -112,12 +118,12 @@ function ListMenu({ list }) {
           onClick={toggleShowCompletedTasks}
         />
         <Divider sx={{ my: 0.5 }} />
-        <StyledMenuItem
+        <IconMenuItem
           text={t("deleteList")}
           startIcon={<DeleteOutline />}
           onClick={() => {
             setIsDeleting(true);
-            setAnchorElement(null);
+            setMenuOpen(false);
           }}
         />
       </Menu>

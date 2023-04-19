@@ -20,7 +20,7 @@ import { AppContext } from "../common/context";
 import { Link, matchPath, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import DeleteList from "./delete-list";
-import { StyledMenuItem } from "./menu-item";
+import { IconMenuItem } from "./menu-item";
 
 function NavigationContextMenu({ selectedList, anchorPosition, onClose }) {
   const [state] = useContext(AppContext);
@@ -39,19 +39,19 @@ function NavigationContextMenu({ selectedList, anchorPosition, onClose }) {
             : undefined
         }
       >
-        <StyledMenuItem
+        <IconMenuItem
           text={t("renameList")}
           startIcon={<FlipOutlined />}
           onClick={() => onClose()}
           disabled={selectedList === null}
         />
-        <StyledMenuItem
+        <IconMenuItem
           text={t("printList")}
           startIcon={<PrintOutlined />}
           onClick={() => onClose()}
         />
         <Divider sx={{ my: 0.5 }} />
-        <StyledMenuItem
+        <IconMenuItem
           text={t("deleteList")}
           startIcon={<DeleteOutlined />}
           onClick={() => {
