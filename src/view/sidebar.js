@@ -43,6 +43,7 @@ function Sidebar() {
 
 function getStyle(theme) {
   return {
+    width: "250px",
     height: "100%",
     display: "flex",
     flexDirection: "column",

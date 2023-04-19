@@ -72,11 +72,12 @@ function TaskDetails({ list, taskId, onClose }) {
   return Boolean(task) ? (
     <ClickAwayListener onClickAway={onClose}>
       <Box
+        role="complementary"
         sx={{
           display: "flex",
           flexDirection: "column",
           width: "300px",
-          height: "100vh",
+          height: "100%",
           padding: "12px",
           bgcolor: theme.palette.secondary.main,
         }}

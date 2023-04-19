@@ -50,16 +50,14 @@ function App() {
         <Spinner loading={state.loading}>
           <Box id="container" sx={{ display: "flex", height: "100%" }}>
             <Box
-              id="navigation"
               sx={{
-                width: "250px",
                 height: "100%",
                 display: { xs: "none", sm: "block" },
               }}
             >
               <Sidebar />
             </Box>
-            <Box role="main" id="main" sx={{ height: "100%", flexGrow: "1" }}>
+            <Box role="main" sx={{ height: "100%", flexGrow: "1" }}>
               <MainPanel />
             </Box>
           </Box>
