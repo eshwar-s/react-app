@@ -24,7 +24,7 @@ import { IconMenuItem } from "./menu-item";
 
 function NavigationContextMenu({ selectedList, anchorPosition, onClose }) {
   const [state] = useContext(AppContext);
-  const [isDeleting, setIsDeleting] = useState(false);
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const { t } = useTranslation();
 
   return (
@@ -55,7 +55,7 @@ function NavigationContextMenu({ selectedList, anchorPosition, onClose }) {
           text={t("deleteList")}
           startIcon={<DeleteOutlined />}
           onClick={() => {
-            setIsDeleting(true);
+            setDeleteDialogOpen(true);
             onClose();
           }}
           disabled={state.lists.length <= 1 || selectedList === null}
@@ -63,8 +63,8 @@ function NavigationContextMenu({ selectedList, anchorPosition, onClose }) {
       </Menu>
       <DeleteList
         list={selectedList}
-        open={isDeleting}
-        onClose={() => setIsDeleting(false)}
+        open={deleteDialogOpen}
+        onClose={() => setDeleteDialogOpen(false)}
       />
     </>
   );
