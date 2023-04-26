@@ -170,7 +170,7 @@ function TaskDetails({ list, taskId, onClose }) {
           </Typography>
           <IconButton
             edge="end"
-            aria-label={t("deleteList")}
+            aria-label={t("deleteTask")}
             size="small"
             onClick={handleTaskDelete}
           >

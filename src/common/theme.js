@@ -45,6 +45,13 @@ function useTheme(isDarkMode, themeColor) {
             },
           },
         },
+        MuiListItemButton: {
+          styleOverrides: {
+            root: {
+              cursor: "default",
+            },
+          },
+        },
         MuiListItemIcon: {
           styleOverrides: {
             root: {

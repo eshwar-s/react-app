@@ -24,8 +24,8 @@ import ThemePicker from "./theme-picker";
 function ListMenu({ list }) {
   const [state, dispatch] = useContext(AppContext);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [isDeleting, setIsDeleting] = useState(false);
-  const [isSelectingTheme, setIsSelectingTheme] = useState(false);
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+  const [themePickerOpen, setThemePickerOpen] = useState(false);
   const buttonRef = useRef();
   const theme = useTheme();
   const { t } = useTranslation();
@@ -104,7 +104,7 @@ function ListMenu({ list }) {
           text={t("changeTheme")}
           startIcon={<PaletteOutlined />}
           onClick={() => {
-            setIsSelectingTheme(true);
+            setThemePickerOpen(true);
             setMenuOpen(false);
           }}
         />
@@ -122,19 +122,19 @@ function ListMenu({ list }) {
           text={t("deleteList")}
           startIcon={<DeleteOutline />}
           onClick={() => {
-            setIsDeleting(true);
+            setDeleteDialogOpen(true);
             setMenuOpen(false);
           }}
         />
       </Menu>
       <DeleteList
         list={list}
-        open={isDeleting}
-        onClose={() => setIsDeleting(false)}
+        open={deleteDialogOpen}
+        onClose={() => setDeleteDialogOpen(false)}
       />
       <ThemePicker
-        open={isSelectingTheme}
-        onClose={() => setIsSelectingTheme(false)}
+        open={themePickerOpen}
+        onClose={() => setThemePickerOpen(false)}
       />
     </>
   );
