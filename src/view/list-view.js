@@ -131,6 +131,7 @@ function ListView({ list }) {
       </Box>
       <Box>
         <TaskDetails
+          sx={{ flexShrink: "0" }}
           list={list}
           taskId={selectedTask}
           onClose={() => setSelectedTask(null)}
