@@ -22,7 +22,7 @@ function Sidebar() {
 
   return (
     <Box sx={getStyle(theme)}>
-      <Box sx={{ flex: "1 1 auto", overflowY: "scroll" }}>
+      <Box sx={{ overflowY: "scroll" }}>
         <NavigationPane />
       </Box>
       <Button
@@ -47,6 +47,7 @@ function getStyle(theme) {
     height: "100%",
     display: "flex",
     flexDirection: "column",
+    justifyContent: "space-between",
     padding: "12px",
     backgroundColor: theme.palette.secondary.main,
   };
