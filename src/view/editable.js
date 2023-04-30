@@ -26,6 +26,7 @@ function Editable({ element, placeholder, onChanged }) {
     contentEditable: isEditing ? "plaintext-only" : "false",
     suppressContentEditableWarning: true,
     spellCheck: false,
+    noWrap: !isEditing && element.props.noWrap,
     onKeyDown: handleKeyDown,
     onClick: () => setIsEditing(true),
     onBlur: handleLostFocus,
