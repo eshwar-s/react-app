@@ -112,7 +112,10 @@ function NavigationPane() {
                 <ListItemIcon sx={{ pointerEvents: "none" }}>
                   <ListIcon color="primary" />
                 </ListItemIcon>
-                <ListItemText primary={list.name} />
+                <ListItemText
+                  primary={list.name}
+                  primaryTypographyProps={{ noWrap: true }}
+                />
                 {badgeCount > 0 ? (
                   <Typography aria-hidden variant="caption">
                     {badgeCount}

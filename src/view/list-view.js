@@ -63,7 +63,7 @@ function ListView({ list }) {
   return (
     <Box sx={{ display: "flex", flexDirection: "row", height: "100%" }}>
       <Box sx={getStyle(theme)}>
-        <Box sx={{ flex: "1 1 auto", overflowY: "scroll" }}>
+        <Box sx={{ overflowY: "scroll" }}>
           <Box
             sx={{
               display: "flex",
@@ -78,8 +78,8 @@ function ListView({ list }) {
                   id="list-name"
                   variant="h5"
                   gutterBottom
+                  noWrap
                   sx={{
-                    flex: "1 1 auto",
                     fontWeight: "bold",
                     color: getTextColor(theme),
                     outline: "0px solid transparent",
@@ -125,7 +125,7 @@ function ListView({ list }) {
             ) : null}
           </Box>
         </Box>
-        <Box sx={{ flex: "0 0 auto" }}>
+        <Box sx={{ flexShrink: "0" }}>
           <AddTask listId={list.id} />
         </Box>
       </Box>
@@ -145,7 +145,9 @@ function getStyle(theme) {
   return {
     display: "flex",
     flexDirection: "column",
-    flex: "1 1 auto",
+    flexGrow: "1",
+    overflow: "hidden",
+    justifyContent: "space-between",
     bgcolor:
       theme.palette.mode === ThemeMode.LIGHT
         ? theme.palette.primary.main

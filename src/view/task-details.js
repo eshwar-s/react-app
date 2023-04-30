@@ -76,6 +76,7 @@ function TaskDetails({ list, taskId, onClose }) {
         sx={{
           display: "flex",
           flexDirection: "column",
+          justifyContent: "space-between",
           width: "300px",
           height: "100%",
           padding: "12px",
@@ -86,7 +87,6 @@ function TaskDetails({ list, taskId, onClose }) {
           sx={{
             display: "flex",
             flexDirection: "column",
-            flex: "1 0 auto",
           }}
         >
           <Box
@@ -107,7 +107,7 @@ function TaskDetails({ list, taskId, onClose }) {
                 <Typography
                   id="list-name"
                   sx={{
-                    flex: "1 0 auto",
+                    flexGrow: "1",
                     outline: "0px solid transparent",
                     color: theme.palette.text.primary,
                     userSelect: "none",
