@@ -27,6 +27,11 @@ function NavigationContextMenu({ selectedList, anchorPosition, onClose }) {
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const { t } = useTranslation();
 
+  const openDeleteListDialog = () => {
+    setDeleteDialogOpen(true);
+    onClose();
+  };
+
   return (
     <>
       <Menu
@@ -54,10 +59,7 @@ function NavigationContextMenu({ selectedList, anchorPosition, onClose }) {
         <IconMenuItem
           text={t("deleteList")}
           startIcon={<DeleteOutlined />}
-          onClick={() => {
-            setDeleteDialogOpen(true);
-            onClose();
-          }}
+          onClick={openDeleteListDialog}
           disabled={state.lists.length <= 1 || selectedList === null}
         />
       </Menu>

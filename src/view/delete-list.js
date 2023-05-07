@@ -41,6 +41,7 @@ function DeleteList({ list, open, onClose }) {
             id="dialog-title"
             variant="subtitle1"
             sx={{ fontWeight: "bold" }}
+            noWrap
           >
             {t("deleteDialogTitle", { listName: list.name })}
           </Typography>

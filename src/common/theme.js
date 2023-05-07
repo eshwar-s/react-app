@@ -42,6 +42,7 @@ function useTheme(isDarkMode, themeColor) {
               borderRadius: "8px",
               padding: "16px",
               minWidth: "300px",
+              maxWidth: "500px",
             },
           },
         },

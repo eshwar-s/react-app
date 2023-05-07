@@ -18,8 +18,9 @@ import DeleteList from "./delete-list";
 import { AppContext } from "../common/context";
 import { ACTION_TYPES } from "../common/actions";
 import { TodoSortOrder } from "../model/todo-settings";
-import { IconMenuItem, SubMenu } from "./menu-item";
+import { IconMenuItem } from "./menu-item";
 import ThemePicker from "./theme-picker";
+import { SubMenu } from "./sub-menu";
 
 function ListMenu({ list }) {
   const [state, dispatch] = useContext(AppContext);
@@ -43,6 +44,16 @@ function ListMenu({ list }) {
       type: ACTION_TYPES.SET_TASK_SORT_ORDER,
       payload: sortOrder,
     });
+    setMenuOpen(false);
+  };
+
+  const openDeleteListDialog = () => {
+    setDeleteDialogOpen(true);
+    setMenuOpen(false);
+  };
+
+  const openThemePickerDialog = () => {
+    setThemePickerOpen(true);
     setMenuOpen(false);
   };
 
@@ -75,9 +86,9 @@ function ListMenu({ list }) {
           onClick={() => setMenuOpen(false)}
         />
         <SubMenu
+          parentMenuOpen={menuOpen}
           text={t("sortList")}
           startIcon={<SortOutlined />}
-          parentMenuOpen={menuOpen}
         >
           <IconMenuItem
             text={t("alphabetically")}
@@ -103,10 +114,7 @@ function ListMenu({ list }) {
         <IconMenuItem
           text={t("changeTheme")}
           startIcon={<PaletteOutlined />}
-          onClick={() => {
-            setThemePickerOpen(true);
-            setMenuOpen(false);
-          }}
+          onClick={openThemePickerDialog}
         />
         <IconMenuItem
           text={
@@ -121,10 +129,7 @@ function ListMenu({ list }) {
         <IconMenuItem
           text={t("deleteList")}
           startIcon={<DeleteOutline />}
-          onClick={() => {
-            setDeleteDialogOpen(true);
-            setMenuOpen(false);
-          }}
+          onClick={openDeleteListDialog}
         />
       </Menu>
       <DeleteList
