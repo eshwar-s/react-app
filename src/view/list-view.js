@@ -62,7 +62,7 @@ function ListView({ list }) {
 
   return (
     <Box sx={{ display: "flex", flexDirection: "row", height: "100%" }}>
-      <Box sx={getStyle(theme)}>
+      <Box role="main" sx={getStyle(theme)}>
         <Box sx={{ overflowY: "scroll" }}>
           <Box
             sx={{
@@ -129,7 +129,7 @@ function ListView({ list }) {
           <AddTask listId={list.id} />
         </Box>
       </Box>
-      <Box>
+      <Box role="complementary">
         <TaskDetails
           sx={{ flexShrink: "0" }}
           list={list}

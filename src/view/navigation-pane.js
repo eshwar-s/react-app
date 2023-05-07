@@ -6,12 +6,11 @@ import {
 } from "@mui/icons-material";
 import {
   Divider,
-  List,
-  ListItem,
-  ListItemButton,
   ListItemIcon,
   ListItemText,
   Menu,
+  MenuItem,
+  MenuList,
   Typography,
   useTheme,
 } from "@mui/material";
@@ -97,37 +96,39 @@ function NavigationPane() {
 
   return (
     <nav onContextMenu={handleContextMenu}>
-      <List>
+      <MenuList>
         {state.lists.map((list, index) => {
           const link = `/lists/${index}`;
           const badgeCount = list.items.filter(
             (item) => !item.isCompleted
           ).length;
           return (
-            <ListItem key={index} dense disablePadding>
-              <ListItemButton
-                sx={{ color: theme.palette.text.primary }}
-                component={Link}
-                to={link}
-                selected={pathname === link}
-              >
-                <ListItemIcon sx={{ pointerEvents: "none" }}>
-                  <ListIcon color="primary" />
-                </ListItemIcon>
-                <ListItemText
-                  primary={list.name}
-                  primaryTypographyProps={{ noWrap: true }}
-                />
-                {badgeCount > 0 ? (
-                  <Typography aria-hidden variant="caption">
-                    {badgeCount}
-                  </Typography>
-                ) : null}
-              </ListItemButton>
-            </ListItem>
+            <MenuItem
+              key={index}
+              sx={{ color: theme.palette.text.primary }}
+              component={Link}
+              to={link}
+              selected={pathname === link}
+            >
+              <ListItemIcon sx={{ pointerEvents: "none" }}>
+                <ListIcon color="primary" />
+              </ListItemIcon>
+              <ListItemText
+                primary={list.name}
+                primaryTypographyProps={{
+                  noWrap: true,
+                  variant: "body2",
+                }}
+              />
+              {badgeCount > 0 ? (
+                <Typography aria-hidden variant="caption">
+                  {badgeCount}
+                </Typography>
+              ) : null}
+            </MenuItem>
           );
         })}
-      </List>
+      </MenuList>
       <NavigationContextMenu
         selectedList={selectedList}
         anchorPosition={contextMenu}

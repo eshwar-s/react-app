@@ -57,10 +57,7 @@ function App() {
             >
               <Sidebar sx={{ flexShrink: "0" }} />
             </Box>
-            <Box
-              role="main"
-              sx={{ height: "100%", flexGrow: "1", overflow: "hidden" }}
-            >
+            <Box sx={{ height: "100%", flexGrow: "1", overflow: "hidden" }}>
               <MainPanel />
             </Box>
           </Box>
