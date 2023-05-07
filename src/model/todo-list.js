@@ -1,4 +1,4 @@
-import { uuidv4 } from "./uuid.js";
+import { uuidv4 } from "../common/uuid.js";
 
 export const DEFAULT_TODO_LIST_NAME = "Untitled";
 

@@ -1,5 +1,5 @@
 import { TodoSortOrder } from "./todo-settings.js";
-import { uuidv4 } from "./uuid.js";
+import { uuidv4 } from "../common/uuid.js";
 
 export class TodoItem {
   constructor(title) {
