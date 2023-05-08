@@ -10,7 +10,7 @@ import {
   SortOutlined,
   StarOutline,
 } from "@mui/icons-material";
-import { Button, Divider, Menu, useTheme } from "@mui/material";
+import { Divider, IconButton, Menu, useTheme } from "@mui/material";
 import { useContext, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { getTextColor } from "./list-view";
@@ -59,18 +59,17 @@ function ListMenu({ list }) {
 
   return (
     <>
-      <Button
+      <IconButton
         id="list-menu-button"
         ref={buttonRef}
         sx={{ color: getTextColor(theme) }}
-        disableElevation
         size="small"
         aria-label={t("menu")}
         aria-haspopup="true"
         onClick={() => setMenuOpen(true)}
       >
         <MoreHoriz />
-      </Button>
+      </IconButton>
       <Menu
         id="list-menu"
         MenuListProps={{
