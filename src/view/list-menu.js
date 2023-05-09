@@ -13,7 +13,6 @@ import {
 import { Divider, IconButton, Menu, useTheme } from "@mui/material";
 import { useContext, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { getTextColor } from "./list-view";
 import DeleteList from "./delete-list";
 import { AppContext } from "../common/context";
 import { ACTION_TYPES } from "../common/actions";
@@ -21,6 +20,7 @@ import { TodoSortOrder } from "../model/todo-settings";
 import { IconMenuItem } from "./menu-item";
 import ThemePicker from "./theme-picker";
 import { SubMenu } from "./sub-menu";
+import { getTextColor } from "../common/colors";
 
 function ListMenu({ list }) {
   const [state, dispatch] = useContext(AppContext);

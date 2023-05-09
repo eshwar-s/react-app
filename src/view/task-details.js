@@ -1,4 +1,3 @@
-import { useTheme } from "@emotion/react";
 import {
   ChevronRight,
   DeleteOutline,
@@ -13,6 +12,7 @@ import {
   IconButton,
   OutlinedInput,
   Typography,
+  useTheme,
 } from "@mui/material";
 import { useContext, useMemo } from "react";
 import { ACTION_TYPES } from "../common/actions";

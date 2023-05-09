@@ -26,5 +26,11 @@
   "creationDate": "Creation Date",
   "themeDialogTitle": "Pick a Theme Color",
   "themeDialogConfirm": "Select theme",
-  "themeDialogCancel": "Cancel"
+  "themeDialogCancel": "Cancel",
+  "myDay": "My Day",
+  "important": "Important",
+  "planned": "Planned",
+  "flagged": "Flagged email",
+  "tasks": "Tasks",
+  "searchPlaceholder": "Search"
 }

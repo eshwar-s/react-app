@@ -13,11 +13,14 @@ import { AppContext } from "../common/context.js";
 import useTheme from "../common/theme";
 import MainPanel from "./main-panel";
 import { useDisableContextMenu } from "../common/hooks.js";
+import { GetThemeColor } from "../common/colors.js";
+import { useLocation } from "react-router-dom";
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
+  const { pathname } = useLocation();
   const isDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
-  const theme = useTheme(isDarkMode, state.settings.theme);
+  const theme = useTheme(isDarkMode, GetThemeColor(pathname, state.settings));
 
   useDisableContextMenu();
 

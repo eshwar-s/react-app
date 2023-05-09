@@ -8,6 +8,7 @@ import { AppContext } from "../common/context";
 import NavigationPane from "./navigation-pane";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import SearchBox from "./search-box";
 
 function Sidebar() {
   const [state, dispatch] = useContext(AppContext);
@@ -23,6 +24,7 @@ function Sidebar() {
   return (
     <Box sx={getStyle(theme)}>
       <Box sx={{ overflowY: "scroll" }}>
+        <SearchBox />
         <NavigationPane />
       </Box>
       <Button

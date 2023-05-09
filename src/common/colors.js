@@ -6,7 +6,10 @@ import {
   blue,
   grey,
   indigo,
+  blueGrey,
 } from "@mui/material/colors";
+import { ROUTE } from "./routes";
+import { ThemeMode } from "./theme";
 
 export const ThemeColor = {
   INDIGO: "indigo",
@@ -15,6 +18,7 @@ export const ThemeColor = {
   RED: "red",
   GREEN: "green",
   TEAL: "teal",
+  BLUE_GREY: "blueGrey",
 };
 
 export function getPrimaryColor(color) {
@@ -59,6 +63,14 @@ export function getPrimaryColor(color) {
         contrastText: "#fff",
       };
 
+    case ThemeColor.BLUE_GREY:
+      return {
+        light: blueGrey[200],
+        main: blueGrey[400],
+        dark: blueGrey[500],
+        contrastText: "#fff",
+      };
+
     case ThemeColor.INDIGO:
     default:
       return {
@@ -72,4 +84,37 @@ export function getPrimaryColor(color) {
 
 export function getSecondaryColor(isDarkMode) {
   return { main: isDarkMode ? grey[900] : grey[300] };
+}
+
+export function GetThemeColor(route, settings) {
+  switch (route) {
+    case ROUTE.SEARCH:
+      return ThemeColor.BLUE_GREY;
+
+    case ROUTE.PLANNED:
+      return ThemeColor.TEAL;
+
+    case ROUTE.IMPORTANT:
+    case ROUTE.FLAGGED:
+      return ThemeColor.RED;
+
+    case ROUTE.MY_DAY:
+    case ROUTE.TASKS:
+      return ThemeColor.INDIGO;
+
+    default:
+      return settings.theme;
+  }
+}
+
+export function getTextColor(theme) {
+  return theme.palette.mode === ThemeMode.LIGHT
+    ? theme.palette.primary.contrastText
+    : theme.palette.primary.main;
+}
+
+export function getBackgroundColor(theme) {
+  return theme.palette.mode === ThemeMode.LIGHT
+    ? theme.palette.primary.main
+    : theme.palette.background.default;
 }

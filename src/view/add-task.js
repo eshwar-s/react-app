@@ -5,7 +5,7 @@ import { useContext, useState } from "react";
 import { AppContext } from "../common/context";
 import { ACTION_TYPES } from "../common/actions";
 import { useTranslation } from "react-i18next";
-import { getTextColor } from "./list-view";
+import { getTextColor } from "../common/colors";
 
 function AddTask({ listId }) {
   const [value, setValue] = useState("");

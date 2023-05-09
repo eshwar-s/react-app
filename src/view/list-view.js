@@ -15,6 +15,7 @@ import { useTranslation } from "react-i18next";
 import { ThemeMode } from "../common/theme";
 import ListMenu from "./list-menu";
 import { TodoItem } from "../model/todo-item";
+import { getBackgroundColor, getTextColor } from "../common/colors";
 
 function SelectedListView() {
   const [state] = useContext(AppContext);
@@ -148,19 +149,10 @@ function getStyle(theme) {
     flexGrow: "1",
     overflow: "hidden",
     justifyContent: "space-between",
-    bgcolor:
-      theme.palette.mode === ThemeMode.LIGHT
-        ? theme.palette.primary.main
-        : theme.palette.background.default,
+    bgcolor: getBackgroundColor(theme),
     height: "100%",
     padding: "12px",
   };
-}
-
-export function getTextColor(theme) {
-  return theme.palette.mode === ThemeMode.LIGHT
-    ? theme.palette.primary.contrastText
-    : theme.palette.primary.main;
 }
 
 export default SelectedListView;
