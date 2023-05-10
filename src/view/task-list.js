@@ -16,7 +16,7 @@ import { ACTION_TYPES } from "../common/actions";
 import { ThemeMode } from "../common/theme";
 import { useTranslation } from "react-i18next";
 
-function TaskList({ listId, tasks, selectedTask, setSelectedTask }) {
+function TaskList({ tasks, selectedTask, setSelectedTask }) {
   const [, dispatch] = useContext(AppContext);
   const theme = useTheme();
   const { t } = useTranslation();
@@ -30,7 +30,7 @@ function TaskList({ listId, tasks, selectedTask, setSelectedTask }) {
     event.stopPropagation();
     dispatch({
       type: ACTION_TYPES.TOGGLE_TASK_COMPLETION,
-      payload: { listId: listId, taskId: taskId },
+      payload: { taskId: taskId },
     });
   };
 
@@ -38,7 +38,7 @@ function TaskList({ listId, tasks, selectedTask, setSelectedTask }) {
     event.stopPropagation();
     dispatch({
       type: ACTION_TYPES.TOGGLE_TASK_IMPORTANCE,
-      payload: { listId: listId, taskId: taskId },
+      payload: { taskId: taskId },
     });
   };
 

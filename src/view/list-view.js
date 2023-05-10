@@ -12,7 +12,6 @@ import { DEFAULT_TODO_LIST_NAME } from "../model/todo-list";
 import { Navigate, useParams } from "react-router-dom";
 import TaskDetails from "./task-details";
 import { useTranslation } from "react-i18next";
-import { ThemeMode } from "../common/theme";
 import ListMenu from "./list-menu";
 import { TodoItem } from "../model/todo-item";
 import { getBackgroundColor, getTextColor } from "../common/colors";
@@ -32,7 +31,7 @@ function ListView({ list }) {
   const [state, dispatch] = useContext(AppContext);
   const theme = useTheme();
   const [collapseCompleted, setCollapseCompleted] = useState(false);
-  const [selectedTask, setSelectedTask] = useState(null);
+  const [selectedTaskId, setSelectedTaskId] = useState(null);
   const { t } = useTranslation();
 
   const incompleteTasks = useMemo(() => {
@@ -50,6 +49,16 @@ function ListView({ list }) {
         return item.isCompleted;
       });
   }, [list, state.settings.sortOrder]);
+
+  const selectedTask = useMemo(() => {
+    if (selectedTaskId) {
+      const index = list.items.findIndex((task) => task.id === selectedTaskId);
+      if (index !== -1) {
+        return list.items[index];
+      }
+    }
+    return null;
+  }, [list, selectedTaskId]);
 
   const handleListNameChanged = (listName) => {
     dispatch({
@@ -97,10 +106,9 @@ function ListView({ list }) {
           </Box>
           <Box>
             <TaskList
-              listId={list.id}
               tasks={incompleteTasks}
-              selectedTask={selectedTask}
-              setSelectedTask={setSelectedTask}
+              selectedTask={selectedTaskId}
+              setSelectedTask={setSelectedTaskId}
             />
             {completedTasks.length > 0 && state.settings.showCompleted ? (
               <>
@@ -116,10 +124,9 @@ function ListView({ list }) {
                 </Button>
                 <Collapse in={!collapseCompleted}>
                   <TaskList
-                    listId={list.id}
                     tasks={completedTasks}
-                    selectedTask={selectedTask}
-                    setSelectedTask={setSelectedTask}
+                    selectedTask={selectedTaskId}
+                    setSelectedTask={setSelectedTaskId}
                   />
                 </Collapse>
               </>
@@ -133,9 +140,8 @@ function ListView({ list }) {
       <Box role="complementary">
         <TaskDetails
           sx={{ flexShrink: "0" }}
-          list={list}
-          taskId={selectedTask}
-          onClose={() => setSelectedTask(null)}
+          task={selectedTask}
+          onClose={() => setSelectedTaskId(null)}
         />
       </Box>
     </Box>

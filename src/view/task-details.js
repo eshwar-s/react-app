@@ -14,25 +14,21 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
-import { useContext, useMemo } from "react";
+import { useContext } from "react";
 import { ACTION_TYPES } from "../common/actions";
 import { AppContext } from "../common/context";
 import Editable from "./editable";
 import { useTranslation } from "react-i18next";
 
-function TaskDetails({ list, taskId, onClose }) {
+function TaskDetails({ task, onClose }) {
   const [, dispatch] = useContext(AppContext);
   const theme = useTheme();
   const { t } = useTranslation();
 
-  const task = useMemo(() => {
-    return taskId ? list.items.find((task) => task.id === taskId) : null;
-  }, [list.items, taskId]);
-
   const handleTitleUpdated = (taskTitle) => {
     dispatch({
       type: ACTION_TYPES.UPDATE_TASK_TITLE,
-      payload: { listId: list.id, taskId: taskId, taskTitle: taskTitle },
+      payload: { taskId: task.id, taskTitle: taskTitle },
     });
   };
 
@@ -40,8 +36,7 @@ function TaskDetails({ list, taskId, onClose }) {
     dispatch({
       type: ACTION_TYPES.UPDATE_TASK_NOTES,
       payload: {
-        listId: list.id,
-        taskId: taskId,
+        taskId: task.id,
         taskNotes: event.target.value,
       },
     });
@@ -50,21 +45,21 @@ function TaskDetails({ list, taskId, onClose }) {
   const toggleCompletion = (taskId) => {
     dispatch({
       type: ACTION_TYPES.TOGGLE_TASK_COMPLETION,
-      payload: { listId: list.id, taskId: taskId },
+      payload: { taskId: taskId },
     });
   };
 
   const toggleImportance = (taskId) => {
     dispatch({
       type: ACTION_TYPES.TOGGLE_TASK_IMPORTANCE,
-      payload: { listId: list.id, taskId: taskId },
+      payload: { taskId: taskId },
     });
   };
 
-  const handleTaskDelete = () => {
+  const handleTaskDelete = (taskId) => {
     dispatch({
       type: ACTION_TYPES.DELETE_TASK,
-      payload: { listId: list.id, taskId: taskId },
+      payload: { taskId: taskId },
     });
     onClose();
   };
@@ -171,7 +166,7 @@ function TaskDetails({ list, taskId, onClose }) {
             edge="end"
             aria-label={t("deleteTask")}
             size="small"
-            onClick={handleTaskDelete}
+            onClick={() => handleTaskDelete(task.id)}
           >
             <DeleteOutline fontSize="inherit" />
           </IconButton>

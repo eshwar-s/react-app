@@ -64,7 +64,10 @@ export const reducer = (state, action) => {
       return {
         ...state,
         lists: state.lists.map((list) => {
-          if (list.id === action.payload.listId) {
+          const index = list.items.findIndex(
+            (item) => item.id == action.payload.taskId
+          );
+          if (index !== -1) {
             return {
               ...list,
               items: list.items.map((task) => {
@@ -86,7 +89,10 @@ export const reducer = (state, action) => {
       return {
         ...state,
         lists: state.lists.map((list) => {
-          if (list.id === action.payload.listId) {
+          const index = list.items.findIndex(
+            (item) => item.id == action.payload.taskId
+          );
+          if (index !== -1) {
             return {
               ...list,
               items: list.items.map((task) => {
@@ -108,7 +114,10 @@ export const reducer = (state, action) => {
       return {
         ...state,
         lists: state.lists.map((list) => {
-          if (list.id === action.payload.listId) {
+          const index = list.items.findIndex(
+            (item) => item.id == action.payload.taskId
+          );
+          if (index !== -1) {
             return {
               ...list,
               items: list.items.map((task) => {
@@ -130,7 +139,10 @@ export const reducer = (state, action) => {
       return {
         ...state,
         lists: state.lists.map((list) => {
-          if (list.id === action.payload.listId) {
+          const index = list.items.findIndex(
+            (item) => item.id == action.payload.taskId
+          );
+          if (index !== -1) {
             return {
               ...list,
               items: list.items.map((task) => {
@@ -152,7 +164,10 @@ export const reducer = (state, action) => {
       return {
         ...state,
         lists: state.lists.map((list) => {
-          if (list.id === action.payload.listId) {
+          const index = list.items.findIndex(
+            (item) => item.id == action.payload.taskId
+          );
+          if (index !== -1) {
             return {
               ...list,
               items: list.items.filter((item) => {
