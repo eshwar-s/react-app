@@ -141,6 +141,10 @@ function NavigationPane() {
   const { pathname } = useLocation();
   const { t } = useTranslation();
 
+  const lists = useMemo(() => {
+    return state.lists.filter((list) => !list.builtIn);
+  }, [state.lists]);
+
   const selectedList = useMemo(() => {
     const match = matchPath(`${ROUTE.LISTS}/:index`, pathname);
     return match && match.params.index < state.lists.length
@@ -187,7 +191,7 @@ function NavigationPane() {
           icon={<NavigationMenuItemIcon route={ROUTE.TASKS} />}
         />
         <Divider></Divider>
-        {state.lists.map((list, index) => {
+        {lists.map((list, index) => {
           const link = `/lists/${index}`;
           const badgeCount = list.items.filter(
             (item) => !item.isCompleted

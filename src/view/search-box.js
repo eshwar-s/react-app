@@ -32,6 +32,13 @@ function SearchBox() {
     }
   }, [searchParams]);
 
+  const handleKeyDown = (event) => {
+    if (event.key === "Escape") {
+      event.preventDefault();
+      handleInputClear(event);
+    }
+  };
+
   const handleInputChange = (event) => {
     if (event.target.value) {
       setSearchParams({ query: event.target.value });
@@ -80,6 +87,7 @@ function SearchBox() {
       }}
       value={value}
       onChange={handleInputChange}
+      onKeyDown={handleKeyDown}
     ></OutlinedInput>
   );
 }

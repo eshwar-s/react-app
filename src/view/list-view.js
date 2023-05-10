@@ -20,10 +20,14 @@ function SelectedListView() {
   const [state] = useContext(AppContext);
   const { selectedIndex } = useParams();
 
-  return selectedIndex < state.lists.length ? (
-    <ListView list={state.lists[selectedIndex]} />
+  const lists = useMemo(() => {
+    return state.lists.filter((list) => !list.builtIn);
+  }, [state.lists]);
+
+  return selectedIndex < lists.length ? (
+    <ListView list={lists[selectedIndex]} />
   ) : (
-    <Navigate to={`/lists/${state.lists.length - 1}`} />
+    <Navigate to={`/lists/${lists.length - 1}`} />
   );
 }
 

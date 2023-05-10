@@ -26,19 +26,19 @@ function TaskList({ tasks, selectedTask, setSelectedTask }) {
     setSelectedTask(taskId);
   };
 
-  const toggleCompletion = (event, taskId) => {
+  const toggleCompletion = (event, task) => {
     event.stopPropagation();
     dispatch({
       type: ACTION_TYPES.TOGGLE_TASK_COMPLETION,
-      payload: { taskId: taskId },
+      payload: { listId: task.listId, taskId: task.id },
     });
   };
 
-  const toggleImportance = (event, taskId) => {
+  const toggleImportance = (event, task) => {
     event.stopPropagation();
     dispatch({
       type: ACTION_TYPES.TOGGLE_TASK_IMPORTANCE,
-      payload: { taskId: taskId },
+      payload: { listId: task.listId, taskId: task.id },
     });
   };
 
@@ -55,7 +55,7 @@ function TaskList({ tasks, selectedTask, setSelectedTask }) {
                 aria-pressed={task.isImportant}
                 aria-label={t("importantTask")}
                 edge="end"
-                onClick={(event) => toggleImportance(event, task.id)}
+                onClick={(event) => toggleImportance(event, task)}
               >
                 {task.isImportant ? <StarIcon /> : <StarOutlineIcon />}
               </IconButton>
@@ -72,7 +72,7 @@ function TaskList({ tasks, selectedTask, setSelectedTask }) {
                   tabIndex={0}
                   edge="start"
                   checked={task.isCompleted}
-                  onClick={(event) => toggleCompletion(event, task.id)}
+                  onClick={(event) => toggleCompletion(event, task)}
                 />
               </ListItemIcon>
               <ListItemText

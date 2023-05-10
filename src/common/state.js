@@ -1,5 +1,5 @@
 import { ACTION_TYPES } from "./actions";
-import { TodoList } from "../model/todo-list.js";
+import { DEFAULT_TODO_LIST_NAME, TodoList } from "../model/todo-list.js";
 import { TodoItem } from "../model/todo-item";
 import { TodoSettings } from "../model/todo-settings";
 
@@ -20,7 +20,7 @@ export const reducer = (state, action) => {
       };
 
     case ACTION_TYPES.ADD_LIST:
-      const newList = TodoList.new();
+      const newList = new TodoList();
       return {
         ...state,
         lists: state.lists.concat(newList),
@@ -50,7 +50,10 @@ export const reducer = (state, action) => {
         ...state,
         lists: state.lists.map((list) => {
           if (list.id === action.payload.listId) {
-            const newTask = new TodoItem(action.payload.taskTitle);
+            const newTask = new TodoItem(
+              action.payload.listId,
+              action.payload.taskTitle
+            );
             return {
               ...list,
               items: list.items.concat(newTask),
@@ -64,10 +67,7 @@ export const reducer = (state, action) => {
       return {
         ...state,
         lists: state.lists.map((list) => {
-          const index = list.items.findIndex(
-            (item) => item.id == action.payload.taskId
-          );
-          if (index !== -1) {
+          if (list.id === action.payload.listId) {
             return {
               ...list,
               items: list.items.map((task) => {
@@ -89,10 +89,7 @@ export const reducer = (state, action) => {
       return {
         ...state,
         lists: state.lists.map((list) => {
-          const index = list.items.findIndex(
-            (item) => item.id == action.payload.taskId
-          );
-          if (index !== -1) {
+          if (list.id === action.payload.listId) {
             return {
               ...list,
               items: list.items.map((task) => {
@@ -114,18 +111,24 @@ export const reducer = (state, action) => {
       return {
         ...state,
         lists: state.lists.map((list) => {
-          const index = list.items.findIndex(
-            (item) => item.id == action.payload.taskId
-          );
-          if (index !== -1) {
+          if (list.id === action.payload.listId) {
             return {
               ...list,
               items: list.items.map((task) => {
                 if (task.id === action.payload.taskId) {
-                  return {
-                    ...task,
-                    isCompleted: !task.isCompleted,
-                  };
+                  if (!task.isCompleted) {
+                    return {
+                      ...task,
+                      isCompleted: true,
+                      completionTime: new Date().toDateString(),
+                    };
+                  } else {
+                    return {
+                      ...task,
+                      isCompleted: false,
+                      completionTime: "",
+                    };
+                  }
                 }
                 return task;
               }),
@@ -139,10 +142,7 @@ export const reducer = (state, action) => {
       return {
         ...state,
         lists: state.lists.map((list) => {
-          const index = list.items.findIndex(
-            (item) => item.id == action.payload.taskId
-          );
-          if (index !== -1) {
+          if (list.id === action.payload.listId) {
             return {
               ...list,
               items: list.items.map((task) => {
@@ -164,10 +164,7 @@ export const reducer = (state, action) => {
       return {
         ...state,
         lists: state.lists.map((list) => {
-          const index = list.items.findIndex(
-            (item) => item.id == action.payload.taskId
-          );
-          if (index !== -1) {
+          if (list.id === action.payload.listId) {
             return {
               ...list,
               items: list.items.filter((item) => {

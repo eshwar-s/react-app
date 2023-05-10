@@ -28,7 +28,7 @@ function TaskDetails({ task, onClose }) {
   const handleTitleUpdated = (taskTitle) => {
     dispatch({
       type: ACTION_TYPES.UPDATE_TASK_TITLE,
-      payload: { taskId: task.id, taskTitle: taskTitle },
+      payload: { listId: task.listId, taskId: task.id, taskTitle: taskTitle },
     });
   };
 
@@ -36,30 +36,31 @@ function TaskDetails({ task, onClose }) {
     dispatch({
       type: ACTION_TYPES.UPDATE_TASK_NOTES,
       payload: {
+        listId: task.listId,
         taskId: task.id,
         taskNotes: event.target.value,
       },
     });
   };
 
-  const toggleCompletion = (taskId) => {
+  const toggleCompletion = (task) => {
     dispatch({
       type: ACTION_TYPES.TOGGLE_TASK_COMPLETION,
-      payload: { taskId: taskId },
+      payload: { listId: task.listId, taskId: task.id },
     });
   };
 
-  const toggleImportance = (taskId) => {
+  const toggleImportance = (task) => {
     dispatch({
       type: ACTION_TYPES.TOGGLE_TASK_IMPORTANCE,
-      payload: { taskId: taskId },
+      payload: { listId: task.listId, taskId: task.id },
     });
   };
 
-  const handleTaskDelete = (taskId) => {
+  const handleTaskDelete = (task) => {
     dispatch({
       type: ACTION_TYPES.DELETE_TASK,
-      payload: { taskId: taskId },
+      payload: { listId: task.listId, taskId: task.id },
     });
     onClose();
   };
@@ -94,7 +95,7 @@ function TaskDetails({ task, onClose }) {
             <Checkbox
               aria-label={t("completeTask")}
               checked={task.isCompleted}
-              onClick={() => toggleCompletion(task.id)}
+              onClick={() => toggleCompletion(task)}
             />
             <Editable
               element={
@@ -118,7 +119,7 @@ function TaskDetails({ task, onClose }) {
               edge="end"
               aria-pressed={task.isImportant}
               aria-label={t("importantTask")}
-              onClick={() => toggleImportance(task.id)}
+              onClick={() => toggleImportance(task)}
             >
               {task.isImportant ? <StarIcon /> : <StarOutlineIcon />}
             </IconButton>
@@ -166,7 +167,7 @@ function TaskDetails({ task, onClose }) {
             edge="end"
             aria-label={t("deleteTask")}
             size="small"
-            onClick={() => handleTaskDelete(task.id)}
+            onClick={() => handleTaskDelete(task)}
           >
             <DeleteOutline fontSize="inherit" />
           </IconButton>

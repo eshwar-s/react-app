@@ -18,7 +18,8 @@ export async function loadTodoLists() {
           todoLists.push(new TodoList().deserialize(itemData));
         }
       } else {
-        todoLists.push(TodoList.new());
+        const defaultLists = TodoList.createTodoLists();
+        todoLists.push(...defaultLists);
       }
 
       const settingsData = window.localStorage.getItem(

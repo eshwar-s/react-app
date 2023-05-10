@@ -1,16 +1,23 @@
 import { uuidv4 } from "../common/uuid.js";
 
 export const DEFAULT_TODO_LIST_NAME = "Untitled";
+export const TODO_TASKS_LIST_NAME = "Tasks";
+export const TODO_FLAGGED_LIST_NAME = "Flagged";
 
 export class TodoList {
-  constructor(name) {
+  constructor(name = DEFAULT_TODO_LIST_NAME) {
     this.id = uuidv4();
     this.name = name;
+    this.builtIn = name !== DEFAULT_TODO_LIST_NAME;
     this.items = [];
   }
 
-  static new() {
-    return new TodoList(DEFAULT_TODO_LIST_NAME);
+  static createTodoLists() {
+    return [
+      new TodoList(TODO_TASKS_LIST_NAME),
+      new TodoList(TODO_FLAGGED_LIST_NAME),
+      new TodoList(DEFAULT_TODO_LIST_NAME),
+    ];
   }
 
   printTodoList() {
