@@ -33,7 +33,7 @@ function ListView({ list }) {
   const [state, dispatch] = useContext(AppContext);
   const theme = useTheme();
   const [collapseCompleted, setCollapseCompleted] = useState(false);
-  const [selectedTaskId, setSelectedTaskId] = useState(null);
+  const [selectedTask, setSelectedTask] = useState(null);
   const { t } = useTranslation();
 
   const incompleteTasks = useMemo(() => {
@@ -51,16 +51,6 @@ function ListView({ list }) {
         return item.isCompleted;
       });
   }, [list, state.settings.sortOrder]);
-
-  const selectedTask = useMemo(() => {
-    if (selectedTaskId) {
-      const index = list.items.findIndex((task) => task.id === selectedTaskId);
-      if (index !== -1) {
-        return list.items[index];
-      }
-    }
-    return null;
-  }, [list, selectedTaskId]);
 
   const handleListNameChanged = (listName) => {
     dispatch({
@@ -109,8 +99,8 @@ function ListView({ list }) {
           <Box>
             <TaskList
               tasks={incompleteTasks}
-              selectedTask={selectedTaskId}
-              setSelectedTask={setSelectedTaskId}
+              selectedTask={selectedTask}
+              setSelectedTask={setSelectedTask}
               showListName={false}
             />
             {completedTasks.length > 0 && state.settings.showCompleted ? (
@@ -128,8 +118,8 @@ function ListView({ list }) {
                 <Collapse in={!collapseCompleted}>
                   <TaskList
                     tasks={completedTasks}
-                    selectedTask={selectedTaskId}
-                    setSelectedTask={setSelectedTaskId}
+                    selectedTask={selectedTask}
+                    setSelectedTask={setSelectedTask}
                     showListName={false}
                   />
                 </Collapse>
@@ -145,7 +135,7 @@ function ListView({ list }) {
         <TaskDetails
           sx={{ flexShrink: "0" }}
           task={selectedTask}
-          onClose={() => setSelectedTaskId(null)}
+          onClose={() => setSelectedTask(null)}
         />
       </Box>
     </Box>

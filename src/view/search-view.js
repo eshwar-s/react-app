@@ -7,7 +7,7 @@ import TaskList from "./task-list";
 
 function SearchView() {
   const [state] = useContext(AppContext);
-  const [selectedTaskId, setSelectedTaskId] = useState(null);
+  const [selectedTask, setSelectedTask] = useState(null);
   const theme = useTheme();
   const [searchParams] = useSearchParams();
   const searchQuery = searchParams.get("query");
@@ -25,8 +25,8 @@ function SearchView() {
       <Box sx={{ overflowY: "scroll" }}>
         <TaskList
           tasks={matchingTasks}
-          selectedTask={selectedTaskId}
-          setSelectedTask={setSelectedTaskId}
+          selectedTask={selectedTask}
+          setSelectedTask={setSelectedTask}
           showListName={true}
         />
       </Box>

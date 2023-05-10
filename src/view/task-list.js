@@ -21,9 +21,9 @@ function TaskList({ tasks, selectedTask, setSelectedTask, showListName }) {
   const theme = useTheme();
   const { t } = useTranslation();
 
-  const handleSelection = (event, taskId) => {
+  const handleSelection = (event, task) => {
     event.stopPropagation();
-    setSelectedTask(taskId);
+    setSelectedTask(task);
   };
 
   const toggleCompletion = (event, task) => {
@@ -64,8 +64,8 @@ function TaskList({ tasks, selectedTask, setSelectedTask, showListName }) {
           >
             <ListItemButton
               sx={getStyle(theme)}
-              onClick={(event) => handleSelection(event, task.id)}
-              selected={task.id === selectedTask}
+              onClick={(event) => handleSelection(event, task)}
+              selected={task.id === selectedTask?.id}
             >
               <ListItemIcon>
                 <Checkbox
