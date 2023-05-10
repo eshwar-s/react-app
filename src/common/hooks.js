@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 
 export const useDisableContextMenu = () => {
   useEffect(() => {
@@ -11,3 +11,9 @@ export const useDisableContextMenu = () => {
     };
   }, []);
 };
+
+export function useTodoList(lists) {
+  return useMemo(() => {
+    return lists.filter((list) => !list.builtIn);
+  }, [lists]);
+}

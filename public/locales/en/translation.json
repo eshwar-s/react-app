@@ -21,6 +21,7 @@
   "deleteDialogConfirm": "Delete list",
   "deleteDialogCancel": "Cancel",
   "createdDate": "Created {{date}}",
+  "completedDate": "Completed {{date}}",
   "alphabetically": "Alphabetically",
   "importance": "Importance",
   "creationDate": "Creation Date",

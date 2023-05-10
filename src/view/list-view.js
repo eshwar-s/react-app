@@ -15,14 +15,12 @@ import { useTranslation } from "react-i18next";
 import ListMenu from "./list-menu";
 import { TodoItem } from "../model/todo-item";
 import { getBackgroundColor, getTextColor } from "../common/colors";
+import { useTodoList } from "../common/hooks";
 
 function SelectedListView() {
   const [state] = useContext(AppContext);
   const { selectedIndex } = useParams();
-
-  const lists = useMemo(() => {
-    return state.lists.filter((list) => !list.builtIn);
-  }, [state.lists]);
+  const lists = useTodoList(state.lists);
 
   return selectedIndex < lists.length ? (
     <ListView list={lists[selectedIndex]} />
@@ -113,6 +111,7 @@ function ListView({ list }) {
               tasks={incompleteTasks}
               selectedTask={selectedTaskId}
               setSelectedTask={setSelectedTaskId}
+              showListName={false}
             />
             {completedTasks.length > 0 && state.settings.showCompleted ? (
               <>
@@ -131,6 +130,7 @@ function ListView({ list }) {
                     tasks={completedTasks}
                     selectedTask={selectedTaskId}
                     setSelectedTask={setSelectedTaskId}
+                    showListName={false}
                   />
                 </Collapse>
               </>

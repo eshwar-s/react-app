@@ -28,6 +28,8 @@ function SearchBox() {
     } else {
       if (location.pathname === ROUTE.SEARCH) {
         navigate(previousRoute.current);
+      } else if (value) {
+        setValue("");
       }
     }
   }, [searchParams]);

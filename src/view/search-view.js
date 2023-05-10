@@ -27,6 +27,7 @@ function SearchView() {
           tasks={matchingTasks}
           selectedTask={selectedTaskId}
           setSelectedTask={setSelectedTaskId}
+          showListName={true}
         />
       </Box>
     </Box>

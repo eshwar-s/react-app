@@ -9,16 +9,19 @@ import NavigationPane from "./navigation-pane";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import SearchBox from "./search-box";
+import { useTodoList } from "../common/hooks";
+import { ROUTE } from "../common/routes";
 
 function Sidebar() {
   const [state, dispatch] = useContext(AppContext);
   const theme = useTheme();
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const lists = useTodoList(state.lists);
 
   const handleListAdd = () => {
     dispatch({ type: ACTION_TYPES.ADD_LIST });
-    navigate(`/lists/${state.lists.length}`);
+    navigate(`${ROUTE.LISTS}/${lists.length}`);
   };
 
   return (

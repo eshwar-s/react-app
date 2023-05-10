@@ -16,8 +16,8 @@ import { ACTION_TYPES } from "../common/actions";
 import { ThemeMode } from "../common/theme";
 import { useTranslation } from "react-i18next";
 
-function TaskList({ tasks, selectedTask, setSelectedTask }) {
-  const [, dispatch] = useContext(AppContext);
+function TaskList({ tasks, selectedTask, setSelectedTask, showListName }) {
+  const [state, dispatch] = useContext(AppContext);
   const theme = useTheme();
   const { t } = useTranslation();
 
@@ -45,6 +45,7 @@ function TaskList({ tasks, selectedTask, setSelectedTask }) {
   return (
     <List sx={{ width: "100%" }}>
       {tasks.map((task, index) => {
+        const list = state.lists.find((list) => list.id == task.listId);
         return (
           <ListItem
             key={index}
@@ -80,6 +81,9 @@ function TaskList({ tasks, selectedTask, setSelectedTask }) {
                   textDecoration: task.isCompleted ? "line-through" : "none",
                 }}
                 primary={task.title}
+                primaryTypographyProps={{ variant: "body2" }}
+                secondary={showListName && list ? list.name : null}
+                secondaryTypographyProps={{ variant: "caption" }}
               />
             </ListItemButton>
           </ListItem>

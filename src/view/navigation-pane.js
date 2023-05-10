@@ -28,6 +28,7 @@ import { IconMenuItem } from "./menu-item";
 import { ROUTE } from "../common/routes";
 import { GetThemeColor, getPrimaryColor } from "../common/colors";
 import { BUILTIN_TODO_LISTS_COUNT } from "../model/todo-list";
+import { useTodoList } from "../common/hooks";
 
 function NavigationContextMenu({ selectedList, anchorPosition, onClose }) {
   const [state] = useContext(AppContext);
@@ -144,10 +145,7 @@ function NavigationPane() {
   const [contextMenu, setContextMenu] = useState(null);
   const { pathname } = useLocation();
   const { t } = useTranslation();
-
-  const lists = useMemo(() => {
-    return state.lists.filter((list) => !list.builtIn);
-  }, [state.lists]);
+  const lists = useTodoList(state.lists);
 
   const selectedList = useMemo(() => {
     const match = matchPath(`${ROUTE.LISTS}/:index`, pathname);
