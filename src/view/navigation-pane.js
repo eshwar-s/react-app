@@ -27,6 +27,7 @@ import DeleteList from "./delete-list";
 import { IconMenuItem } from "./menu-item";
 import { ROUTE } from "../common/routes";
 import { GetThemeColor, getPrimaryColor } from "../common/colors";
+import { BUILTIN_TODO_LISTS_COUNT } from "../model/todo-list";
 
 function NavigationContextMenu({ selectedList, anchorPosition, onClose }) {
   const [state] = useContext(AppContext);
@@ -66,7 +67,10 @@ function NavigationContextMenu({ selectedList, anchorPosition, onClose }) {
           text={t("deleteList")}
           startIcon={<DeleteIcon />}
           onClick={openDeleteListDialog}
-          disabled={state.lists.length <= 1 || selectedList === null}
+          disabled={
+            state.lists.length <= BUILTIN_TODO_LISTS_COUNT + 1 ||
+            selectedList === null
+          }
         />
       </Menu>
       <DeleteList
@@ -147,10 +151,10 @@ function NavigationPane() {
 
   const selectedList = useMemo(() => {
     const match = matchPath(`${ROUTE.LISTS}/:index`, pathname);
-    return match && match.params.index < state.lists.length
-      ? state.lists[match.params.index]
+    return match && match.params.index < lists.length
+      ? lists[match.params.index]
       : null;
-  }, [state.lists, pathname]);
+  }, [lists, pathname]);
 
   const handleContextMenu = (event) => {
     event.preventDefault();
