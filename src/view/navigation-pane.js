@@ -28,7 +28,12 @@ import { IconMenuItem } from "./menu-item";
 import { ROUTE } from "../common/routes";
 import { GetThemeColor, getPrimaryColor } from "../common/colors";
 import { BUILTIN_LISTS_COUNT } from "../model/todo-list";
-import { useFlaggedList, useTaskList, useTodoLists } from "../common/hooks";
+import {
+  useFlaggedList,
+  useImportantTasks,
+  useTaskList,
+  useTodoLists,
+} from "../common/hooks";
 
 function NavigationContextMenu({ selectedList, anchorPosition, onClose }) {
   const [state] = useContext(AppContext);
@@ -148,6 +153,7 @@ function NavigationPane() {
   const lists = useTodoLists(state.lists);
   const taskList = useTaskList(state.lists);
   const flaggedList = useFlaggedList(state.lists);
+  const importantTasks = useImportantTasks(state.lists);
 
   const selectedList = useMemo(() => {
     const match = matchPath(`${ROUTE.LISTS}/:index`, pathname);
@@ -155,6 +161,14 @@ function NavigationPane() {
       ? lists[match.params.index]
       : null;
   }, [lists, pathname]);
+
+  const getImportantBadgeCount = () => {
+    return importantTasks.filter((item) => !item.isCompleted).length;
+  };
+
+  const getListBadgeCount = (list) => {
+    return list.items.filter((item) => !item.isCompleted).length;
+  };
 
   const handleContextMenu = (event) => {
     event.preventDefault();
@@ -164,10 +178,6 @@ function NavigationPane() {
         ? { mouseX: event.clientX, mouseY: event.clientY }
         : null
     );
-  };
-
-  const getListBadgeCount = (list) => {
-    return list.items.filter((item) => !item.isCompleted).length;
   };
 
   return (
@@ -182,6 +192,7 @@ function NavigationPane() {
           name={t("important")}
           link={ROUTE.IMPORTANT}
           icon={<NavigationMenuItemIcon route={ROUTE.IMPORTANT} />}
+          badgeCount={getImportantBadgeCount()}
         />
         <NavigationMenuItem
           name={t("planned")}

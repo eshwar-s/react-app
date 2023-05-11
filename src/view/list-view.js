@@ -31,8 +31,8 @@ export function TodoListView() {
 
 export function TasksListView() {
   const [state] = useContext(AppContext);
-  const list = useTaskList(state.lists);
-  return <ListView list={list} />;
+  const taskList = useTaskList(state.lists);
+  return <ListView list={taskList} />;
 }
 
 function ListView({ list }) {

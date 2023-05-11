@@ -1,9 +1,7 @@
 import { ROUTE } from "../common/routes";
 import { Route, Routes } from "react-router-dom";
 import { TodoListView, TasksListView } from "./list-view.js";
-import MyDayView from "./myday-view";
-import ImportantView from "./important-view";
-import PlannedView from "./planned-view";
+import { ImportantView, MyDayView, PlannedView } from "./tasks-view";
 import FlaggedView from "./flagged-view";
 import SearchView from "./search-view";
 

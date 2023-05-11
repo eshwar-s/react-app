@@ -32,3 +32,11 @@ export function useFlaggedList(lists) {
     );
   }, [lists]);
 }
+
+export function useImportantTasks(lists) {
+  return useMemo(() => {
+    return lists.flatMap((list) =>
+      list.items.filter((item) => item.isImportant)
+    );
+  }, [lists]);
+}
