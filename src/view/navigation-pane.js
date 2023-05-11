@@ -162,8 +162,8 @@ function NavigationPane() {
       : null;
   }, [lists, pathname]);
 
-  const getImportantBadgeCount = () => {
-    return importantTasks.filter((item) => !item.isCompleted).length;
+  const getTasksBadgeCount = (tasks) => {
+    return tasks.filter((item) => !item.isCompleted).length;
   };
 
   const getListBadgeCount = (list) => {
@@ -192,7 +192,7 @@ function NavigationPane() {
           name={t("important")}
           link={ROUTE.IMPORTANT}
           icon={<NavigationMenuItemIcon route={ROUTE.IMPORTANT} />}
-          badgeCount={getImportantBadgeCount()}
+          badgeCount={getTasksBadgeCount(importantTasks)}
         />
         <NavigationMenuItem
           name={t("planned")}
