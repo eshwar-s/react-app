@@ -1,6 +1,6 @@
 import { cloneElement, useRef, useState } from "react";
 
-function Editable({ element, placeholder, onChanged }) {
+function Editable({ element, disabled, placeholder, onChanged }) {
   const [isEditing, setIsEditing] = useState(false);
   const ref = useRef(null);
 
@@ -23,7 +23,7 @@ function Editable({ element, placeholder, onChanged }) {
 
   return cloneElement(element, {
     ref: ref,
-    contentEditable: isEditing ? "plaintext-only" : "false",
+    contentEditable: !disabled && isEditing ? "plaintext-only" : "false",
     suppressContentEditableWarning: true,
     spellCheck: false,
     noWrap: !isEditing && element.props.noWrap,

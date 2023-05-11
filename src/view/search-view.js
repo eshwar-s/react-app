@@ -4,6 +4,7 @@ import { Box, useTheme } from "@mui/material";
 import { useContext, useMemo, useState } from "react";
 import { AppContext } from "../common/context";
 import TaskList from "./task-list";
+import TaskDetails from "./task-details";
 
 function SearchView() {
   const [state] = useContext(AppContext);
@@ -21,13 +22,22 @@ function SearchView() {
   }, [state.lists, searchQuery]);
 
   return (
-    <Box role="main" sx={getStyle(theme)}>
-      <Box sx={{ overflowY: "scroll" }}>
-        <TaskList
-          tasks={matchingTasks}
-          selectedTask={selectedTask}
-          setSelectedTask={setSelectedTask}
-          showListName={true}
+    <Box sx={{ display: "flex", flexDirection: "row", height: "100%" }}>
+      <Box role="main" sx={getStyle(theme)}>
+        <Box sx={{ overflowY: "scroll" }}>
+          <TaskList
+            tasks={matchingTasks}
+            selectedTask={selectedTask}
+            setSelectedTask={setSelectedTask}
+            showListName={true}
+          />
+        </Box>
+      </Box>
+      <Box role="complementary">
+        <TaskDetails
+          sx={{ flexShrink: "0" }}
+          task={selectedTask}
+          onClose={() => setSelectedTask(null)}
         />
       </Box>
     </Box>

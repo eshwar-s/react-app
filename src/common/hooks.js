@@ -1,4 +1,5 @@
 import { useEffect, useMemo } from "react";
+import { FLAGGED_LIST_NAME, TASKS_LIST_NAME } from "../model/todo-list";
 
 export const useDisableContextMenu = () => {
   useEffect(() => {
@@ -12,8 +13,22 @@ export const useDisableContextMenu = () => {
   }, []);
 };
 
-export function useTodoList(lists) {
+export function useTodoLists(lists) {
   return useMemo(() => {
     return lists.filter((list) => !list.builtIn);
+  }, [lists]);
+}
+
+export function useTaskList(lists) {
+  return useMemo(() => {
+    return lists.find((list) => list.builtIn && list.name === TASKS_LIST_NAME);
+  }, [lists]);
+}
+
+export function useFlaggedList(lists) {
+  return useMemo(() => {
+    return lists.find(
+      (list) => list.builtIn && list.name === FLAGGED_LIST_NAME
+    );
   }, [lists]);
 }

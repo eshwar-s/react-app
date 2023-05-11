@@ -79,11 +79,13 @@ function ListMenu({ list }) {
         open={menuOpen}
         onClose={() => setMenuOpen(false)}
       >
-        <IconMenuItem
-          text={t("renameList")}
-          startIcon={<FlipOutlined />}
-          onClick={() => setMenuOpen(false)}
-        />
+        {!list.builtIn && (
+          <IconMenuItem
+            text={t("renameList")}
+            startIcon={<FlipOutlined />}
+            onClick={() => setMenuOpen(false)}
+          />
+        )}
         <SubMenu
           parentMenuOpen={menuOpen}
           text={t("sortList")}
@@ -110,11 +112,13 @@ function ListMenu({ list }) {
           startIcon={<PrintOutlined />}
           onClick={() => setMenuOpen(false)}
         />
-        <IconMenuItem
-          text={t("changeTheme")}
-          startIcon={<PaletteOutlined />}
-          onClick={openThemePickerDialog}
-        />
+        {!list.builtIn && (
+          <IconMenuItem
+            text={t("changeTheme")}
+            startIcon={<PaletteOutlined />}
+            onClick={openThemePickerDialog}
+          />
+        )}
         <IconMenuItem
           text={
             state.settings.showCompleted
@@ -124,12 +128,14 @@ function ListMenu({ list }) {
           startIcon={<CheckCircleOutline />}
           onClick={toggleShowCompletedTasks}
         />
-        <Divider sx={{ my: 0.5 }} />
-        <IconMenuItem
-          text={t("deleteList")}
-          startIcon={<DeleteOutline />}
-          onClick={openDeleteListDialog}
-        />
+        {!list.builtIn && <Divider sx={{ my: 0.5 }} />}
+        {!list.builtIn && (
+          <IconMenuItem
+            text={t("deleteList")}
+            startIcon={<DeleteOutline />}
+            onClick={openDeleteListDialog}
+          />
+        )}
       </Menu>
       <DeleteList
         list={list}

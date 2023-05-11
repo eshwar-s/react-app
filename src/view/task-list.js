@@ -42,10 +42,14 @@ function TaskList({ tasks, selectedTask, setSelectedTask, showListName }) {
     });
   };
 
+  const getListName = (task) => {
+    const list = state.lists.find((list) => list.id == task.listId);
+    return list?.name;
+  };
+
   return (
     <List sx={{ width: "100%" }}>
       {tasks.map((task, index) => {
-        const list = state.lists.find((list) => list.id == task.listId);
         return (
           <ListItem
             key={index}
@@ -63,6 +67,7 @@ function TaskList({ tasks, selectedTask, setSelectedTask, showListName }) {
             }
           >
             <ListItemButton
+              dense
               sx={getStyle(theme)}
               onClick={(event) => handleSelection(event, task)}
               selected={task.id === selectedTask?.id}
@@ -82,7 +87,7 @@ function TaskList({ tasks, selectedTask, setSelectedTask, showListName }) {
                 }}
                 primary={task.title}
                 primaryTypographyProps={{ variant: "body2" }}
-                secondary={showListName && list ? list.name : null}
+                secondary={showListName ? getListName(task) : null}
                 secondaryTypographyProps={{ variant: "caption" }}
               />
             </ListItemButton>

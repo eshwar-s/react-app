@@ -1,11 +1,10 @@
 import { ROUTE } from "../common/routes";
-import SelectedListView from "./list-view";
 import { Route, Routes } from "react-router-dom";
+import { TodoListView, TasksListView } from "./list-view.js";
 import MyDayView from "./myday-view";
 import ImportantView from "./important-view";
 import PlannedView from "./planned-view";
 import FlaggedView from "./flagged-view";
-import TasksView from "./tasks-view";
 import SearchView from "./search-view";
 
 function MainPanel() {
@@ -16,11 +15,8 @@ function MainPanel() {
       <Route path={ROUTE.IMPORTANT} element={<ImportantView />} />
       <Route path={ROUTE.PLANNED} element={<PlannedView />} />
       <Route path={ROUTE.FLAGGED} element={<FlaggedView />} />
-      <Route path={ROUTE.TASKS} element={<TasksView />} />
-      <Route
-        path={`${ROUTE.LISTS}/:selectedIndex`}
-        element={<SelectedListView />}
-      />
+      <Route path={ROUTE.TASKS} element={<TasksListView />} />
+      <Route path={`${ROUTE.LISTS}/:index`} element={<TodoListView />} />
     </Routes>
   );
 }

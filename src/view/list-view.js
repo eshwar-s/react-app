@@ -15,25 +15,31 @@ import { useTranslation } from "react-i18next";
 import ListMenu from "./list-menu";
 import { TodoItem } from "../model/todo-item";
 import { getBackgroundColor, getTextColor } from "../common/colors";
-import { useTodoList } from "../common/hooks";
+import { useTaskList, useTodoLists } from "../common/hooks";
 
-function SelectedListView() {
+export function TodoListView() {
   const [state] = useContext(AppContext);
-  const { selectedIndex } = useParams();
-  const lists = useTodoList(state.lists);
+  const { index } = useParams();
+  const lists = useTodoLists(state.lists);
 
-  return selectedIndex < lists.length ? (
-    <ListView list={lists[selectedIndex]} />
+  return index < lists.length ? (
+    <ListView list={lists[index]} />
   ) : (
     <Navigate to={`/lists/${lists.length - 1}`} />
   );
 }
 
+export function TasksListView() {
+  const [state] = useContext(AppContext);
+  const list = useTaskList(state.lists);
+  return <ListView list={list} />;
+}
+
 function ListView({ list }) {
   const [state, dispatch] = useContext(AppContext);
-  const theme = useTheme();
   const [collapseCompleted, setCollapseCompleted] = useState(false);
   const [selectedTask, setSelectedTask] = useState(null);
+  const theme = useTheme();
   const { t } = useTranslation();
 
   const incompleteTasks = useMemo(() => {
@@ -91,6 +97,7 @@ function ListView({ list }) {
                   {list.name}
                 </Typography>
               }
+              disabled={list.builtIn}
               placeholder={DEFAULT_TODO_LIST_NAME}
               onChanged={handleListNameChanged}
             ></Editable>
@@ -154,5 +161,3 @@ function getStyle(theme) {
     padding: "12px",
   };
 }
-
-export default SelectedListView;
