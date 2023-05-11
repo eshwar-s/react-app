@@ -28,7 +28,7 @@ import { IconMenuItem } from "./menu-item";
 import { ROUTE } from "../common/routes";
 import { GetThemeColor, getPrimaryColor } from "../common/colors";
 import { BUILTIN_LISTS_COUNT } from "../model/todo-list";
-import { useTodoLists } from "../common/hooks";
+import { useFlaggedList, useTaskList, useTodoLists } from "../common/hooks";
 
 function NavigationContextMenu({ selectedList, anchorPosition, onClose }) {
   const [state] = useContext(AppContext);
@@ -146,6 +146,8 @@ function NavigationPane() {
   const { pathname } = useLocation();
   const { t } = useTranslation();
   const lists = useTodoLists(state.lists);
+  const taskList = useTaskList(state.lists);
+  const flaggedList = useFlaggedList(state.lists);
 
   const selectedList = useMemo(() => {
     const match = matchPath(`${ROUTE.LISTS}/:index`, pathname);
@@ -162,6 +164,10 @@ function NavigationPane() {
         ? { mouseX: event.clientX, mouseY: event.clientY }
         : null
     );
+  };
+
+  const getListBadgeCount = (list) => {
+    return list.items.filter((item) => !item.isCompleted).length;
   };
 
   return (
@@ -186,25 +192,24 @@ function NavigationPane() {
           name={t("flagged")}
           link={ROUTE.FLAGGED}
           icon={<NavigationMenuItemIcon route={ROUTE.FLAGGED} />}
+          badgeCount={getListBadgeCount(flaggedList)}
         />
         <NavigationMenuItem
           name={t("tasks")}
           link={ROUTE.TASKS}
           icon={<NavigationMenuItemIcon route={ROUTE.TASKS} />}
+          badgeCount={getListBadgeCount(taskList)}
         />
         <Divider></Divider>
         {lists.map((list, index) => {
           const link = `/lists/${index}`;
-          const badgeCount = list.items.filter(
-            (item) => !item.isCompleted
-          ).length;
           return (
             <NavigationMenuItem
               key={index}
               name={list.name}
               link={link}
               icon={<NavigationMenuItemIcon route={ROUTE.LISTS} />}
-              badgeCount={badgeCount}
+              badgeCount={getListBadgeCount(list)}
             ></NavigationMenuItem>
           );
         })}
