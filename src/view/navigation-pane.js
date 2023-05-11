@@ -23,7 +23,7 @@ import { useContext, useMemo, useState } from "react";
 import { AppContext } from "../common/context";
 import { Link, matchPath, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import DeleteList from "./delete-list";
+import DeleteListDialog from "./delete-dialog";
 import { IconMenuItem } from "./menu-item";
 import { ROUTE } from "../common/routes";
 import { GetThemeColor, getPrimaryColor } from "../common/colors";
@@ -74,7 +74,7 @@ function NavigationContextMenu({ selectedList, anchorPosition, onClose }) {
           }
         />
       </Menu>
-      <DeleteList
+      <DeleteListDialog
         list={selectedList}
         open={deleteDialogOpen}
         onClose={() => setDeleteDialogOpen(false)}

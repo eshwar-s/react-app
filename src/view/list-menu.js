@@ -13,7 +13,7 @@ import {
 import { Divider, IconButton, Menu, useTheme } from "@mui/material";
 import { useContext, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import DeleteList from "./delete-list";
+import DeleteListDialog from "./delete-dialog";
 import { AppContext } from "../common/context";
 import { ACTION_TYPES } from "../common/actions";
 import { TodoSortOrder } from "../model/todo-settings";
@@ -137,7 +137,7 @@ function ListMenu({ list }) {
           />
         )}
       </Menu>
-      <DeleteList
+      <DeleteListDialog
         list={list}
         open={deleteDialogOpen}
         onClose={() => setDeleteDialogOpen(false)}
