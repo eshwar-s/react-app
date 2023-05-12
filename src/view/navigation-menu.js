@@ -17,6 +17,7 @@ import {
   MenuItem,
   MenuList,
   Typography,
+  darken,
   useTheme,
 } from "@mui/material";
 import { useContext, useMemo, useState } from "react";
@@ -88,6 +89,19 @@ function NavigationContextMenu({ selectedList, anchorPosition, onClose }) {
   );
 }
 
+function getMenuItemStyle(theme) {
+  const selectionColor = darken(theme.palette.secondary.main, 0.05);
+
+  return {
+    "&.Mui-selected, &.Mui-selected:hover": {
+      bgcolor: selectionColor,
+    },
+    "&.Mui-selected.Mui-focusVisible, &.Mui-focusVisible": {
+      bgcolor: selectionColor,
+    },
+  };
+}
+
 function NavigationMenuItem({ name, link, icon, badgeCount = 0 }) {
   const theme = useTheme();
   const { pathname } = useLocation();
@@ -96,11 +110,11 @@ function NavigationMenuItem({ name, link, icon, badgeCount = 0 }) {
   return (
     <MenuItem
       dense
-      sx={{ color: theme.palette.text.primary }}
       component={Link}
       to={link}
       selected={selected}
       tabIndex={selected ? 0 : -1}
+      sx={getMenuItemStyle(theme)}
     >
       <ListItemIcon sx={{ pointerEvents: "none" }}>{icon}</ListItemIcon>
       <ListItemText
@@ -221,7 +235,7 @@ function NavigationMenu() {
               link={link}
               icon={<NavigationMenuItemIcon route={ROUTE.LISTS} />}
               badgeCount={getListBadgeCount(list)}
-            ></NavigationMenuItem>
+            />
           );
         })}
       </MenuList>

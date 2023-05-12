@@ -1,5 +1,5 @@
 import { ClearOutlined, SearchOutlined } from "@mui/icons-material";
-import { InputAdornment, OutlinedInput } from "@mui/material";
+import { InputAdornment, OutlinedInput, darken, useTheme } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
@@ -13,6 +13,7 @@ import { ROUTE } from "../common/routes";
 function SearchBox() {
   const { t } = useTranslation();
   const [value, setValue] = useState("");
+  const theme = useTheme();
   const previousRoute = useRef("");
   const location = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
@@ -58,11 +59,8 @@ function SearchBox() {
 
   return (
     <OutlinedInput
-      sx={{
-        ".MuiOutlinedInput-input": {
-          height: "16px",
-        },
-      }}
+      sx={getStyle(theme)}
+      color="secondary"
       size="small"
       placeholder={t("searchPlaceholder")}
       startAdornment={
@@ -90,8 +88,19 @@ function SearchBox() {
       value={value}
       onChange={handleInputChange}
       onKeyDown={handleKeyDown}
-    ></OutlinedInput>
+    />
   );
+}
+
+function getStyle(theme) {
+  return {
+    ".MuiOutlinedInput-input": {
+      height: "16px",
+    },
+    "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+      borderColor: darken(theme.palette.secondary.main, 0.15),
+    },
+  };
 }
 
 export default SearchBox;
