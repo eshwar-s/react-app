@@ -22,7 +22,7 @@ import ThemePicker from "./theme-picker";
 import { SubMenu } from "./sub-menu";
 import { getTextColor } from "../common/colors";
 
-function ListMenu({ list }) {
+function OptionsMenu({ list }) {
   const [state, dispatch] = useContext(AppContext);
   const [menuOpen, setMenuOpen] = useState(false);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
@@ -150,4 +150,4 @@ function ListMenu({ list }) {
   );
 }
 
-export default ListMenu;
+export default OptionsMenu;

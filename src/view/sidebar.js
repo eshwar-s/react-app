@@ -5,7 +5,7 @@ import { Box } from "@mui/system";
 import { useContext } from "react";
 import { ACTION_TYPES } from "../common/actions";
 import { AppContext } from "../common/context";
-import NavigationPane from "./navigation-pane";
+import NavigationMenu from "./navigation-menu";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import SearchBox from "./search-box";
@@ -28,7 +28,7 @@ function Sidebar() {
     <Box sx={getStyle(theme)}>
       <Box sx={{ overflowY: "scroll" }}>
         <SearchBox />
-        <NavigationPane />
+        <NavigationMenu />
       </Box>
       <Button
         sx={{

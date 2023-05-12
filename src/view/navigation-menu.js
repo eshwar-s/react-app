@@ -145,7 +145,7 @@ function NavigationMenuItemIcon({ route }) {
   return null;
 }
 
-function NavigationPane() {
+function NavigationMenu() {
   const [state] = useContext(AppContext);
   const [contextMenu, setContextMenu] = useState(null);
   const { pathname } = useLocation();
@@ -234,4 +234,4 @@ function NavigationPane() {
   );
 }
 
-export default NavigationPane;
+export default NavigationMenu;

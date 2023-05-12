@@ -12,7 +12,7 @@ import { DEFAULT_TODO_LIST_NAME } from "../model/todo-list";
 import { Navigate, useParams } from "react-router-dom";
 import TaskDetails from "./task-details";
 import { useTranslation } from "react-i18next";
-import ListMenu from "./list-menu";
+import OptionsMenu from "./options-menu";
 import { TodoItem } from "../model/todo-item";
 import { getBackgroundColor, getTextColor } from "../common/colors";
 import { useTaskList, useTodoLists } from "../common/hooks";
@@ -101,7 +101,7 @@ function ListView({ list }) {
               placeholder={DEFAULT_TODO_LIST_NAME}
               onChanged={handleListNameChanged}
             ></Editable>
-            <ListMenu list={list} />
+            <OptionsMenu list={list} />
           </Box>
           <Box>
             <TaskList
