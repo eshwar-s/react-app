@@ -1,11 +1,10 @@
-import { Button, Collapse, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import { Box } from "@mui/system";
 import { useContext, useMemo, useState } from "react";
 import { AppContext } from "../common/context";
 import TaskList from "./task-list";
 import AddTask from "./add-task";
-import { ExpandLess, ExpandMore } from "@mui/icons-material";
 import { ACTION_TYPES } from "../common/actions";
 import Editable from "./editable";
 import { DEFAULT_TODO_LIST_NAME } from "../model/todo-list";
@@ -16,6 +15,7 @@ import OptionsMenu from "./options-menu";
 import { TodoItem } from "../model/todo-item";
 import { getBackgroundColor, getTextColor } from "../common/colors";
 import { useTaskList, useTodoLists } from "../common/hooks";
+import Collapsible from "./collapsible";
 
 export function TodoListView() {
   const [state] = useContext(AppContext);
@@ -37,7 +37,6 @@ export function TasksListView() {
 
 function ListView({ list }) {
   const [state, dispatch] = useContext(AppContext);
-  const [collapseCompleted, setCollapseCompleted] = useState(false);
   const [selectedTask, setSelectedTask] = useState(null);
   const theme = useTheme();
   const { t } = useTranslation();
@@ -111,26 +110,14 @@ function ListView({ list }) {
               showListName={false}
             />
             {completedTasks.length > 0 && state.settings.showCompleted ? (
-              <>
-                <Button
-                  sx={{ color: getTextColor(theme) }}
-                  size="small"
-                  onClick={() => setCollapseCompleted(!collapseCompleted)}
-                  startIcon={
-                    collapseCompleted ? <ExpandLess /> : <ExpandMore />
-                  }
-                >
-                  {t("completed")}
-                </Button>
-                <Collapse in={!collapseCompleted}>
-                  <TaskList
-                    tasks={completedTasks}
-                    selectedTask={selectedTask}
-                    setSelectedTask={setSelectedTask}
-                    showListName={false}
-                  />
-                </Collapse>
-              </>
+              <Collapsible label={t("completed")} size="small">
+                <TaskList
+                  tasks={completedTasks}
+                  selectedTask={selectedTask}
+                  setSelectedTask={setSelectedTask}
+                  showListName={false}
+                />
+              </Collapsible>
             ) : null}
           </Box>
         </Box>
