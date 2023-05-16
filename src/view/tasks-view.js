@@ -5,7 +5,7 @@ import { Heading } from "./heading";
 import TaskList from "./task-list";
 import TaskDetails from "./task-details";
 import { useImportantTasks, useTaskList } from "../common/hooks";
-import { useContext, useMemo, useState } from "react";
+import { useContext, useState } from "react";
 import { AppContext } from "../common/context";
 import AddTask from "./add-task";
 

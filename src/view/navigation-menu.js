@@ -155,8 +155,10 @@ function NavigationMenuItemIcon({ route }) {
 
     case ROUTE.LISTS:
       return <ListIcon sx={{ color: color }} />;
+
+    default:
+      return null;
   }
-  return null;
 }
 
 function NavigationMenu() {

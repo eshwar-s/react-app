@@ -78,6 +78,7 @@ function OptionsMenu({ list }) {
         anchorEl={buttonRef.current}
         open={menuOpen}
         onClose={() => setMenuOpen(false)}
+        variant="selectedMenu"
       >
         {!list.builtIn && (
           <IconMenuItem

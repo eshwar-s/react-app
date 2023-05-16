@@ -4,12 +4,13 @@ import { uuidv4 } from "../common/uuid.js";
 export class TodoItem {
   constructor(listId, title) {
     this.id = uuidv4();
-    this.creationTime = new Date().toDateString();
+    this.creationDate = new Date().toDateString();
     this.listId = listId;
     this.title = title;
     this.isImportant = false;
     this.isCompleted = false;
-    this.completionTime = "";
+    this.completionDate = null;
+    this.dueDate = null;
     this.owner = null;
     this.notes = "";
   }

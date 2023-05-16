@@ -43,7 +43,7 @@ function TaskList({ tasks, selectedTask, setSelectedTask, showListName }) {
   };
 
   const getListName = (task) => {
-    const list = state.lists.find((list) => list.id == task.listId);
+    const list = state.lists.find((list) => list.id === task.listId);
     return list?.name;
   };
 

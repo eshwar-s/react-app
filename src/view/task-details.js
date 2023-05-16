@@ -162,8 +162,8 @@ function TaskDetails({ task, onClose }) {
             variant="caption"
           >
             {task.isCompleted
-              ? t("completedDate", { date: task.completionTime })
-              : t("createdDate", { date: task.creationTime })}
+              ? t("completedDate", { date: task.completionDate })
+              : t("createdDate", { date: task.creationDate })}
           </Typography>
           <IconButton
             edge="end"

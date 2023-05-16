@@ -18,12 +18,20 @@ export function SubMenu({ parentMenuOpen, text, startIcon, children }) {
     }
   };
 
+  const handleMenuOpen = (event) => {
+    setSubMenuOpen(true);
+  };
+
+  const handleMenuClose = (event) => {
+    setSubMenuOpen(false);
+  };
+
   return (
     <>
       <MenuItem
         ref={menuItemRef}
         dense
-        onClick={() => setSubMenuOpen(true)}
+        onClick={handleMenuOpen}
         onKeyDown={handleMenuItemKeyDown}
       >
         <ListItemIcon>{startIcon}</ListItemIcon>
@@ -43,7 +51,7 @@ export function SubMenu({ parentMenuOpen, text, startIcon, children }) {
         }}
         open={parentMenuOpen && subMenuOpen}
         anchorEl={menuItemRef.current}
-        onClose={() => setSubMenuOpen(false)}
+        onClose={handleMenuClose}
         onKeyDown={handleMenuKeyDown}
       >
         {children}

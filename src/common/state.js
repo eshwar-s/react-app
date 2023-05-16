@@ -1,5 +1,5 @@
 import { ACTION_TYPES } from "./actions";
-import { DEFAULT_TODO_LIST_NAME, TodoList } from "../model/todo-list.js";
+import { TodoList } from "../model/todo-list.js";
 import { TodoItem } from "../model/todo-item";
 import { TodoSettings } from "../model/todo-settings";
 
@@ -120,13 +120,13 @@ export const reducer = (state, action) => {
                     return {
                       ...task,
                       isCompleted: true,
-                      completionTime: new Date().toDateString(),
+                      completionDate: new Date().toDateString(),
                     };
                   } else {
                     return {
                       ...task,
                       isCompleted: false,
-                      completionTime: "",
+                      completionDate: "",
                     };
                   }
                 }
@@ -150,6 +150,28 @@ export const reducer = (state, action) => {
                   return {
                     ...task,
                     isImportant: !task.isImportant,
+                  };
+                }
+                return task;
+              }),
+            };
+          }
+          return list;
+        }),
+      };
+
+    case ACTION_TYPES.SET_TASK_DUE_DATE:
+      return {
+        ...state,
+        lists: state.lists.map((list) => {
+          if (list.id === action.payload.listId) {
+            return {
+              ...list,
+              items: list.items.map((task) => {
+                if (task.id === action.payload.taskId) {
+                  return {
+                    ...task,
+                    dueDate: action.payload.taskDueDate,
                   };
                 }
                 return task;
