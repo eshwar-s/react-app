@@ -63,7 +63,7 @@ function TasksView({ heading, tasks }) {
       <Box role="complementary">
         <TaskDetails
           sx={{ flexShrink: "0" }}
-          task={selectedTask}
+          taskId={selectedTask}
           onClose={() => setSelectedTask(null)}
         />
       </Box>

@@ -120,13 +120,13 @@ export const reducer = (state, action) => {
                     return {
                       ...task,
                       isCompleted: true,
-                      completionDate: new Date().toDateString(),
+                      completionDate: Date.now(),
                     };
                   } else {
                     return {
                       ...task,
                       isCompleted: false,
-                      completionDate: "",
+                      completionDate: Number.NaN,
                     };
                   }
                 }

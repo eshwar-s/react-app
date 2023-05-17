@@ -23,7 +23,7 @@ function TaskList({ tasks, selectedTask, setSelectedTask, showListName }) {
 
   const handleSelection = (event, task) => {
     event.stopPropagation();
-    setSelectedTask(task);
+    setSelectedTask(task.id);
   };
 
   const toggleCompletion = (event, task) => {
@@ -70,7 +70,7 @@ function TaskList({ tasks, selectedTask, setSelectedTask, showListName }) {
               dense
               sx={getStyle(theme)}
               onClick={(event) => handleSelection(event, task)}
-              selected={task.id === selectedTask?.id}
+              selected={task.id === selectedTask}
             >
               <ListItemIcon>
                 <Checkbox

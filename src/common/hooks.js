@@ -40,3 +40,23 @@ export function useImportantTasks(lists) {
     );
   }, [lists]);
 }
+
+export function usePlannedTasks(lists) {
+  return useMemo(() => {
+    return lists.flatMap((list) =>
+      list.items.filter((item) => !Number.isNaN(item.dueDate))
+    );
+  }, [lists]);
+}
+
+export function useSelectedTask(taskId, lists) {
+  return useMemo(() => {
+    for (const list of lists) {
+      const task = list.items.find((item) => item.id === taskId);
+      if (task) {
+        return task;
+      }
+    }
+    return null;
+  }, [taskId, lists]);
+}

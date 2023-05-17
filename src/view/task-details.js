@@ -19,11 +19,27 @@ import { ACTION_TYPES } from "../common/actions";
 import { AppContext } from "../common/context";
 import Editable from "./editable";
 import { useTranslation } from "react-i18next";
+import i18next from "i18next";
+import { getFullDate } from "../common/date";
+import { useSelectedTask } from "../common/hooks";
 
-function TaskDetails({ task, onClose }) {
-  const [, dispatch] = useContext(AppContext);
+function TaskDetails({ taskId, onClose }) {
+  const [state, dispatch] = useContext(AppContext);
   const theme = useTheme();
   const { t } = useTranslation();
+  const task = useSelectedTask(taskId, state.lists);
+
+  const getTaskDate = (task) => {
+    if (task.isCompleted) {
+      return t("completedDate", {
+        date: getFullDate(i18next.language, task.completionDate),
+      });
+    } else {
+      return t("createdDate", {
+        date: getFullDate(i18next.language, task.creationDate),
+      });
+    }
+  };
 
   const handleTitleUpdated = (taskTitle) => {
     dispatch({
@@ -161,9 +177,7 @@ function TaskDetails({ task, onClose }) {
             }}
             variant="caption"
           >
-            {task.isCompleted
-              ? t("completedDate", { date: task.completionDate })
-              : t("createdDate", { date: task.creationDate })}
+            {task ? getTaskDate(task) : ""}
           </Typography>
           <IconButton
             edge="end"

@@ -36,7 +36,7 @@ function SearchView() {
       <Box role="complementary">
         <TaskDetails
           sx={{ flexShrink: "0" }}
-          task={selectedTask}
+          taskId={selectedTask}
           onClose={() => setSelectedTask(null)}
         />
       </Box>
