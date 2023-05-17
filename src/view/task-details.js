@@ -14,14 +14,13 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
-import { useContext } from "react";
+import { useContext, useMemo } from "react";
 import { ACTION_TYPES } from "../common/actions";
 import { AppContext } from "../common/context";
 import Editable from "./editable";
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";
 import { getFullDate } from "../common/date";
-import { useSelectedTask } from "../common/hooks";
 
 function TaskDetails({ taskId, onClose }) {
   const [state, dispatch] = useContext(AppContext);
@@ -191,6 +190,18 @@ function TaskDetails({ taskId, onClose }) {
       </Box>
     </ClickAwayListener>
   ) : null;
+}
+
+function useSelectedTask(taskId, lists) {
+  return useMemo(() => {
+    for (const list of lists) {
+      const task = list.items.find((item) => item.id === taskId);
+      if (task) {
+        return task;
+      }
+    }
+    return null;
+  }, [taskId, lists]);
 }
 
 export default TaskDetails;
