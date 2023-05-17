@@ -126,7 +126,7 @@ export const reducer = (state, action) => {
                     return {
                       ...task,
                       isCompleted: false,
-                      completionDate: Number.NaN,
+                      completionDate: null,
                     };
                   }
                 }

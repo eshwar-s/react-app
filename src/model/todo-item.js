@@ -9,8 +9,8 @@ export class TodoItem {
     this.title = title;
     this.isImportant = false;
     this.isCompleted = false;
-    this.completionDate = Number.NaN;
-    this.dueDate = Number.NaN;
+    this.completionDate = null;
+    this.dueDate = null;
     this.owner = null;
     this.notes = "";
   }

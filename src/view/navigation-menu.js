@@ -32,6 +32,7 @@ import { BUILTIN_LISTS_COUNT } from "../model/todo-list";
 import {
   useFlaggedList,
   useImportantTasks,
+  usePlannedTasks,
   useTaskList,
   useTodoLists,
 } from "../common/hooks";
@@ -170,6 +171,7 @@ function NavigationMenu() {
   const taskList = useTaskList(state.lists);
   const flaggedList = useFlaggedList(state.lists);
   const importantTasks = useImportantTasks(state.lists);
+  const plannedTasks = usePlannedTasks(state.lists);
 
   const selectedList = useMemo(() => {
     const match = matchPath(`${ROUTE.LISTS}/:index`, pathname);
@@ -214,6 +216,7 @@ function NavigationMenu() {
           name={t("planned")}
           link={ROUTE.PLANNED}
           icon={<NavigationMenuItemIcon route={ROUTE.PLANNED} />}
+          badgeCount={getTasksBadgeCount(plannedTasks)}
         />
         <NavigationMenuItem
           name={t("flagged")}

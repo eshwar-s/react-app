@@ -43,9 +43,7 @@ export function useImportantTasks(lists) {
 
 export function usePlannedTasks(lists) {
   return useMemo(() => {
-    return lists.flatMap((list) =>
-      list.items.filter((item) => !Number.isNaN(item.dueDate))
-    );
+    return lists.flatMap((list) => list.items.filter((item) => item.dueDate));
   }, [lists]);
 }
 
