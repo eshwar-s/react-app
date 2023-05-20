@@ -11,15 +11,16 @@ function SearchView() {
   const [selectedTask, setSelectedTask] = useState(null);
   const theme = useTheme();
   const [searchParams] = useSearchParams();
-  const searchQuery = searchParams.get("query");
+  const query = searchParams.get("query");
 
   const matchingTasks = useMemo(() => {
+    const searchQuery = query ? query.toLowerCase() : "";
     return state.lists.flatMap((list) => {
       return list.items.filter(
-        (item) => item.title.indexOf(searchQuery) !== -1
+        (item) => item.title.toLowerCase().indexOf(searchQuery) !== -1
       );
     });
-  }, [state.lists, searchQuery]);
+  }, [state.lists, query]);
 
   return (
     <Box sx={{ display: "flex", flexDirection: "row", height: "100%" }}>
