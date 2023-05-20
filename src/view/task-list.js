@@ -1,4 +1,5 @@
 import {
+  Box,
   Checkbox,
   IconButton,
   List,
@@ -6,6 +7,7 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
+  Typography,
 } from "@mui/material";
 import StarIcon from "@mui/icons-material/Star";
 import StarOutlineIcon from "@mui/icons-material/StarOutline";
@@ -15,9 +17,11 @@ import { AppContext } from "../common/context";
 import { ACTION_TYPES } from "../common/actions";
 import { ThemeMode } from "../common/theme";
 import { useTranslation } from "react-i18next";
+import { getShortDate } from "../common/date";
+import i18next from "i18next";
 
 function TaskList({ tasks, selectedTask, setSelectedTask, showListName }) {
-  const [state, dispatch] = useContext(AppContext);
+  const [, dispatch] = useContext(AppContext);
   const theme = useTheme();
   const { t } = useTranslation();
 
@@ -40,11 +44,6 @@ function TaskList({ tasks, selectedTask, setSelectedTask, showListName }) {
       type: ACTION_TYPES.TOGGLE_TASK_IMPORTANCE,
       payload: { listId: task.listId, taskId: task.id },
     });
-  };
-
-  const getListName = (task) => {
-    const list = state.lists.find((list) => list.id === task.listId);
-    return list?.name;
   };
 
   return (
@@ -82,19 +81,64 @@ function TaskList({ tasks, selectedTask, setSelectedTask, showListName }) {
                 />
               </ListItemIcon>
               <ListItemText
-                sx={{
-                  textDecoration: task.isCompleted ? "line-through" : "none",
-                }}
-                primary={task.title}
-                primaryTypographyProps={{ variant: "body2" }}
-                secondary={showListName ? getListName(task) : null}
-                secondaryTypographyProps={{ variant: "caption" }}
+                disableTypography
+                primary={<TaskTitle task={task} />}
+                secondary={
+                  <TaskDescription task={task} showListName={showListName} />
+                }
               />
             </ListItemButton>
           </ListItem>
         );
       })}
     </List>
+  );
+}
+
+function TaskTitle({ task }) {
+  return (
+    <Typography
+      variant="body2"
+      sx={{
+        textDecoration: task.isCompleted ? "line-through" : "none",
+      }}
+    >
+      {task.title}
+    </Typography>
+  );
+}
+
+function TaskDescription({ task, showListName }) {
+  const [state] = useContext(AppContext);
+
+  const getListName = (task) => {
+    const list = state.lists.find((list) => list.id === task.listId);
+    return list?.name;
+  };
+
+  return (
+    <Box sx={{ opacity: 0.8 }}>
+      {showListName ? (
+        <Typography variant="caption" sx={{ marginInlineEnd: "4px" }}>
+          {getListName(task)}
+        </Typography>
+      ) : null}
+      {showListName && task.dueDate ? (
+        <Typography
+          variant="caption"
+          sx={{
+            marginInlineEnd: "4px",
+          }}
+        >
+          &#8226;
+        </Typography>
+      ) : null}
+      {task.dueDate ? (
+        <Typography variant="caption" sx={{ marginInlineEnd: "4px" }}>
+          {getShortDate(i18next.language, task.dueDate)}
+        </Typography>
+      ) : null}
+    </Box>
   );
 }
 
