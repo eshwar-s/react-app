@@ -7,7 +7,7 @@ export function TaskDatePicker({
   onChange,
   fontSize,
   margin,
-  ...props
+  datePickerProps,
 }) {
   return (
     <DatePicker
@@ -30,7 +30,7 @@ export function TaskDatePicker({
         },
       }}
       onChange={onChange}
-      {...props}
+      {...datePickerProps}
     />
   );
 }
@@ -41,7 +41,7 @@ export function TaskDateTimePicker({
   onChange,
   fontSize,
   margin,
-  ...props
+  timePickerProps,
 }) {
   return (
     <DateTimePicker
@@ -64,7 +64,7 @@ export function TaskDateTimePicker({
         },
       }}
       onChange={onChange}
-      {...props}
+      {...timePickerProps}
     />
   );
 }

@@ -191,9 +191,9 @@ function TaskDetails({ taskId, onClose }) {
               task.reminderTime ? moment(task.reminderTime).utc(true) : null
             }
             onChange={(value) => setTaskReminderTime(task, value)}
-            disablePast
             fontSize="13px"
             margin="0px 0px 24px 0px"
+            timePickerProps={{ disablePast: true }}
           />
         </Box>
         <Box
