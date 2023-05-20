@@ -14,12 +14,16 @@ function SearchView() {
   const query = searchParams.get("query");
 
   const matchingTasks = useMemo(() => {
-    const searchQuery = query ? query.toLowerCase() : "";
-    return state.lists.flatMap((list) => {
-      return list.items.filter(
-        (item) => item.title.toLowerCase().indexOf(searchQuery) !== -1
-      );
-    });
+    let matches = [];
+    const searchQuery = query ? query.toLowerCase() : null;
+    if (searchQuery) {
+      matches = state.lists.flatMap((list) => {
+        return list.items.filter(
+          (item) => item.title.toLowerCase().indexOf(searchQuery) !== -1
+        );
+      });
+    }
+    return matches;
   }, [state.lists, query]);
 
   return (
