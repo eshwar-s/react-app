@@ -117,7 +117,7 @@ function TaskDescription({ task, showListName }) {
   };
 
   return (
-    <Box sx={{ opacity: 0.8 }}>
+    <Box sx={{ opacity: 0.7 }}>
       {showListName ? (
         <Typography variant="caption" sx={{ marginInlineEnd: "4px" }}>
           {getListName(task)}

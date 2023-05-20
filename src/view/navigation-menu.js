@@ -184,10 +184,6 @@ function NavigationMenu() {
     return tasks.filter((item) => !item.isCompleted).length;
   };
 
-  const getListBadgeCount = (list) => {
-    return list.items.filter((item) => !item.isCompleted).length;
-  };
-
   const handleContextMenu = (event) => {
     event.preventDefault();
     event.target.click();
@@ -222,13 +218,13 @@ function NavigationMenu() {
           name={t("flagged")}
           link={ROUTE.FLAGGED}
           icon={<NavigationMenuItemIcon route={ROUTE.FLAGGED} />}
-          badgeCount={getListBadgeCount(flaggedList)}
+          badgeCount={getTasksBadgeCount(flaggedList.items)}
         />
         <NavigationMenuItem
           name={t("tasks")}
           link={ROUTE.TASKS}
           icon={<NavigationMenuItemIcon route={ROUTE.TASKS} />}
-          badgeCount={getListBadgeCount(taskList)}
+          badgeCount={getTasksBadgeCount(taskList.items)}
         />
         <Divider></Divider>
         {lists.map((list, index) => {
@@ -239,7 +235,7 @@ function NavigationMenu() {
               name={list.name}
               link={link}
               icon={<NavigationMenuItemIcon route={ROUTE.LISTS} />}
-              badgeCount={getListBadgeCount(list)}
+              badgeCount={getTasksBadgeCount(list.items)}
             />
           );
         })}
