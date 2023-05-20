@@ -85,6 +85,17 @@ function TaskDetails({ taskId, onClose }) {
     });
   };
 
+  const setTaskReminderTime = (task, value) => {
+    dispatch({
+      type: ACTION_TYPES.SET_TASK_REMINDER_TIME,
+      payload: {
+        listId: task.listId,
+        taskId: task.id,
+        taskReminderTime: value.toDate().valueOf(),
+      },
+    });
+  };
+
   const handleTaskDelete = (task) => {
     dispatch({
       type: ACTION_TYPES.DELETE_TASK,
@@ -176,7 +187,8 @@ function TaskDetails({ taskId, onClose }) {
           />
           <TaskDateTimePicker
             label={t("remindMe")}
-            onChange={null}
+            value={task.reminderTime ? moment(task.reminderTime).utc() : null}
+            onChange={(value) => setTaskReminderTime(task, value)}
             disablePast
             fontSize="13px"
             margin="0px 0px 24px 0px"
