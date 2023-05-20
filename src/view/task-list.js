@@ -19,6 +19,7 @@ import { ThemeMode } from "../common/theme";
 import { useTranslation } from "react-i18next";
 import { getShortDate } from "../common/date";
 import i18next from "i18next";
+import { red } from "@mui/material/colors";
 
 function TaskList({ tasks, selectedTask, setSelectedTask, showListName }) {
   const [, dispatch] = useContext(AppContext);
@@ -110,6 +111,8 @@ function TaskTitle({ task }) {
 
 function TaskDescription({ task, showListName }) {
   const [state] = useContext(AppContext);
+  const textStyle = { color: "inherit", opacity: 0.7, marginInlineEnd: "4px" };
+  const isTaskOverdue = !task.isCompleted ? task.dueDate < Date.now() : false;
 
   const getListName = (task) => {
     const list = state.lists.find((list) => list.id === task.listId);
@@ -117,24 +120,26 @@ function TaskDescription({ task, showListName }) {
   };
 
   return (
-    <Box sx={{ opacity: 0.7 }}>
+    <Box>
       {showListName ? (
-        <Typography variant="caption" sx={{ marginInlineEnd: "4px" }}>
+        <Typography variant="caption" sx={textStyle}>
           {getListName(task)}
         </Typography>
       ) : null}
       {showListName && task.dueDate ? (
-        <Typography
-          variant="caption"
-          sx={{
-            marginInlineEnd: "4px",
-          }}
-        >
+        <Typography variant="caption" sx={textStyle}>
           &#8226;
         </Typography>
       ) : null}
       {task.dueDate ? (
-        <Typography variant="caption" sx={{ marginInlineEnd: "4px" }}>
+        <Typography
+          variant="caption"
+          sx={{
+            color: isTaskOverdue ? red["A400"] : textStyle.color,
+            opacity: isTaskOverdue ? 1 : textStyle.opacity,
+            marginInlineEnd: textStyle.marginInlineEnd,
+          }}
+        >
           {getShortDate(i18next.language, task.dueDate)}
         </Typography>
       ) : null}

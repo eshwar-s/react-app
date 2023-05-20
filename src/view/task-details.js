@@ -80,7 +80,7 @@ function TaskDetails({ taskId, onClose }) {
       payload: {
         listId: task.listId,
         taskId: task.id,
-        taskDueDate: value.toDate().valueOf(),
+        taskDueDate: value ? value.toDate().valueOf() : null,
       },
     });
   };
@@ -91,7 +91,7 @@ function TaskDetails({ taskId, onClose }) {
       payload: {
         listId: task.listId,
         taskId: task.id,
-        taskReminderTime: value.toDate().valueOf(),
+        taskReminderTime: value ? value.toDate().valueOf() : null,
       },
     });
   };
