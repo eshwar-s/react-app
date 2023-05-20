@@ -1,5 +1,11 @@
 import { ClearOutlined, SearchOutlined } from "@mui/icons-material";
-import { InputAdornment, OutlinedInput, darken, useTheme } from "@mui/material";
+import {
+  InputAdornment,
+  OutlinedInput,
+  darken,
+  lighten,
+  useTheme,
+} from "@mui/material";
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
@@ -9,6 +15,7 @@ import {
   useSearchParams,
 } from "react-router-dom";
 import { ROUTE } from "../common/routes";
+import { ThemeMode } from "../common/theme";
 
 function SearchBox() {
   const { t } = useTranslation();
@@ -98,7 +105,10 @@ function getStyle(theme) {
       height: "16px",
     },
     "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-      borderColor: darken(theme.palette.secondary.main, 0.15),
+      borderColor:
+        theme.palette.mode === ThemeMode.LIGHT
+          ? darken(theme.palette.secondary.main, 0.15)
+          : lighten(theme.palette.secondary.main, 0.15),
     },
   };
 }

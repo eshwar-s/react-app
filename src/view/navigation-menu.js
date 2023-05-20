@@ -18,6 +18,7 @@ import {
   MenuList,
   Typography,
   darken,
+  lighten,
   useTheme,
 } from "@mui/material";
 import { useContext, useMemo, useState } from "react";
@@ -36,6 +37,7 @@ import {
   useTaskList,
   useTodoLists,
 } from "../common/hooks";
+import { ThemeMode } from "../common/theme";
 
 function NavigationContextMenu({ selectedList, anchorPosition, onClose }) {
   const [state] = useContext(AppContext);
@@ -91,7 +93,10 @@ function NavigationContextMenu({ selectedList, anchorPosition, onClose }) {
 }
 
 function getMenuItemStyle(theme) {
-  const selectionColor = darken(theme.palette.secondary.main, 0.05);
+  const selectionColor =
+    theme.palette.mode === ThemeMode.LIGHT
+      ? darken(theme.palette.secondary.main, 0.05)
+      : lighten(theme.palette.secondary.main, 0.05);
 
   return {
     "&.Mui-selected, &.Mui-selected:hover": {
@@ -100,6 +105,7 @@ function getMenuItemStyle(theme) {
     "&.Mui-selected.Mui-focusVisible, &.Mui-focusVisible": {
       bgcolor: selectionColor,
     },
+    color: theme.palette.text.primary,
   };
 }
 
