@@ -15,6 +15,8 @@ import MainPanel from "./main-panel";
 import { useDisableContextMenu } from "../common/hooks.js";
 import { GetThemeColor } from "../common/colors.js";
 import { useLocation } from "react-router-dom";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -48,25 +50,27 @@ function App() {
   }, [state.loading, state.settings]);
 
   return (
-    <ThemeProvider theme={theme}>
-      <AppContext.Provider value={[state, dispatch]}>
-        <Spinner loading={state.loading}>
-          <Box id="container" sx={{ display: "flex", height: "100%" }}>
-            <Box
-              sx={{
-                height: "100%",
-                display: { xs: "none", sm: "none", md: "block" },
-              }}
-            >
-              <Sidebar sx={{ flexShrink: "0" }} />
+    <LocalizationProvider dateAdapter={AdapterMoment}>
+      <ThemeProvider theme={theme}>
+        <AppContext.Provider value={[state, dispatch]}>
+          <Spinner loading={state.loading}>
+            <Box id="container" sx={{ display: "flex", height: "100%" }}>
+              <Box
+                sx={{
+                  height: "100%",
+                  display: { xs: "none", sm: "none", md: "block" },
+                }}
+              >
+                <Sidebar sx={{ flexShrink: "0" }} />
+              </Box>
+              <Box sx={{ height: "100%", flexGrow: "1", overflow: "hidden" }}>
+                <MainPanel />
+              </Box>
             </Box>
-            <Box sx={{ height: "100%", flexGrow: "1", overflow: "hidden" }}>
-              <MainPanel />
-            </Box>
-          </Box>
-        </Spinner>
-      </AppContext.Provider>
-    </ThemeProvider>
+          </Spinner>
+        </AppContext.Provider>
+      </ThemeProvider>
+    </LocalizationProvider>
   );
 }
 

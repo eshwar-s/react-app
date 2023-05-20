@@ -11,6 +11,7 @@ export class TodoItem {
     this.isCompleted = false;
     this.completionDate = null;
     this.dueDate = null;
+    this.reminderTime = null;
     this.owner = null;
     this.notes = "";
   }

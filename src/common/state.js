@@ -182,6 +182,28 @@ export const reducer = (state, action) => {
         }),
       };
 
+    case ACTION_TYPES.SET_TASK_REMINDER_TIME:
+      return {
+        ...state,
+        lists: state.lists.map((list) => {
+          if (list.id === action.payload.listId) {
+            return {
+              ...list,
+              items: list.items.map((task) => {
+                if (task.id === action.payload.taskId) {
+                  return {
+                    ...task,
+                    reminderTime: action.payload.taskReminderTime,
+                  };
+                }
+                return task;
+              }),
+            };
+          }
+          return list;
+        }),
+      };
+
     case ACTION_TYPES.DELETE_TASK:
       return {
         ...state,

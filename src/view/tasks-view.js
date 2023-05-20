@@ -4,7 +4,11 @@ import { Box, useTheme } from "@mui/material";
 import { Heading } from "./heading";
 import TaskList from "./task-list";
 import TaskDetails from "./task-details";
-import { useImportantTasks, useTaskList } from "../common/hooks";
+import {
+  useImportantTasks,
+  usePlannedTasks,
+  useTaskList,
+} from "../common/hooks";
 import { useContext, useState } from "react";
 import { AppContext } from "../common/context";
 import AddTask from "./add-task";
@@ -23,8 +27,11 @@ export function ImportantView() {
 }
 
 export function PlannedView() {
+  const [state] = useContext(AppContext);
   const { t } = useTranslation();
-  return <TasksView heading={t("planned")} tasks={[]} />;
+  const plannedTasks = usePlannedTasks(state.lists);
+
+  return <TasksView heading={t("planned")} tasks={plannedTasks} />;
 }
 
 function TasksView({ heading, tasks }) {

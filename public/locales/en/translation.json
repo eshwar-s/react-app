@@ -33,5 +33,7 @@
   "planned": "Planned",
   "flagged": "Flagged email",
   "tasks": "Tasks",
-  "searchPlaceholder": "Search"
+  "searchPlaceholder": "Search",
+  "dueDate": "Due Date",
+  "remindMe": "Remind Me"
 }

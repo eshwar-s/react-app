@@ -21,6 +21,8 @@ import Editable from "./editable";
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";
 import { getFullDate } from "../common/date";
+import { TaskDatePicker, TaskDateTimePicker } from "./date-picker";
+import moment from "moment";
 
 function TaskDetails({ taskId, onClose }) {
   const [state, dispatch] = useContext(AppContext);
@@ -69,6 +71,17 @@ function TaskDetails({ taskId, onClose }) {
     dispatch({
       type: ACTION_TYPES.TOGGLE_TASK_IMPORTANCE,
       payload: { listId: task.listId, taskId: task.id },
+    });
+  };
+
+  const setTaskDueDate = (task, value) => {
+    dispatch({
+      type: ACTION_TYPES.SET_TASK_DUE_DATE,
+      payload: {
+        listId: task.listId,
+        taskId: task.id,
+        taskDueDate: value.toDate().valueOf(),
+      },
     });
   };
 
@@ -142,16 +155,32 @@ function TaskDetails({ taskId, onClose }) {
           <Divider />
           <OutlinedInput
             sx={{
-              ".MuiOutlinedInput-notchedOutline": { border: "none" },
+              ".MuiOutlinedInput-notchedOutline": {
+                border: "none",
+              },
             }}
             size="small"
             multiline
-            minRows={3}
+            minRows={4}
             placeholder={t("addNotePlaceholder")}
             value={task.notes}
             onChange={handleTaskNotes}
           ></OutlinedInput>
-          <Divider />
+          <Divider sx={{ marginBottom: "24px" }} />
+          <TaskDatePicker
+            label={t("dueDate")}
+            value={task.dueDate ? moment(task.dueDate).utc() : null}
+            onChange={(value) => setTaskDueDate(task, value)}
+            fontSize="13px"
+            margin="0px 0px 24px 0px"
+          />
+          <TaskDateTimePicker
+            label={t("remindMe")}
+            onChange={null}
+            disablePast
+            fontSize="13px"
+            margin="0px 0px 24px 0px"
+          />
         </Box>
         <Box
           sx={{
