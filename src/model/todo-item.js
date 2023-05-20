@@ -2,15 +2,15 @@ import { TodoSortOrder } from "./todo-settings.js";
 import { uuidv4 } from "../common/uuid.js";
 
 export class TodoItem {
-  constructor(listId, title) {
+  constructor(listId, title, isImportant, dueDate) {
     this.id = uuidv4();
     this.creationDate = Date.now();
     this.listId = listId;
     this.title = title;
-    this.isImportant = false;
+    this.isImportant = isImportant;
     this.isCompleted = false;
     this.completionDate = null;
-    this.dueDate = null;
+    this.dueDate = dueDate;
     this.reminderTime = null;
     this.owner = null;
     this.notes = "";

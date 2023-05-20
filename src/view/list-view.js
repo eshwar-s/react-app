@@ -16,6 +16,7 @@ import { TodoItem } from "../model/todo-item";
 import { getBackgroundColor, getTextColor } from "../common/colors";
 import { useTaskList, useTodoLists } from "../common/hooks";
 import Collapsible from "./collapsible";
+import { ROUTE } from "../common/routes";
 
 export function TodoListView() {
   const [state] = useContext(AppContext);
@@ -25,7 +26,7 @@ export function TodoListView() {
   return index < lists.length ? (
     <ListView list={lists[index]} />
   ) : (
-    <Navigate to={`/lists/${lists.length - 1}`} />
+    <Navigate to={`${ROUTE.LISTS}/${lists.length - 1}`} />
   );
 }
 
@@ -122,7 +123,7 @@ function ListView({ list }) {
           </Box>
         </Box>
         <Box sx={{ flexShrink: "0" }}>
-          <AddTask listId={list.id} />
+          <AddTask listId={list.id} setImportant={false} setDueDate={false} />
         </Box>
       </Box>
       <Box role="complementary">

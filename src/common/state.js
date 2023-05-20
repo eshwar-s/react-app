@@ -52,7 +52,9 @@ export const reducer = (state, action) => {
           if (list.id === action.payload.listId) {
             const newTask = new TodoItem(
               action.payload.listId,
-              action.payload.taskTitle
+              action.payload.taskTitle,
+              action.payload.taskImportance,
+              action.payload.taskDueDate
             );
             return {
               ...list,

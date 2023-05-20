@@ -7,7 +7,7 @@ import { ACTION_TYPES } from "../common/actions";
 import { useTranslation } from "react-i18next";
 import { getTextColor } from "../common/colors";
 
-function AddTask({ listId }) {
+function AddTask({ listId, setImportant, setDueDate }) {
   const [value, setValue] = useState("");
   const [, dispatch] = useContext(AppContext);
   const theme = useTheme();
@@ -21,6 +21,8 @@ function AddTask({ listId }) {
         payload: {
           listId: listId,
           taskTitle: event.target.value,
+          taskImportance: setImportant,
+          taskDueDate: setDueDate ? Date.now() : null,
         },
       });
       setValue("");

@@ -228,7 +228,7 @@ function NavigationMenu() {
         />
         <Divider></Divider>
         {lists.map((list, index) => {
-          const link = `/lists/${index}`;
+          const link = `${ROUTE.LISTS}/${index}`;
           return (
             <NavigationMenuItem
               key={index}

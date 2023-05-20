@@ -22,23 +22,43 @@ export function ImportantView() {
   const [state] = useContext(AppContext);
   const { t } = useTranslation();
   const importantTasks = useImportantTasks(state.lists);
+  const taskList = useTaskList(state.lists);
 
-  return <TasksView heading={t("important")} tasks={importantTasks} />;
+  return (
+    <TasksView
+      heading={t("important")}
+      tasks={importantTasks}
+      addTaskProps={{
+        listId: taskList.id,
+        setImportant: true,
+        setDueDate: false,
+      }}
+    />
+  );
 }
 
 export function PlannedView() {
   const [state] = useContext(AppContext);
   const { t } = useTranslation();
   const plannedTasks = usePlannedTasks(state.lists);
+  const taskList = useTaskList(state.lists);
 
-  return <TasksView heading={t("planned")} tasks={plannedTasks} />;
+  return (
+    <TasksView
+      heading={t("planned")}
+      tasks={plannedTasks}
+      addTaskProps={{
+        listId: taskList.id,
+        setImportant: false,
+        setDueDate: true,
+      }}
+    />
+  );
 }
 
-function TasksView({ heading, tasks }) {
-  const [state] = useContext(AppContext);
+function TasksView({ heading, tasks, addTaskProps }) {
   const [selectedTask, setSelectedTask] = useState(null);
   const theme = useTheme();
-  const taskList = useTaskList(state.lists);
 
   return (
     <Box sx={{ display: "flex", flexDirection: "row", height: "100%" }}>
@@ -64,7 +84,7 @@ function TasksView({ heading, tasks }) {
           </Box>
         </Box>
         <Box sx={{ flexShrink: "0" }}>
-          <AddTask listId={taskList.id} />
+          <AddTask {...addTaskProps} />
         </Box>
       </Box>
       <Box role="complementary">
