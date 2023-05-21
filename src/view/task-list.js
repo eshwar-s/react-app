@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import StarIcon from "@mui/icons-material/Star";
 import StarOutlineIcon from "@mui/icons-material/StarOutline";
-import { alpha, useTheme } from "@mui/material/styles";
+import { darken, lighten, useTheme } from "@mui/material/styles";
 import { useContext } from "react";
 import { AppContext } from "../common/context";
 import { ACTION_TYPES } from "../common/actions";
@@ -161,14 +161,14 @@ function getStyle(theme) {
     "&.Mui-selected, &.Mui-selected:hover, &.Mui-selected.Mui-focusVisible": {
       bgcolor:
         theme.palette.mode === ThemeMode.LIGHT
-          ? theme.palette.primary.light
-          : alpha(theme.palette.primary.light, 0.3),
+          ? lighten(theme.palette.primary.light, 0.5)
+          : darken(theme.palette.primary.light, 0.6),
     },
     "&.Mui-focusVisible": {
       bgcolor:
         theme.palette.mode === ThemeMode.LIGHT
-          ? theme.palette.primary.light
-          : alpha(theme.palette.primary.light, 0.3),
+          ? lighten(theme.palette.primary.light, 0.5)
+          : darken(theme.palette.primary.light, 0.6),
     },
   };
 }

@@ -40,7 +40,7 @@ function SearchBox() {
         setValue("");
       }
     }
-  }, [searchParams]);
+  }, [searchParams, location.pathname, navigate, value]);
 
   const handleKeyDown = (event) => {
     if (event.key === "Escape") {
