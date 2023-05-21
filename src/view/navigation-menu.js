@@ -176,8 +176,8 @@ function NavigationMenu() {
   const lists = useTodoLists(state.lists);
   const taskList = useTaskList(state.lists);
   const flaggedList = useFlaggedList(state.lists);
-  const importantTasks = useImportantTasks(state.lists);
-  const plannedTasks = usePlannedTasks(state.lists);
+  const importantTasks = useImportantTasks(state.lists, false);
+  const plannedTasks = usePlannedTasks(state.lists, false);
 
   const selectedList = useMemo(() => {
     const match = matchPath(`${ROUTE.LISTS}/:index`, pathname);
@@ -186,7 +186,7 @@ function NavigationMenu() {
       : null;
   }, [lists, pathname]);
 
-  const getTasksBadgeCount = (tasks) => {
+  const getBadgeCount = (tasks) => {
     return tasks.filter((item) => !item.isCompleted).length;
   };
 
@@ -212,25 +212,25 @@ function NavigationMenu() {
           name={t("important")}
           link={ROUTE.IMPORTANT}
           icon={<NavigationMenuItemIcon route={ROUTE.IMPORTANT} />}
-          badgeCount={getTasksBadgeCount(importantTasks)}
+          badgeCount={importantTasks.length}
         />
         <NavigationMenuItem
           name={t("planned")}
           link={ROUTE.PLANNED}
           icon={<NavigationMenuItemIcon route={ROUTE.PLANNED} />}
-          badgeCount={getTasksBadgeCount(plannedTasks)}
+          badgeCount={plannedTasks.length}
         />
         <NavigationMenuItem
           name={t("flagged")}
           link={ROUTE.FLAGGED}
           icon={<NavigationMenuItemIcon route={ROUTE.FLAGGED} />}
-          badgeCount={getTasksBadgeCount(flaggedList.items)}
+          badgeCount={getBadgeCount(flaggedList.items)}
         />
         <NavigationMenuItem
           name={t("tasks")}
           link={ROUTE.TASKS}
           icon={<NavigationMenuItemIcon route={ROUTE.TASKS} />}
-          badgeCount={getTasksBadgeCount(taskList.items)}
+          badgeCount={getBadgeCount(taskList.items)}
         />
         <Divider></Divider>
         {lists.map((list, index) => {
@@ -241,7 +241,7 @@ function NavigationMenu() {
               name={list.name}
               link={link}
               icon={<NavigationMenuItemIcon route={ROUTE.LISTS} />}
-              badgeCount={getTasksBadgeCount(list.items)}
+              badgeCount={getBadgeCount(list.items)}
             />
           );
         })}

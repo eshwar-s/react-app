@@ -80,7 +80,7 @@ function OptionsMenu({ list }) {
         onClose={() => setMenuOpen(false)}
         variant="selectedMenu"
       >
-        {!list.builtIn && (
+        {list && !list.builtIn && (
           <IconMenuItem
             text={t("renameList")}
             startIcon={<FlipOutlined />}
@@ -113,7 +113,7 @@ function OptionsMenu({ list }) {
           startIcon={<PrintOutlined />}
           onClick={() => setMenuOpen(false)}
         />
-        {!list.builtIn && (
+        {list && !list.builtIn && (
           <IconMenuItem
             text={t("changeTheme")}
             startIcon={<PaletteOutlined />}
@@ -129,8 +129,8 @@ function OptionsMenu({ list }) {
           startIcon={<CheckCircleOutline />}
           onClick={toggleShowCompletedTasks}
         />
-        {!list.builtIn && <Divider sx={{ my: 0.5 }} />}
-        {!list.builtIn && (
+        {list && !list.builtIn && <Divider sx={{ my: 0.5 }} />}
+        {list && !list.builtIn && (
           <IconMenuItem
             text={t("deleteList")}
             startIcon={<DeleteOutline />}

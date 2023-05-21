@@ -12,6 +12,7 @@ import {
 import { useContext, useState } from "react";
 import { AppContext } from "../common/context";
 import AddTask from "./add-task";
+import OptionsMenu from "./options-menu";
 
 export function MyDayView() {
   const { t } = useTranslation();
@@ -21,7 +22,10 @@ export function MyDayView() {
 export function ImportantView() {
   const [state] = useContext(AppContext);
   const { t } = useTranslation();
-  const importantTasks = useImportantTasks(state.lists);
+  const importantTasks = useImportantTasks(
+    state.lists,
+    state.settings.showCompleted
+  );
   const taskList = useTaskList(state.lists);
 
   return (
@@ -40,7 +44,10 @@ export function ImportantView() {
 export function PlannedView() {
   const [state] = useContext(AppContext);
   const { t } = useTranslation();
-  const plannedTasks = usePlannedTasks(state.lists);
+  const plannedTasks = usePlannedTasks(
+    state.lists,
+    state.settings.showCompleted
+  );
   const taskList = useTaskList(state.lists);
 
   return (
@@ -73,6 +80,7 @@ function TasksView({ heading, tasks, addTaskProps }) {
             }}
           >
             <Heading text={heading} />
+            <OptionsMenu list={null} />
           </Box>
           <Box>
             <TaskList

@@ -33,16 +33,22 @@ export function useFlaggedList(lists) {
   }, [lists]);
 }
 
-export function useImportantTasks(lists) {
+export function useImportantTasks(lists, includeCompleted) {
   return useMemo(() => {
     return lists.flatMap((list) =>
-      list.items.filter((item) => item.isImportant)
+      list.items.filter(
+        (item) => item.isImportant && (includeCompleted || !item.isCompleted)
+      )
     );
-  }, [lists]);
+  }, [lists, includeCompleted]);
 }
 
-export function usePlannedTasks(lists) {
+export function usePlannedTasks(lists, includeCompleted) {
   return useMemo(() => {
-    return lists.flatMap((list) => list.items.filter((item) => item.dueDate));
-  }, [lists]);
+    return lists.flatMap((list) =>
+      list.items.filter(
+        (item) => item.dueDate && (includeCompleted || !item.isCompleted)
+      )
+    );
+  }, [lists, includeCompleted]);
 }
