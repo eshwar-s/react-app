@@ -163,20 +163,6 @@ function TaskDetails({ taskId, onClose }) {
               {task.isImportant ? <StarIcon /> : <StarOutlineIcon />}
             </IconButton>
           </Box>
-          <Divider />
-          <OutlinedInput
-            sx={{
-              ".MuiOutlinedInput-notchedOutline": {
-                border: "none",
-              },
-            }}
-            size="small"
-            multiline
-            minRows={4}
-            placeholder={t("addNotePlaceholder")}
-            value={task.notes}
-            onChange={handleTaskNotes}
-          ></OutlinedInput>
           <Divider sx={{ marginBottom: "24px" }} />
           <TaskDatePicker
             label={t("dueDate")}
@@ -195,6 +181,21 @@ function TaskDetails({ taskId, onClose }) {
             margin="0px 0px 24px 0px"
             timePickerProps={{ disablePast: true }}
           />
+          <Divider />
+          <OutlinedInput
+            sx={{
+              ".MuiOutlinedInput-notchedOutline": {
+                border: "none",
+              },
+            }}
+            size="small"
+            multiline
+            minRows={4}
+            placeholder={t("addNotePlaceholder")}
+            value={task.notes}
+            onChange={handleTaskNotes}
+          ></OutlinedInput>
+          <Divider />
         </Box>
         <Box
           sx={{

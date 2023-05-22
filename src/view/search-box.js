@@ -66,6 +66,7 @@ function SearchBox() {
 
   return (
     <OutlinedInput
+      role="search"
       sx={getStyle(theme)}
       color="secondary"
       size="small"
