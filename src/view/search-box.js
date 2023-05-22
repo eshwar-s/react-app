@@ -4,7 +4,7 @@ import {
   OutlinedInput,
   darken,
   lighten,
-  useTheme,
+  styled,
 } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -20,7 +20,6 @@ import { ThemeMode } from "../common/theme";
 function SearchBox() {
   const { t } = useTranslation();
   const [value, setValue] = useState("");
-  const theme = useTheme();
   const previousRoute = useRef("");
   const location = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
@@ -65,9 +64,8 @@ function SearchBox() {
   };
 
   return (
-    <OutlinedInput
+    <SearchInput
       role="search"
-      sx={getStyle(theme)}
       color="secondary"
       size="small"
       placeholder={t("searchPlaceholder")}
@@ -100,18 +98,16 @@ function SearchBox() {
   );
 }
 
-function getStyle(theme) {
-  return {
-    ".MuiOutlinedInput-input": {
-      height: "16px",
-    },
-    "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-      borderColor:
-        theme.palette.mode === ThemeMode.LIGHT
-          ? darken(theme.palette.secondary.main, 0.15)
-          : lighten(theme.palette.secondary.main, 0.15),
-    },
-  };
-}
+const SearchInput = styled(OutlinedInput)(({ theme }) => ({
+  ".MuiOutlinedInput-input": {
+    height: "16px",
+  },
+  "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+    borderColor:
+      theme.palette.mode === ThemeMode.LIGHT
+        ? darken(theme.palette.secondary.main, 0.15)
+        : lighten(theme.palette.secondary.main, 0.15),
+  },
+}));
 
 export default SearchBox;

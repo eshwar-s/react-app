@@ -1,6 +1,6 @@
 import { createTheme } from "@mui/material";
 import { useMemo } from "react";
-import { getPrimaryColor, getSecondaryColor } from "./colors";
+import { getErrorColor, getPrimaryColor, getSecondaryColor } from "./colors";
 
 export const ThemeMode = {
   DARK: "dark",
@@ -14,6 +14,7 @@ function useTheme(isDarkMode, themeColor) {
         mode: isDarkMode ? ThemeMode.DARK : ThemeMode.LIGHT,
         primary: getPrimaryColor(themeColor),
         secondary: getSecondaryColor(isDarkMode),
+        error: getErrorColor(),
       },
       typography: {
         button: {

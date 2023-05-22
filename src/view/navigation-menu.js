@@ -44,6 +44,11 @@ function NavigationContextMenu({ selectedList, anchorPosition, onClose }) {
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const { t } = useTranslation();
 
+  const openPrintDialog = () => {
+    setTimeout(() => window.print(), 0);
+    onClose();
+  };
+
   const openDeleteListDialog = () => {
     setDeleteDialogOpen(true);
     onClose();
@@ -70,7 +75,7 @@ function NavigationContextMenu({ selectedList, anchorPosition, onClose }) {
         <IconMenuItem
           text={t("printList")}
           startIcon={<PrintIcon />}
-          onClick={() => onClose()}
+          onClick={openPrintDialog}
         />
         <Divider sx={{ my: 0.5 }} />
         <IconMenuItem

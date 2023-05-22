@@ -8,6 +8,7 @@ import {
   ListItemIcon,
   ListItemText,
   Typography,
+  useMediaQuery,
 } from "@mui/material";
 import StarIcon from "@mui/icons-material/Star";
 import StarOutlineIcon from "@mui/icons-material/StarOutline";
@@ -19,7 +20,6 @@ import { ThemeMode } from "../common/theme";
 import { useTranslation } from "react-i18next";
 import { getShortDate } from "../common/date";
 import i18next from "i18next";
-import { red } from "@mui/material/colors";
 
 function TaskList({ tasks, selectedTask, setSelectedTask, showListName }) {
   const [, dispatch] = useContext(AppContext);
@@ -68,7 +68,7 @@ function TaskList({ tasks, selectedTask, setSelectedTask, showListName }) {
           >
             <ListItemButton
               dense
-              sx={getStyle(theme)}
+              sx={getButtonStyle(theme)}
               onClick={(event) => handleSelection(event, task)}
               selected={task.id === selectedTask}
             >
@@ -97,11 +97,14 @@ function TaskList({ tasks, selectedTask, setSelectedTask, showListName }) {
 }
 
 function TaskTitle({ task }) {
+  const isPrinting = useMediaQuery("print");
+
   return (
     <Typography
       variant="body2"
       sx={{
-        textDecoration: task.isCompleted ? "line-through" : "none",
+        textDecoration:
+          task.isCompleted && !isPrinting ? "line-through" : "none",
       }}
     >
       {task.title}
@@ -111,6 +114,7 @@ function TaskTitle({ task }) {
 
 function TaskDescription({ task, showListName }) {
   const [state] = useContext(AppContext);
+  const theme = useTheme();
   const textStyle = { color: "inherit", opacity: 0.7, marginInlineEnd: "4px" };
   const isTaskOverdue = !task.isCompleted ? task.dueDate < Date.now() : false;
 
@@ -135,7 +139,7 @@ function TaskDescription({ task, showListName }) {
         <Typography
           variant="caption"
           sx={{
-            color: isTaskOverdue ? red["A400"] : textStyle.color,
+            color: isTaskOverdue ? theme.palette.error.main : textStyle.color,
             opacity: isTaskOverdue ? 1 : textStyle.opacity,
             marginInlineEnd: textStyle.marginInlineEnd,
           }}
@@ -147,7 +151,7 @@ function TaskDescription({ task, showListName }) {
   );
 }
 
-function getStyle(theme) {
+function getButtonStyle(theme) {
   return {
     color: theme.palette.text.primary,
     borderRadius: "4px",

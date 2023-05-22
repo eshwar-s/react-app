@@ -47,6 +47,11 @@ function OptionsMenu({ list }) {
     setMenuOpen(false);
   };
 
+  const openPrintDialog = () => {
+    setTimeout(() => window.print(), 0);
+    setMenuOpen(false);
+  };
+
   const openDeleteListDialog = () => {
     setDeleteDialogOpen(true);
     setMenuOpen(false);
@@ -111,7 +116,7 @@ function OptionsMenu({ list }) {
         <IconMenuItem
           text={t("printList")}
           startIcon={<PrintOutlined />}
-          onClick={() => setMenuOpen(false)}
+          onClick={openPrintDialog}
         />
         {list && !list.builtIn && (
           <IconMenuItem

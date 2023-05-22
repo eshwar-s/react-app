@@ -1,6 +1,6 @@
 import { getBackgroundColor } from "../common/colors";
 import { useTranslation } from "react-i18next";
-import { Box, useTheme } from "@mui/material";
+import { Box, useMediaQuery, useTheme } from "@mui/material";
 import { Heading } from "./heading";
 import TaskList from "./task-list";
 import TaskDetails from "./task-details";
@@ -66,6 +66,7 @@ export function PlannedView() {
 function TasksView({ heading, tasks, addTaskProps }) {
   const [selectedTask, setSelectedTask] = useState(null);
   const theme = useTheme();
+  const isPrinting = useMediaQuery("print");
 
   return (
     <Box sx={{ display: "flex", flexDirection: "row", height: "100%" }}>
@@ -87,7 +88,7 @@ function TasksView({ heading, tasks, addTaskProps }) {
               tasks={tasks}
               selectedTask={selectedTask}
               setSelectedTask={setSelectedTask}
-              showListName={true}
+              showListName={!isPrinting}
             />
           </Box>
         </Box>

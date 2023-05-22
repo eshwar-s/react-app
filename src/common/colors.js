@@ -86,6 +86,10 @@ export function getSecondaryColor(isDarkMode) {
   return { main: isDarkMode ? grey[900] : grey[300] };
 }
 
+export function getErrorColor() {
+  return { main: red["A200"] };
+}
+
 export function GetThemeColor(route, settings) {
   switch (route) {
     case ROUTE.SEARCH:

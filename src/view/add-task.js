@@ -1,6 +1,6 @@
 import { InputAdornment, OutlinedInput } from "@mui/material";
 import { Add as AddIcon } from "@mui/icons-material";
-import { useTheme } from "@mui/material/styles";
+import { styled, useTheme } from "@mui/material/styles";
 import { useContext, useState } from "react";
 import { AppContext } from "../common/context";
 import { ACTION_TYPES } from "../common/actions";
@@ -34,8 +34,7 @@ function AddTask({ listId, setImportant, setDueDate }) {
   };
 
   return (
-    <OutlinedInput
-      sx={getStyle(theme)}
+    <AddTextInput
       size="small"
       placeholder={t("addTaskPlaceholder")}
       startAdornment={
@@ -50,16 +49,17 @@ function AddTask({ listId, setImportant, setDueDate }) {
   );
 }
 
-function getStyle(theme) {
-  return {
-    width: "100%",
-    backgroundColor: "rgba(0, 0, 0, 0.15)",
-    input: {
-      color: getTextColor(theme),
-      "&::placeholder": { opacity: 1 },
-      spellCheck: false,
-    },
-  };
-}
+const AddTextInput = styled(OutlinedInput)(({ theme }) => ({
+  width: "100%",
+  backgroundColor: "rgba(0, 0, 0, 0.15)",
+  input: {
+    color: getTextColor(theme),
+    "&::placeholder": { opacity: 1 },
+    spellCheck: false,
+  },
+  "@media print": {
+    display: "none",
+  },
+}));
 
 export default AddTask;

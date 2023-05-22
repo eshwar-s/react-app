@@ -1,4 +1,4 @@
-import { Button, Collapse, useTheme } from "@mui/material";
+import { Button, Collapse, useMediaQuery, useTheme } from "@mui/material";
 import { useState } from "react";
 import { getTextColor } from "../common/colors";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
@@ -6,8 +6,9 @@ import { ExpandLess, ExpandMore } from "@mui/icons-material";
 function Collapsible({ label, size, children }) {
   const [collapse, setCollapse] = useState(false);
   const theme = useTheme();
+  const isPrinting = useMediaQuery("print");
 
-  return (
+  return !isPrinting ? (
     <>
       <Button
         sx={{ color: getTextColor(theme) }}
@@ -19,6 +20,8 @@ function Collapsible({ label, size, children }) {
       </Button>
       <Collapse in={!collapse}>{children}</Collapse>
     </>
+  ) : (
+    <>{children}</>
   );
 }
 
