@@ -20,6 +20,7 @@ import { ThemeMode } from "../common/theme";
 import { useTranslation } from "react-i18next";
 import { getShortDate } from "../common/date";
 import i18next from "i18next";
+import { CheckCircle, CircleOutlined } from "@mui/icons-material";
 
 function TaskList({ tasks, selectedTask, setSelectedTask, showListName }) {
   const [, dispatch] = useContext(AppContext);
@@ -79,6 +80,8 @@ function TaskList({ tasks, selectedTask, setSelectedTask, showListName }) {
                   edge="start"
                   checked={task.isCompleted}
                   onClick={(event) => toggleCompletion(event, task)}
+                  checkedIcon={<CheckCircle />}
+                  icon={<CircleOutlined />}
                 />
               </ListItemIcon>
               <ListItemText

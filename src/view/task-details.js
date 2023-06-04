@@ -1,5 +1,7 @@
 import {
+  CheckCircle,
   ChevronRight,
+  CircleOutlined,
   DeleteOutline,
   Star as StarIcon,
   StarOutline as StarOutlineIcon,
@@ -135,6 +137,8 @@ function TaskDetails({ taskId, onClose }) {
               aria-label={t("completeTask")}
               checked={task.isCompleted}
               onClick={() => toggleCompletion(task)}
+              icon={<CircleOutlined />}
+              checkedIcon={<CheckCircle />}
             />
             <Editable
               element={
