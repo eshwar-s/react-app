@@ -119,7 +119,8 @@ function TaskDescription({ task, showListName }) {
   const [state] = useContext(AppContext);
   const theme = useTheme();
   const textStyle = { color: "inherit", opacity: 0.7, marginInlineEnd: "4px" };
-  const isTaskOverdue = !task.isCompleted ? task.dueDate < Date.now() : false;
+  const today = new Date().setHours(0, 0, 0, 0);
+  const isTaskOverdue = !task.isCompleted ? task.dueDate < today : false;
 
   const getListName = (task) => {
     const list = state.lists.find((list) => list.id === task.listId);

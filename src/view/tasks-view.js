@@ -6,6 +6,7 @@ import TaskList from "./task-list";
 import TaskDetails from "./task-details";
 import {
   useImportantTasks,
+  useMyDayTasks,
   usePlannedTasks,
   useTaskList,
 } from "../common/hooks";
@@ -15,8 +16,22 @@ import AddTask from "./add-task";
 import OptionsMenu from "./options-menu";
 
 export function MyDayView() {
+  const [state] = useContext(AppContext);
   const { t } = useTranslation();
-  return <TasksView heading={t("myDay")} tasks={[]} />;
+  const myDayTasks = useMyDayTasks(state.lists, state.settings.showCompleted);
+  const taskList = useTaskList(state.lists);
+
+  return (
+    <TasksView
+      heading={t("myDay")}
+      tasks={myDayTasks}
+      addTaskProps={{
+        listId: taskList.id,
+        setImportant: false,
+        setDueDate: false,
+      }}
+    />
+  );
 }
 
 export function ImportantView() {

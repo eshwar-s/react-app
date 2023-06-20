@@ -52,3 +52,17 @@ export function usePlannedTasks(lists, includeCompleted) {
     );
   }, [lists, includeCompleted]);
 }
+
+export function useMyDayTasks(lists, includeCompleted) {
+  return useMemo(() => {
+    const today = new Date().toDateString();
+    return lists.flatMap((list) =>
+      list.items.filter(
+        (item) =>
+          item.dueDate &&
+          new Date(item.dueDate).toDateString() === today &&
+          (includeCompleted || !item.isCompleted)
+      )
+    );
+  }, [lists, includeCompleted]);
+}

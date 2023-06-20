@@ -170,16 +170,14 @@ function TaskDetails({ taskId, onClose }) {
           <Divider sx={{ marginBottom: "24px" }} />
           <TaskDatePicker
             label={t("dueDate")}
-            value={task.dueDate ? moment(task.dueDate).utc(true) : null}
+            value={task.dueDate ? moment(task.dueDate) : null}
             onChange={(value) => setTaskDueDate(task, value)}
             fontSize="13px"
             margin="0px 0px 24px 0px"
           />
           <TaskDateTimePicker
             label={t("remindMe")}
-            value={
-              task.reminderTime ? moment(task.reminderTime).utc(true) : null
-            }
+            value={task.reminderTime ? moment(task.reminderTime) : null}
             onChange={(value) => setTaskReminderTime(task, value)}
             fontSize="13px"
             margin="0px 0px 24px 0px"
